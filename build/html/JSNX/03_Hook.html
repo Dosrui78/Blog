@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.3 Hook的使用 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/JSNX/03_Hook.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="4.2 入门级JS反爬" href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">菜鸟篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">Python篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JS逆向篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_debugger.html">4.1 JS调试干扰专题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html">4.2 入门级JS反爬</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.3 Hook的使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.31 Hook定义</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.32 Hook步骤</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">JS逆向篇</a> &raquo;</li>
+      <li>4.3 Hook的使用</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/JSNX/03_Hook.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hook">
+<h1>4.3 Hook的使用<a class="headerlink" href="#hook" title="Permalink to this headline">¶</a></h1>
+<section id="id1">
+<h2>4.31 Hook定义<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Hook技术又叫钩子函数，在系统没有调用该函数前，钩子程序就先捕获该消息，钩子函数先得到控制权，这时钩子函数既可以加工处理（改变）该函数的执行行为，还可以强制结束消息的传递。简单来说，就是把<strong>系统的程序</strong>拉出来变成我们自己执行代码片段。</p>
+</div></blockquote>
+<p>在js中，系统程序可以指浏览器API，也可以之代码中实现的一些方法等</p>
+<p>分类：手动hook，自动hook</p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>4.32 Hook步骤<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>寻找hook点</p></li>
+<li><p>编写hook逻辑</p></li>
+<li><p>调试</p></li>
+</ol>
+<p>函数hook公式：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>old_func = func
+func = function(argument){
+	my task;
+	return func.apply(argument)
+}
+func.prototype...... = ......
+//func：要hook的函数
+</pre></div>
+</div>
+<p>对象中属性Hook公式：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">obj_attr</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">attr</span>
+<span class="n">Object</span><span class="o">.</span><span class="n">defineProperty</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="s1">&#39;attr&#39;</span><span class="p">,{</span>
+		<span class="n">get</span><span class="p">:</span><span class="n">function</span><span class="p">(){</span>
+			<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">cookie_cache</span><span class="p">);</span>
+			<span class="k">return</span> <span class="n">old_attr</span>
+		<span class="p">},</span>
+		<span class="nb">set</span><span class="p">:</span><span class="n">function</span><span class="p">(</span><span class="n">val</span><span class="p">){</span>
+			<span class="k">return</span> <span class="o">......</span>
+		<span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html" class="btn btn-neutral float-left" title="4.2 入门级JS反爬" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

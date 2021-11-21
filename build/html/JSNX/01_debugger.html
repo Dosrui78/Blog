@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.1 JS调试干扰专题 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/JSNX/01_debugger.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.2 入门级JS反爬" href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html" />
+    <link rel="prev" title="JS逆向篇" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">菜鸟篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">Python篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JS逆向篇</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1 JS调试干扰专题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debugger">4.11 构建debugger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">简单粗暴型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function">借助构造器Function构造</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.12 无限debugger处理方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.13 调试干扰-调试检测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.14 调试干扰-内存爆破</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.15 js逆向-事件监听断点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.16 逆向分析找加密参数基本流程</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html">4.2 入门级JS反爬</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">JS逆向篇</a> &raquo;</li>
+      <li>4.1 JS调试干扰专题</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/JSNX/01_debugger.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="js">
+<h1>4.1 JS调试干扰专题<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>进行devtool调试时经常会卡debugger或者有各种干扰项，还有F12摁了没反应的情况，此时可以在浏览器右上角找到调试入口。</p>
+</div></blockquote>
+<section id="debugger">
+<h2>4.11 构建debugger<a class="headerlink" href="#debugger" title="Permalink to this headline">¶</a></h2>
+<section id="id1">
+<h3>简单粗暴型<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>while(!![]){
+debugger;
+}
+</pre></div>
+</div>
+</section>
+<section id="function">
+<h3>借助构造器Function构造<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
+<span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">();</span>
+<span class="n">a</span><span class="p">()</span>
+
+<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constrctor</span><span class="o">=</span><span class="n">Function</span><span class="p">()</span>    
+<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">();</span>   
+
+<span class="p">(</span><span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>一般都带点混淆</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>XXX.constructor(&quot;debugger&quot;).call(&quot;action&quot;)
+(function(){return !![];})[&quot;constructor&quot;](&quot;debugger&quot;)[&quot;call&quot;](&quot;action&quot;) 
+
+Function(&quot;debugger&quot;).call() 	
+//这里根据后面带的参数个数、类型来定，如果参数为多个，或者类型为数组时，call需换成apply,或者bind
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id2">
+<h2>4.12 无限debugger处理方法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>并不是真正的debugger，而是很频繁的去debugger，解决无限debugger才能进行下一步找到函数的入口；</p>
+<p>常用方法如下：</p>
+<ul class="simple">
+<li><p>如果是Function原理的debugger，可以重写函数构造器</p></li>
+<li><p>如果是eval型构造器，可以重构eval函数</p></li>
+<li><p>如果是定时器，且②失效了，可以重构定时器</p></li>
+<li><p>如果以上都失效，向上找堆栈，在进入无限debugger之前打上断点将触发无限debugger的函数q置空（最麻烦，但是适用性最广）</p></li>
+</ul>
+<p>debugger与计时器搭配型，他的原理就是定时器设置一个很短的时间，频繁的去执行含有debugger的方法，以达到无限debugger的效果，这里我就写一个简单的demo来举例吧</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">a</span><span class="p">(){</span>
+    <span class="n">debugger</span><span class="p">;</span>
+    <span class="n">b</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">function</span> <span class="n">b</span><span class="p">(){</span>
+    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;hello world!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">setInterval</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span> 	<span class="o">//</span><span class="n">每0</span><span class="mf">.2</span><span class="n">秒触发一次</span>
+</pre></div>
+</div>
+<p>这时候就可以通过hook的方式去重写这个定时器方法：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>setInterval_new=setInterval
+setInterval=function(a,b){
+if(a.indexOf(&quot;debugger&quot;)==-1){
+	return setInterval_new(a,b)
+	}
+}	//如果这里的定时器只是单纯的用来频繁触发debugger的话，就直接将其干掉了
+</pre></div>
+</div>
+<p>上面所提的eval手段也是通过这样的手段将其重写。</p>
+<p>同上当出现”debugger”在constructor里面时，重写方法如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Function.prototype.constructor_bc=Function.prototype.constructor;
+Function.prototype.constructor=function(){
+	if(arguments===&quot;debugger&quot;){
+	&quot;什么都不做&quot;
+	}	//利用arguments关键字的属性获取当前方法里面的参数
+    else{
+    return Function.prototype.constructor_bc.apply(this,arguments)  
+    	//跟上面处理debugger和定时器一起用的处理方法一样
+    }
+    }	//注：&quot;Function&quot;的含义并不是某度上面有些人说&quot;js不区分大小&quot;，不知道的小伙伴可以去看看比较正规一点的文档了解一下
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>4.13 调试干扰-调试检测<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>禁止F12右键的解决方案，浏览器的更多工具中的开发者工具</p></li>
+<li><p>呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以Autoresponse干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>4.14 调试干扰-内存爆破<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>内存爆破，指js通过死循环/频繁操作数据库（包括cookie）<strong>频繁</strong>调取history等方式，使浏览器崩溃的一种反调试手段。</p>
+<p>还有一种特性情况：js文件很大，电脑内存不足（这种情况在调试层面几乎无解）</p>
+<p>特点：</p>
+<ol class="simple">
+<li><p>正常运行时，一切正常</p></li>
+<li><p>调试时利用时间差，调试特点等将控制流推入循环</p></li>
+<li><p>利用正则/toString()判断代码是否进行格式化</p></li>
+<li><p>利用浏览器指纹判断是否为浏览器环境</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>4.15 js逆向-事件监听断点<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>非常频繁使用的<strong>事件监听</strong>断点： script、XHR</p></li>
+</ul>
+<ul class="simple">
+<li><p>一般频繁使用的： Dom断点、Countrol、timer</p></li>
+<li><p>不太常用但是偶尔用到的： Mouse</p></li>
+</ul>
+<ul class="simple">
+<li><p>的可能只是在特殊情况下才会用到。</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>4.16 逆向分析找加密参数基本流程<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>打开抓包软件找到url的位置 进行重放攻击</p>
+<ul>
+<li><p>可行：搜索加密参数</p>
+<ul>
+<li><p>搜不到，检查数据是否是json数据，是的话打XHR断点</p></li>
+</ul>
+</li>
+<li><p>不可行：</p>
+<ul>
+<li><p>可能是动态cookie，对cookie进行进一步分析</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="JS逆向篇" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html" class="btn btn-neutral float-right" title="4.2 入门级JS反爬" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

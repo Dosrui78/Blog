@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.2 Git教程 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Other/02_Git.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Python篇" href="../Python/index.html" />
+    <link rel="prev" title="2.1 Xpath拓展" href="01_Xpath.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">菜鸟篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Xpath.html">2.1 Xpath拓展</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.2 Git教程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.21 初始设置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">安装完成设置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">初始化</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.22 提交设置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">把大象放到冰箱</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">提交并添加描述</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">查看状态</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">查看改动了哪里（先-后+）</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">2.23 后悔药（回退版本）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">回退至最近一次版本</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">记录每一次命令</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">2.24 撤销操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">丢掉工作区的修改</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">2.25 删除文件操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">删除工作区</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">2.26 远程仓库</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ssh-key">创建SSH Key:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">第一次推送</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">删除远程库</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">查看远程库信息：</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">删除操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">从远程库克隆</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">2.27 创建合并分支</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id23">新建分支（以下两个相同）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">切换分支（以下两个相同）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#devmaster">把dev分支的工作成果合并到master分支</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">查看日志</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">2.28 分支冲突</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">2.29 分支管理策略</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">2.30 团队协作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">2.31 小结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">Python篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">菜鸟篇</a> &raquo;</li>
+      <li>2.2 Git教程</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Other/02_Git.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="git">
+<h1>2.2 Git教程<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p><strong>Git是目前世界上最先进的分布式版本控制系统（没有之一）。</strong></p>
+<p><img alt="2.2.jpg" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.2.jpg?raw=true" /></p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="id1">
+<h2>2.21 初始设置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<section id="id2">
+<h3>安装完成设置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git config --global user.name &quot;Your Name&quot;
+$ git config --global user.email &quot;email@example.com&quot;
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>初始化<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>把这目录变成Git可以管理的仓库。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git init
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>2.22 提交设置<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<section id="id5">
+<h3>把大象放到冰箱<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>把文件添加到Git仓库</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git add readme.txt
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>提交并添加描述<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git commit -m xxxx(xxx为描述)
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>查看状态<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git status
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>查看改动了哪里（先-后+）<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git diff
+</pre></div>
+</div>
+<p>查看工作区和版本库里面最新版本的区别：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git diff HEAD -- readme.txt
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>2.23 后悔药（回退版本）<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<section id="id10">
+<h3>回退至最近一次版本<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git reset --hard HEAD^ 
+$git reset --hard 1024a(1024a为commitid号，可通过git log查看)
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>记录每一次命令<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git reflog
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2>2.24 撤销操作<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<section id="id13">
+<h3>丢掉工作区的修改<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>就是回到近一次git commit或git add时的状态，下面两种写法发都可：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git restore -- readme.txt
+$git checkout -- readme.txt
+</pre></div>
+</div>
+<blockquote>
+<div><p>若是已经把修改添加到了暂缓区（unstage），提交了就改不回去了</p>
+<p>撤销掉把暂存区（unstage）的修改，重新放回工作区</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git reset HEAD  &lt;file&gt;
+</pre></div>
+</div>
+<blockquote>
+<div><p>最后再用git checkout – readme.txt 来撤销工作区的修改。</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2>2.25 删除文件操作<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<section id="id15">
+<h3>删除工作区<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$rm test.txt
+</pre></div>
+</div>
+<blockquote>
+<div><p>这时候用$git status查看会告诉你那些文件被删了</p>
+<p>删除版本库，然后提交一次，文件就从版本库被删除了</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git rm test.txt
+$git commit -m  &quot;remove test.txt&quot;
+</pre></div>
+</div>
+<blockquote>
+<div><p>如果删错了 版本库里还有恢复可用(原理是用版本库替换工作区的版本)</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git checkout -- test.txt
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id16">
+<h2>2.26 远程仓库<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>本地Git仓库和Github仓库是靠SSH加密的</p>
+</div></blockquote>
+<section id="ssh-key">
+<h3>创建SSH Key:<a class="headerlink" href="#ssh-key" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ssh-keygen -t rsa -C&quot;youremail@example.com&quot;
+</pre></div>
+</div>
+<p>从Github克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后把本地仓库的内容推送到GitHub仓库</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git remote add origin git@github.com:Dosrui78/learngit.git
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h3>第一次推送<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git push -u origin master
+</pre></div>
+</div>
+<p>只要本地做了提交就可以通过：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git push origin master
+</pre></div>
+</div>
+</section>
+<section id="id18">
+<h3>删除远程库<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id19">
+<h3>查看远程库信息：<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git remote -v
+</pre></div>
+</div>
+</section>
+<section id="id20">
+<h3>删除操作<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git remote rm origin
+</pre></div>
+</div>
+</section>
+<section id="id21">
+<h3>从远程库克隆<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git clone …… 
+$git checkout -b dev创建新分支dev，效果等同于
+$git branch dev 
+$git checkout dev
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id22">
+<h2>2.27 创建合并分支<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424">廖雪峰的官方网站</a>有图解</p>
+<section id="id23">
+<h3>新建分支（以下两个相同）<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git checkout -b dev
+$git switch -c dev
+</pre></div>
+</div>
+<p>等同于</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git branch dev
+$git checkout dev
+</pre></div>
+</div>
+<p><em>一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点：</em></p>
+<p><em>master<strong>随提交次数越来愈长，创建新分支时</strong>HEAD**会指向新的分支，此时修改提交就是移动新的分支了，<strong>master</strong>不动。</em></p>
+<p>查看当前分支</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git branch
+</pre></div>
+</div>
+</section>
+<section id="id24">
+<h3>切换分支（以下两个相同）<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git checkout dev
+$git switch dev
+</pre></div>
+</div>
+</section>
+<section id="devmaster">
+<h3>把dev分支的工作成果合并到master分支<a class="headerlink" href="#devmaster" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git merge dev
+</pre></div>
+</div>
+</section>
+<section id="id25">
+<h3>查看日志<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span> <span class="o">--</span><span class="n">pretty</span><span class="o">=</span><span class="n">oneline</span> <span class="o">--</span><span class="n">abbrev</span><span class="o">--</span><span class="n">commit</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id26">
+<h2>2.28 分支冲突<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+<p>分支可视化，可以看到分支合并情况</p>
+<p>只加graph</p>
+<p><img alt="2.28.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.28.png?raw=true" /></p>
+<p>加graph和pretty=online</p>
+<p><img alt="2.28-1.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.28-1.png?raw=true" /></p>
+<p>加–graph –pretty==online –abbrev-commit(abbrev缩写的意思，意思是缩写commit)</p>
+<p><img alt="2.28-2.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.28-2.png?raw=true" /></p>
+</section>
+<hr class="docutils" />
+<section id="id27">
+<h2>2.29 分支管理策略<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
+<p>通常，合并分支时都会用Fast forward 模式，这种模式下删除分支后会丢掉分支信息，如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。</p>
+<p>合并时禁用Fast forward:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$git merge --no-ff -m &quot;merge with no-ff&quot; dev
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id28">
+<h2>2.30 团队协作<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>现在，你的小伙伴要在dev分支上开发，就必须创建远程origin的dev分支到本地，于是他用这个命令创建本地dev分支：</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b dev origin/dev
+</pre></div>
+</div>
+<p>因此，多人协作的工作模式通常是这样：</p>
+<ul>
+<li><p>首先，可以试图用git push origin 推送自己的修改；</p></li>
+<li><p>如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</p></li>
+<li><p>如果合并有冲突，则解决冲突，并在本地提交；</p></li>
+<li><p>没有冲突或者解决掉冲突后，再用git push origin 推送就能成功！</p></li>
+<li><p>如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--set-upstream-to</span> <span class="pre">&lt;branch-name&gt;</span> <span class="pre">origin/&lt;branch-name&gt;</span></code>。</p>
+<p>这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
+</li>
+</ul>
+<p>这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
+</section>
+<hr class="docutils" />
+<section id="id29">
+<h2>2.31 小结<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>查看远程库信息，使用git remote -v；</p>
+<p>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
+<p>从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；</p>
+<p>在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；</p>
+<p>建立本地分支和远程分支的关联，使用git branch –set-upstream branch-name origin/branch-name；</p>
+<p>从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。</p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01_Xpath.html" class="btn btn-neutral float-left" title="2.1 Xpath拓展" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Python/index.html" class="btn btn-neutral float-right" title="Python篇" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
