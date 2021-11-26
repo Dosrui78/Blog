@@ -1,2 +1,2 @@
 ### ZYR's new Blog
-[链接1](https://dosrui78s-blog.readthedocs.io/en/latest/)
+[链接](https://dosrui78s-blog.readthedocs.io/en/latest/)
