@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.4 海象运算符 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Python/04_海象运算符.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="爬虫菜鸟篇" href="../Other/index.html" />
+    <link rel="prev" title="1.3 Python直接赋值、浅拷贝和深拷贝解析" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Excel.html">1.1 Python 操作 Excel 报表自动化指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.3 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.4 海象运算符</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#walrus">1.41 海象(Walrus)运算符介绍</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫菜鸟篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Python篇</a> &raquo;</li>
+      <li>1.4 海象运算符</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Python/04_海象运算符.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>1.4 海象运算符<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Python 3.8终于支持直接对表达式的变量赋值啦，代码更简洁优雅了，让我们来见识一下新海象运算符的威力。作为Python语法糖的热心爱好者，我浏览了3.8版本的发行说明，有一个特别的运算符引起了我的注意。该运算符称为<strong>Walrus运算符</strong>（<strong>：=</strong>）或命名表达式运算符。</p>
+</div></blockquote>
+<section id="walrus">
+<h2>1.41 海象(Walrus)运算符介绍<a class="headerlink" href="#walrus" title="Permalink to this headline">¶</a></h2>
+<p>这个新的运算符（<strong>：=</strong>）使我们可以将值分配给表达式中的变量。该符号有点像海象的眼睛和象牙。</p>
+<p><img alt="img" src="https://pic2.zhimg.com/v2-8886203be2667dd682210da03332edb5_b.jpg" /></p>
+<p>用海象运算符之前：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;India&#39;</span><span class="p">,</span> <span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">,</span> <span class="s2">&quot;Japan&quot;</span><span class="p">,</span> <span class="s2">&quot;Germany&quot;</span><span class="p">]</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of countries is &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">country_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">country_size</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+  <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Length of countries is &quot;</span><span class="p">,</span> <span class="n">country_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>用海象运算符之后：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">country_size</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of countries is &quot;</span><span class="p">,</span> <span class="n">country_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" class="btn btn-neutral float-left" title="1.3 Python直接赋值、浅拷贝和深拷贝解析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Other/index.html" class="btn btn-neutral float-right" title="爬虫菜鸟篇" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

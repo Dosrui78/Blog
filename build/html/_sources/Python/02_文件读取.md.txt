@@ -129,7 +129,8 @@ import os
 from configparser import ConfigParser
 config = ConfigParser() # 一般用于打开ini文件
 config.read(os.path.abspath(__file__) + '/../config.ini')
-print(config._sections['mysql']['table_name']) # 输出为teacher
+print(config._sections) # 输出类型为dict:{'mysql': {'username': 'root', 'password': '', 'host': 'localhost', 'port': '3306', 'database': 'teacher', 'table_name': 'teacher'}}
+print(config._sections['mysql']['table_name']) # 输出类型为str：teacher
 
 [mysql]
 username=root
