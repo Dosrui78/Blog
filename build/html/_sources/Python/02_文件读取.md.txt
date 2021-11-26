@@ -1,0 +1,142 @@
+#### 1.2 Python打开文件的路径
+
+##### 1.21 `__file__`详解
+
+###### `__file__`表示当前文件的绝对/相对路径
+
+那么这里的`__file__`是什么用呢？
+
+其实就是当前脚本运行的路径。
+
+但是也会分不同的情况。
+
+如果执行命令时使用绝对路径，`__file__`就是脚本的绝对路径。
+
+如果使用的是相对路径，`__file__`就是脚本的相对路径。
+
+注：
+
+如果在交互式环境中，则会爆出异常。因为此时`__file__`并未生成。
+
+###### Python中模块导入方法
+
+```
+import my_package
+print(my_package.__file__)
+```
+
+案例：
+
+```
+import string
+print(string.__file__)
+```
+
+输出：
+
+![1.21.png](https://github.com/Dosrui78/Blog-Images/blob/master/1.21.png?raw=true)
+
+由此，通过调用 __file__ 属性输出的绝对路径，我们可以很轻易地找到该模块（或包）的源文件。
+
+---
+
+##### 1.22 os.path()模块
+
+| 方法                                | 说明                                                         |
+| :---------------------------------- | :----------------------------------------------------------- |
+| os.path.abspath(path)               | 返回绝对路径                                                 |
+| os.path.basename(path)              | 返回文件名                                                   |
+| os.path.commonprefix(list)          | 返回list(多个路径)中，所有path共有的最长的路径               |
+| os.path.dirname(path)               | 返回文件路径                                                 |
+| os.path.exists(path)                | 如果路径 path 存在，返回 True；如果路径 path 不存在，返回 False。 |
+| os.path.lexists                     | 路径存在则返回True,路径损坏也返回True                        |
+| os.path.expanduser(path)            | 把path中包含的"~"和"~user"转换成用户目录                     |
+| os.path.expandvars(path)            | 根据环境变量的值替换path中包含的"$name"和"${name}"           |
+| os.path.getatime(path)              | 返回最近访问时间（浮点型秒数）                               |
+| os.path.getmtime(path)              | 返回最近文件修改时间                                         |
+| os.path.getctime(path)              | 返回文件 path 创建时间                                       |
+| os.path.getsize(path)               | 返回文件大小，如果文件不存在就返回错误                       |
+| os.path.isabs(path)                 | 判断是否为绝对路径                                           |
+| os.path.isfile(path)                | 判断路径是否为文件                                           |
+| os.path.isdir(path)                 | 判断路径是否为目录                                           |
+| os.path.islink(path)                | 判断路径是否为链接                                           |
+| os.path.ismount(path)               | 判断路径是否为挂载点                                         |
+| os.path.join(path1[, path2[, ...]]) | 把目录和文件名合成一个路径                                   |
+| os.path.normcase(path)              | 转换path的大小写和斜杠                                       |
+| os.path.normpath(path)              | 规范path字符串形式                                           |
+| os.path.realpath(path)              | 返回path的真实路径                                           |
+| os.path.relpath(path[, start])      | 从start开始计算相对路径                                      |
+| os.path.samefile(path1, path2)      | 判断目录或文件是否相同                                       |
+| os.path.sameopenfile(fp1, fp2)      | 判断fp1和fp2是否指向同一文件                                 |
+| os.path.samestat(stat1, stat2)      | 判断stat tuple stat1和stat2是否指向同一个文件                |
+| os.path.split(path)                 | 把路径分割成 dirname 和 basename，返回一个元组               |
+| os.path.splitdrive(path)            | 一般用在 windows 下，返回驱动器名和路径组成的元组            |
+| os.path.splitext(path)              | 分割路径，返回路径名和文件扩展名的元组                       |
+| os.path.splitunc(path)              | 把路径分割为加载点与文件                                     |
+| os.path.walk(path, visit, arg)      | 遍历path，进入每个目录都调用visit函数，visit函数必须有3个参数(arg, dirname, names)，dirname表示当前目录的目录名，names代表当前目录下的所有文件名，args则为walk的第三个参数 |
+| os.path.supports_unicode_filenames  | 设置是否支持unicode路径名                                    |
+
+实例：
+
+```
+import os
+
+print( os.path.basename('/root/runoob.txt') )   # 返回文件名
+print( os.path.dirname('/root/runoob.txt') )    # 返回目录路径
+print( os.path.split('/root/runoob.txt') )      # 分割文件名与路径
+print( os.path.join('root','test','runoob.txt') )  # 将目录和文件名合成一个路径
+```
+
+输出结果为：
+
+```
+runoob.txt
+/root
+('/root', 'runoob.txt')
+root/test/runoob.txt
+```
+
+---------
+
+##### 1.23 configparser模块
+
+###### configparser简介
+
+```
+ConfigParser 是用来读取配置文件的包。配置文件的格式如下：中括号“[ ]”内包含的为section。section 下面为类似于key-value 的配置内容。
+
+[db]
+db_host = 127.0.0.1
+db_port = 69
+db_user = root
+db_pass = root
+host_port = 69
+
+[concurrent]
+thread = 10
+processor = 20
+括号“[ ]”内包含的为section。紧接着section 为类似于key-value 的options 的配置内容。
+```
+
+---
+
+
+
+###### configparser初始化文件
+
+```
+import os
+from configparser import ConfigParser
+config = ConfigParser() # 一般用于打开ini文件
+config.read(os.path.abspath(__file__) + '/../config.ini')
+print(config._sections['mysql']['table_name']) # 输出为teacher
+
+[mysql]
+username=root
+password=
+host=localhost
+port=3306
+database=teacher
+table_name=teacher
+```
+

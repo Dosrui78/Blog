@@ -9,7 +9,7 @@ Some experience of a small crawler.
    :maxdepth: 2
    :caption: Contents:
 
+   Python/index   
    Other/index
-   Python/index
    JS/index
    JSNX/index

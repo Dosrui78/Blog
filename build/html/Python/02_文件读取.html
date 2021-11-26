@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.2 Python打开文件的路径 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Python/02_文件读取.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.3 Python直接赋值、浅拷贝和深拷贝解析" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" />
+    <link rel="prev" title="1.1 Python 操作 Excel 报表自动化指南" href="01_Excel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Excel.html">1.1 Python 操作 Excel 报表自动化指南</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2 Python打开文件的路径</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file">1.21 <code class="docutils literal notranslate"><span class="pre">__file__</span></code>详解</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">__file__</span></code>表示当前文件的绝对/相对路径</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Python中模块导入方法</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#os-path">1.22 os.path()模块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configparser">1.23 configparser模块</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">configparser简介</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">configparser初始化文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.3 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫菜鸟篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Python篇</a> &raquo;</li>
+      <li>1.2 Python打开文件的路径</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Python/02_文件读取.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python">
+<h1>1.2 Python打开文件的路径<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<section id="file">
+<h2>1.21 <code class="docutils literal notranslate"><span class="pre">__file__</span></code>详解<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h2>
+<section id="id1">
+<h3><code class="docutils literal notranslate"><span class="pre">__file__</span></code>表示当前文件的绝对/相对路径<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>那么这里的<code class="docutils literal notranslate"><span class="pre">__file__</span></code>是什么用呢？</p>
+<p>其实就是当前脚本运行的路径。</p>
+<p>但是也会分不同的情况。</p>
+<p>如果执行命令时使用绝对路径，<code class="docutils literal notranslate"><span class="pre">__file__</span></code>就是脚本的绝对路径。</p>
+<p>如果使用的是相对路径，<code class="docutils literal notranslate"><span class="pre">__file__</span></code>就是脚本的相对路径。</p>
+<p>注：</p>
+<p>如果在交互式环境中，则会爆出异常。因为此时<code class="docutils literal notranslate"><span class="pre">__file__</span></code>并未生成。</p>
+</section>
+<section id="id2">
+<h3>Python中模块导入方法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">my_package</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_package</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>案例：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>输出：</p>
+<p><img alt="1.21.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/1.21.png?raw=true" /></p>
+<p>由此，通过调用 <strong>file</strong> 属性输出的绝对路径，我们可以很轻易地找到该模块（或包）的源文件。</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="os-path">
+<h2>1.22 os.path()模块<a class="headerlink" href="#os-path" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">os.path.abspath(path)</td>
+<td align="left">返回绝对路径</td>
+</tr>
+<tr>
+<td align="left">os.path.basename(path)</td>
+<td align="left">返回文件名</td>
+</tr>
+<tr>
+<td align="left">os.path.commonprefix(list)</td>
+<td align="left">返回list(多个路径)中，所有path共有的最长的路径</td>
+</tr>
+<tr>
+<td align="left">os.path.dirname(path)</td>
+<td align="left">返回文件路径</td>
+</tr>
+<tr>
+<td align="left">os.path.exists(path)</td>
+<td align="left">如果路径 path 存在，返回 True；如果路径 path 不存在，返回 False。</td>
+</tr>
+<tr>
+<td align="left">os.path.lexists</td>
+<td align="left">路径存在则返回True,路径损坏也返回True</td>
+</tr>
+<tr>
+<td align="left">os.path.expanduser(path)</td>
+<td align="left">把path中包含的"~"和"~user"转换成用户目录</td>
+</tr>
+<tr>
+<td align="left">os.path.expandvars(path)</td>
+<td align="left">根据环境变量的值替换path中包含的"$name"和"${name}"</td>
+</tr>
+<tr>
+<td align="left">os.path.getatime(path)</td>
+<td align="left">返回最近访问时间（浮点型秒数）</td>
+</tr>
+<tr>
+<td align="left">os.path.getmtime(path)</td>
+<td align="left">返回最近文件修改时间</td>
+</tr>
+<tr>
+<td align="left">os.path.getctime(path)</td>
+<td align="left">返回文件 path 创建时间</td>
+</tr>
+<tr>
+<td align="left">os.path.getsize(path)</td>
+<td align="left">返回文件大小，如果文件不存在就返回错误</td>
+</tr>
+<tr>
+<td align="left">os.path.isabs(path)</td>
+<td align="left">判断是否为绝对路径</td>
+</tr>
+<tr>
+<td align="left">os.path.isfile(path)</td>
+<td align="left">判断路径是否为文件</td>
+</tr>
+<tr>
+<td align="left">os.path.isdir(path)</td>
+<td align="left">判断路径是否为目录</td>
+</tr>
+<tr>
+<td align="left">os.path.islink(path)</td>
+<td align="left">判断路径是否为链接</td>
+</tr>
+<tr>
+<td align="left">os.path.ismount(path)</td>
+<td align="left">判断路径是否为挂载点</td>
+</tr>
+<tr>
+<td align="left">os.path.join(path1[, path2[, ...]])</td>
+<td align="left">把目录和文件名合成一个路径</td>
+</tr>
+<tr>
+<td align="left">os.path.normcase(path)</td>
+<td align="left">转换path的大小写和斜杠</td>
+</tr>
+<tr>
+<td align="left">os.path.normpath(path)</td>
+<td align="left">规范path字符串形式</td>
+</tr>
+<tr>
+<td align="left">os.path.realpath(path)</td>
+<td align="left">返回path的真实路径</td>
+</tr>
+<tr>
+<td align="left">os.path.relpath(path[, start])</td>
+<td align="left">从start开始计算相对路径</td>
+</tr>
+<tr>
+<td align="left">os.path.samefile(path1, path2)</td>
+<td align="left">判断目录或文件是否相同</td>
+</tr>
+<tr>
+<td align="left">os.path.sameopenfile(fp1, fp2)</td>
+<td align="left">判断fp1和fp2是否指向同一文件</td>
+</tr>
+<tr>
+<td align="left">os.path.samestat(stat1, stat2)</td>
+<td align="left">判断stat tuple stat1和stat2是否指向同一个文件</td>
+</tr>
+<tr>
+<td align="left">os.path.split(path)</td>
+<td align="left">把路径分割成 dirname 和 basename，返回一个元组</td>
+</tr>
+<tr>
+<td align="left">os.path.splitdrive(path)</td>
+<td align="left">一般用在 windows 下，返回驱动器名和路径组成的元组</td>
+</tr>
+<tr>
+<td align="left">os.path.splitext(path)</td>
+<td align="left">分割路径，返回路径名和文件扩展名的元组</td>
+</tr>
+<tr>
+<td align="left">os.path.splitunc(path)</td>
+<td align="left">把路径分割为加载点与文件</td>
+</tr>
+<tr>
+<td align="left">os.path.walk(path, visit, arg)</td>
+<td align="left">遍历path，进入每个目录都调用visit函数，visit函数必须有3个参数(arg, dirname, names)，dirname表示当前目录的目录名，names代表当前目录下的所有文件名，args则为walk的第三个参数</td>
+</tr>
+<tr>
+<td align="left">os.path.supports_unicode_filenames</td>
+<td align="left">设置是否支持unicode路径名</td>
+</tr>
+</tbody>
+</table><p>实例：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="s1">&#39;/root/runoob.txt&#39;</span><span class="p">)</span> <span class="p">)</span>   <span class="c1"># 返回文件名</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;/root/runoob.txt&#39;</span><span class="p">)</span> <span class="p">)</span>    <span class="c1"># 返回目录路径</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/root/runoob.txt&#39;</span><span class="p">)</span> <span class="p">)</span>      <span class="c1"># 分割文件名与路径</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">,</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="s1">&#39;runoob.txt&#39;</span><span class="p">)</span> <span class="p">)</span>  <span class="c1"># 将目录和文件名合成一个路径</span>
+</pre></div>
+</div>
+<p>输出结果为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">runoob</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">/</span><span class="n">root</span>
+<span class="p">(</span><span class="s1">&#39;/root&#39;</span><span class="p">,</span> <span class="s1">&#39;runoob.txt&#39;</span><span class="p">)</span>
+<span class="n">root</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">runoob</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="configparser">
+<h2>1.23 configparser模块<a class="headerlink" href="#configparser" title="Permalink to this headline">¶</a></h2>
+<section id="id3">
+<h3>configparser简介<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ConfigParser 是用来读取配置文件的包。配置文件的格式如下：中括号“[ ]”内包含的为section。section 下面为类似于key-value 的配置内容。
+
+[db]
+db_host = 127.0.0.1
+db_port = 69
+db_user = root
+db_pass = root
+host_port = 69
+
+[concurrent]
+thread = 10
+processor = 20
+括号“[ ]”内包含的为section。紧接着section 为类似于key-value 的options 的配置内容。
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h3>configparser初始化文件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span> <span class="c1"># 一般用于打开ini文件</span>
+<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/../config.ini&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">_sections</span><span class="p">[</span><span class="s1">&#39;mysql&#39;</span><span class="p">][</span><span class="s1">&#39;table_name&#39;</span><span class="p">])</span> <span class="c1"># 输出为teacher</span>
+
+<span class="p">[</span><span class="n">mysql</span><span class="p">]</span>
+<span class="n">username</span><span class="o">=</span><span class="n">root</span>
+<span class="n">password</span><span class="o">=</span>
+<span class="n">host</span><span class="o">=</span><span class="n">localhost</span>
+<span class="n">port</span><span class="o">=</span><span class="mi">3306</span>
+<span class="n">database</span><span class="o">=</span><span class="n">teacher</span>
+<span class="n">table_name</span><span class="o">=</span><span class="n">teacher</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01_Excel.html" class="btn btn-neutral float-left" title="1.1 Python 操作 Excel 报表自动化指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" class="btn btn-neutral float-right" title="1.3 Python直接赋值、浅拷贝和深拷贝解析" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
