@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.6 Python日志 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Python/06_日志.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="爬虫基础篇" href="../Other/index.html" />
+    <link rel="prev" title="1.5 我终于把Python中下划线的含义弄清楚了" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Excel.html">1.1 Python 操作 Excel 报表自动化指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.3 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.5 我终于把Python中下划线的含义弄清楚了</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.6 Python日志</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.61 日志基础教程</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">更改显示消息的格式</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.62 进阶日志教程</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">配置日志记录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5"></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loguru">1.63 loguru</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">loguru基本使用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">loguru详细使用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Python篇</a> &raquo;</li>
+      <li>1.6 Python日志</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Python/06_日志.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python">
+<h1>1.6 Python日志<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<section id="id1">
+<h2>1.61 日志基础教程<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="left">级别</th>
+<th align="left">何时使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>DEBUG</code></td>
+<td align="left">细节信息，仅当诊断问题时适用。</td>
+</tr>
+<tr>
+<td align="left"><code>INFO</code></td>
+<td align="left">确认程序按预期运行。</td>
+</tr>
+<tr>
+<td align="left"><code>WARNING</code></td>
+<td align="left">表明有已经或即将发生的意外（例如：磁盘空间不足）。程序仍按预期进行。</td>
+</tr>
+<tr>
+<td align="left"><code>ERROR</code></td>
+<td align="left">由于严重的问题，程序的某些功能已经不能正常执行</td>
+</tr>
+<tr>
+<td align="left"><code>CRITICAL</code></td>
+<td align="left">严重的错误，表明程序已不能继续执行</td>
+</tr>
+</tbody>
+</table><blockquote>
+<div><p>默认的级别是 <code class="docutils literal notranslate"><span class="pre">WARNING</span></code>，意味着只会追踪该级别及以上的事件，除非更改日志配置。所追踪事件可以以不同形式处理。最简单的方式是输出到控制台。另一种常用的方式是写入磁盘文件。</p>
+</div></blockquote>
+<section id="id2">
+<h3>更改显示消息的格式<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>要更改用于显示消息的格式，你需要指定要使用的格式:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myapp.log&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(funcName)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y %I:%M:%S %p&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>output（其实在运行栏看不到输出，直接存到log文件了）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">11</span><span class="o">/</span><span class="mi">29</span><span class="o">/</span><span class="mi">2021</span> <span class="mi">11</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">35</span> <span class="n">AM</span> <span class="o">-</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">INFO</span><span class="p">:</span> <span class="n">lalala</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>filename为日志储存的位置，format为日志显示的格式，asctime表示日期和时间，funcName表示日志输出在哪个函数下，levelname表示日志级别，message表示日志要输出的内容，level指定日志最低级别，datefmt表示日期格式转换的格式。</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>1.62 进阶日志教程<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>日志库采用模块化方法，并提供几类组件：记录器、处理器、过滤器和格式器。</p>
+<ul class="simple">
+<li><p>记录器暴露了应用程序代码直接使用的接口。</p></li>
+<li><p>处理器将日志记录（由记录器创建）发送到适当的目标。</p></li>
+<li><p>过滤器提供了更细粒度的功能，用于确定要输出的日志记录。</p></li>
+<li><p>格式器指定最终输出中日志记录的样式。</p></li>
+</ul>
+<p>日志事件信息在 <a class="reference external" href="https://docs.python.org/zh-cn/3/library/logging.html#logging.LogRecord"><code class="docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 实例中的记录器、处理器、过滤器和格式器之间传递。</p>
+<p>通过调用 <a class="reference external" href="https://docs.python.org/zh-cn/3/library/logging.html#logging.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a> 类（以下称为 <em>loggers</em> ， 记录器）的实例来执行日志记录。 每个实例都有一个名称，它们在概念上以点（句点）作为分隔符排列在命名空间的层次结构中。 例如，名为 ‘scan’ 的记录器是记录器 ‘scan.text’ ，’scan.html’ 和 ‘scan.pdf’ 的父级。 记录器名称可以是你想要的任何名称，并指示记录消息源自的应用程序区域。</p>
+<p>在命名记录器时使用的一个好习惯是在每个使用日志记录的模块中使用模块级记录器，命名如下:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id4">
+<h3>配置日志记录<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>handlers种类（常用）</p>
+<ol class="simple">
+<li><p>logging.StreamHandler
+使用这个Handler可以向类似与sys.stdout或者sys.stderr的任何文件对象(file object)输出信息。
+它的构造函数是：StreamHandler([strm])
+其中strm参数是一个文件对象。
+默认是sys.stderr</p></li>
+<li><p>logging.FileHandler
+和StreamHandler类似，用于向一个文件输出日志信息。不过FileHandler会帮你打开这个文件。
+它的构造函数是：FileHandler(filename[,mode])
+filename是文件名，必须指定一个文件名。
+mode是文件的打开方式。
+默认是’a’，即添加到文件末尾。</p></li>
+</ol>
+<p>输出到控制台：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># create logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;simple_example&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="c1"># create console handler and set level to debug</span>
+<span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="c1"># create formatter</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># add formatter to ch</span>
+<span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+<span class="c1"># add ch to logger</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+
+<span class="c1"># &#39;application&#39; code</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;debug message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;info message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;warn message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;error message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;critical message&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>输出到文件（接上条）：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fh</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">fileHandler</span><span class="p">(</span><span class="s2">&quot;文件路径&quot;</span><span class="p">)</span>
+<span class="n">fh</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">fh</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>从命令行运行此模块将生成以下输出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python simple_logging_module.py
+2005-03-19 15:10:26,618 - simple_example - DEBUG - debug message
+2005-03-19 15:10:26,620 - simple_example - INFO - info message
+2005-03-19 15:10:26,695 - simple_example - WARNING - warn message
+2005-03-19 15:10:26,697 - simple_example - ERROR - error message
+2005-03-19 15:10:26,773 - simple_example - CRITICAL - critical message
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<hr class="docutils" />
+<section id="loguru">
+<h2>1.63 loguru<a class="headerlink" href="#loguru" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>上面的实现方式已经是一个较为可行的配置方案了。然而，我还是会感觉到有些 Handler 配起来麻烦，尤其是新建一个项目的很多时候懒得去写一些配置。即使是不用上文的配置，用最基本的几行 logging 配置，像如下的通用配置：</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;__name__&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;hi~&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id6">
+<h3>loguru基本使用<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this is a debug message&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>看到了吧，不需要配置什么东西，直接引入一个 logger，然后调用其 debug 方法即可。 在 loguru 里面有且仅有一个主要对象，那就是 logger，loguru 里面有且仅有一个 logger，而且它已经被提前配置了一些基础信息，比如比较友好的格式化、文本颜色信息等等。 上面的代码运行结果如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>2021-11-29 13:49:02.765 | DEBUG    | __main__:&lt;module&gt;:22 - this is a debug message!
+</pre></div>
+</div>
+<p>可以看到其默认的输出格式是上面的内容，有时间、级别、模块名、行号以及日志信息，不需要手动创建 logger，直接使用即可，另外其输出还是彩色的，看起来会更加友好。 以上的日志信息是直接输出到控制台的，并没有输出到其他的地方，如果想要输出到其他的位置，比如存为文件，我们只需要使用一行代码声明即可。 例如将结果同时输出到一个 runtime.log 文件里面，可以这么写：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;runtime.log&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this is a debug&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>很简单吧，我们也不需要再声明一个 FileHandler 了，就一行 add 语句搞定，运行之后会发现目录下 runtime.log 里面同样出现了刚刚控制台输出的 DEBUG 信息。 上面就是一些基本的使用，但这还远远不够，下面我们来详细了解下它的一些功能模块。</p>
+</section>
+<section id="id7">
+<h3>loguru详细使用<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="n">trace</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;runtime.log&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{time}{level}{message}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;my_module&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;500 MB&quot;</span><span class="p">,</span> <span class="n">retention</span><span class="o">=</span><span class="s2">&quot;10 days&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;zip&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this is a debug message!&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this is a debug message!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>rotation也可以换成rotation=’00:00’，rotation=’1 week’。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html" class="btn btn-neutral float-left" title="1.5 我终于把Python中下划线的含义弄清楚了" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Other/index.html" class="btn btn-neutral float-right" title="爬虫基础篇" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

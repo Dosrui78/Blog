@@ -48,13 +48,7 @@ option.add_argument("--disable-javascript")
 options.add_experimental_option('excludeSwitches', ['enable-automation']) 
 
 # 禁用浏览器弹窗
-prefs = {  
-    'profile.default_content_setting_values' :  {  
-        'notifications' : 2  
-     }  
-}  
-options.add_experimental_option('prefs',prefs)
-driver=webdriver.Chrome(chrome_options=chrome_options)
+options.add_experimental_option("prefs",{'profile.default_content_setting_values':{'notifications' : 2}})
 
 # 隐身模式（无痕模式）
 options.add_argument('--incognito')
