@@ -6,10 +6,12 @@
 
 ```
 from selenium import webdriver
-option = webdriver.ChromeOptions()
+options = webdriver.ChromeOptions()
 ```
 
-```
+[Chromium 命令行开关列表](https://peter.sh/experiments/chromium-command-line-switches/)
+
+```python
 # 添加UA
 options.add_argument('user-agent="MQQBrowser/26 Mozilla/5.0 (Linux; U; Android 2.3.7; zh-cn; MB200 Build/GRJ22; CyanogenMod-7) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"')
 
@@ -44,8 +46,14 @@ option.add_extension('d:\crx\AdBlock_v2.17.crx')
 # 禁用JavaScript
 option.add_argument("--disable-javascript") 
 
-# 设置开发者模式启动，该模式下webdriver属性为正常值
+# 设置开发者模式启动，该模式下webdriver属性为正常值，实现了规避检测
 options.add_experimental_option('excludeSwitches', ['enable-automation']) 
+
+#禁止打印日志
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
+# “--log-level” 设置最小日志级别。有效值为 0 到 3：INFO = 0、WARNING = 1、LOG_ERROR = 2、LOG_FATAL = 3
+options.add_argument('log-level=4')
 
 # 禁用浏览器弹窗
 options.add_experimental_option("prefs",{'profile.default_content_setting_values':{'notifications' : 2}})

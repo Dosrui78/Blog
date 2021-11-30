@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4.2 入门级JS反爬 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+  <title>4.21 加密参数直接出现 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="canonical" href="https://magic.iswbm.com/JSNX/02_入门js反爬.html" />
@@ -46,17 +46,14 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Python/index.html">Python篇</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫菜鸟篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫基础篇</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">JS逆向篇</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_debugger.html">4.1 JS调试干扰专题</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.2 入门级JS反爬</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">4.21 加密参数直接出现</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cookie">4.22 入门级cookie反爬</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">4.23 简单请求头参数加密</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">4.24 简单js动态加密解析</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.21 加密参数直接出现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cookie">4.22 入门级cookie反爬</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.23 简单请求头参数加密</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#js">4.24 简单js动态加密解析</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_Hook.html">4.3 Hook的使用</a></li>
 </ul>
 </li>
@@ -77,7 +74,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="index.html">JS逆向篇</a> &raquo;</li>
-      <li>4.2 入门级JS反爬</li>
+      <li>4.21 加密参数直接出现</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/JSNX/02_入门js反爬.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,10 +84,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="js">
-<h1>4.2 入门级JS反爬<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
+  <p>4.2 入门级JS反爬</p>
 <section id="id1">
-<h2>4.21 加密参数直接出现<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h1>4.21 加密参数直接出现<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p><img alt="img" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.21.png?raw=true" /></p>
 <p>这种带翻页的，打开fiddler，查看翻页会有哪些参数变化，然后进行堆栈查找</p>
 <p><img alt="img" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.21-1.png?raw=true" /></p>
@@ -114,7 +110,7 @@
 </section>
 <hr class="docutils" />
 <section id="cookie">
-<h2>4.22 入门级cookie反爬<a class="headerlink" href="#cookie" title="Permalink to this headline">¶</a></h2>
+<h1>4.22 入门级cookie反爬<a class="headerlink" href="#cookie" title="Permalink to this headline">¶</a></h1>
 <p>在抓包找加密参数的时候，fiddler中webForms啥都没有，cookies中发现这么段奇怪代码：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yuanrenxue_cookie</span><span class="o">=</span><span class="mi">1637043175</span><span class="o">|</span><span class="n">YT6lsXhFR2vSKWc4ZCEpeRYwPzco3XKQSAAD5kn8fQuQpE0CPhyjRlBqS7qzuTIbZc6IiTv9IUqK4cCbGiNGCoZInCtnVtQD3MRwJVULGAsguM702mqPskkoWxHQ8fOktadPXtjlXSFcvJMANNCl7S3sGpPG2JxJptbr3tM9DwoEk</span>
 </pre></div>
@@ -146,7 +142,7 @@
 </div>
 </section>
 <section id="id2">
-<h2>4.23 简单请求头参数加密<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h1>4.23 简单请求头参数加密<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
 <p>当webForms出现的并没有加密参数，就要边翻页边找规律，发现safe是加密参数，一直在变</p>
 <p>于是打script断点后一直F8调到1界面，搜索safe发现逻辑显而易见，然后对这些加密逻辑打上断点</p>
 <p><img alt="4.23.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.23.png?raw=true" /></p>
@@ -182,8 +178,8 @@
 </ul>
 </section>
 <hr class="docutils" />
-<section id="id3">
-<h2>4.24 简单js动态加密解析<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<section id="js">
+<h1>4.24 简单js动态加密解析<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <p><img alt="img" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.24.png?raw=true" /></p>
 <p>打个scripct断点，然后一直f8前进到有js的界面</p>
 <p><img alt="img" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.24-1.png?raw=true" /></p>
@@ -197,7 +193,9 @@
 </pre></div>
 </div>
 <p>document[xxxxx]就是document.cookie.</p>
-</section>
+<hr class="docutils" />
+<p>Tips：如果抠代码时代码明明是缺啥补啥但还是报如下错误可能是因为代码格式化导致的，此时可在代码压缩网站<a class="reference external" href="https://www.sojson.com/yasuojs.html">https://www.sojson.com/yasuojs.html</a>将代码压缩后解决</p>
+<p><img alt="4.24-4.jpg" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.24-4.jpg?raw=true" /></p>
 </section>
 
 
