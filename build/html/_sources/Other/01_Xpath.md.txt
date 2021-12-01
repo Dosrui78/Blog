@@ -54,7 +54,7 @@ preceding-sibling表示上面一个兄弟节点元素，反之，following-sibli
 
 ##### 2.15 Xpath选择不包含某一属性的节点
 
-> 这里可以用到not。例如排除一个属性的节点可以用***//tbody/tr[not(@class)]***来写，排除一个或者两个属性可以使用***//tbody/tr[not(@class or @id)]***来选择。
+> 这里可以用到not。例如排除一个属性的节点可以用//tbody/tr[not(@class)]来写，排除一个或者两个属性可以使用//tbody/tr[not(@class or @id)]来选择。
 
 ------
 
