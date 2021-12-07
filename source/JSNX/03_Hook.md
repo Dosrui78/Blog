@@ -64,7 +64,7 @@ eval.toString = function(){
 
 ----
 
-#### 4.44 油猴脚本Hook
+#### 4.35 油猴脚本Hook
 
 ```
 @name :脚本名，你爱叫什么叫什么。
