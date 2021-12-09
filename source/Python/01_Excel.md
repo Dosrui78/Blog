@@ -1,5 +1,9 @@
 #### 1.1 Python 操作 Excel 报表自动化指南
 
+**我们先来看一下python中能操作Excel的库对比（一共九个库）：**
+
+![图片](https://mmbiz.qpic.cn/mmbiz_jpg/PvP6qjUpvIro0I67PdvBOWIE9fbaibCXbHapVRnT05gAliao0aLA24G2CiaDicSA78hU3gNDHbNJllUnqiaFO0SZMpQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
 ##### 1.11 xlrd读取表格
 
 - 介绍
@@ -60,7 +64,7 @@ print(sheet.cell(rowx=2, colx=0))  # 获取第三行，第一列的数据output:
 
 
 
-##### 1.12 xlwt写入表格
+##### 1.12 xlwt写入表格（仅限xls格式！）
 
 >  xlwt可以用于写入新的Excel表格或者在原表格基础上进行修改，速度也很快，推荐使用！
 
@@ -87,3 +91,35 @@ fun3_2_2() #结果如下图1.12
 
 ![1.12.png](https://github.com/Dosrui78/Blog-Images/blob/master/1.12.png?raw=true "1.12")
 
+----
+
+##### 1.13 xlutils 读取 写入 （也就是修改）Excel 表格信息
+
+> 要用xlutils，得先使用xlrd读取表格比如：
+
+```
+import xlrd
+import xlutils.copy
+wb = xlrd.open_workbook('1.13 xlutils 修改操作练习.xlsx')
+nb = copy.copy(wb)
+
+#读取表格信息
+sheet = wb.sheet_by_index(0)
+col2 = sheet.col_values(1) # 取出第二列
+cel_value = sheet.cell_value(1, 1)
+print(col2)
+print(cel_value)
+
+#写入表格信息
+write_save = nb.get_sheet(0)
+write_Save.write(0, 0, 'xlutils写入！')
+nb.save("new_test.xls")  # 保存工作簿
+```
+
+效果如下：
+
+![图片](https://mmbiz.qpic.cn/mmbiz_png/PvP6qjUpvIro0I67PdvBOWIE9fbaibCXb35ibtj2MR8URrw7V8KpDoGvLwyPA90YSt1uuF0Te1jY4tMxX2nUAAlA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
+复制了源文件信息，并进行了追加：
+
+![图片](https://mmbiz.qpic.cn/mmbiz_png/PvP6qjUpvIro0I67PdvBOWIE9fbaibCXb3Dm6sF1Yrgxr7zz6jXFYeA0LXIYLj2Vl7ba8qWfPo7SbJLic3oho8aQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
