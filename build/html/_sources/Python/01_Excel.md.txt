@@ -2,7 +2,7 @@
 
 **我们先来看一下python中能操作Excel的库对比（一共九个库）：**
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/PvP6qjUpvIro0I67PdvBOWIE9fbaibCXbHapVRnT05gAliao0aLA24G2CiaDicSA78hU3gNDHbNJllUnqiaFO0SZMpQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![1.110.png](https://github.com/Dosrui78/Blog-Images/blob/master/1.110.png?raw=true)
 
 ##### 1.11 xlrd读取表格
 
@@ -115,11 +115,3 @@ write_save = nb.get_sheet(0)
 write_Save.write(0, 0, 'xlutils写入！')
 nb.save("new_test.xls")  # 保存工作簿
 ```
-
-效果如下：
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/PvP6qjUpvIro0I67PdvBOWIE9fbaibCXb35ibtj2MR8URrw7V8KpDoGvLwyPA90YSt1uuF0Te1jY4tMxX2nUAAlA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-
-复制了源文件信息，并进行了追加：
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/PvP6qjUpvIro0I67PdvBOWIE9fbaibCXb3Dm6sF1Yrgxr7zz6jXFYeA0LXIYLj2Vl7ba8qWfPo7SbJLic3oho8aQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
