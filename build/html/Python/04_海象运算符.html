@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.5 我终于把Python中下划线的含义弄清楚了" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html" />
-    <link rel="prev" title="1.3 Python直接赋值、浅拷贝和深拷贝解析" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" /> 
+    <link rel="next" title="1.6 Python日志" href="05_Python%E6%97%A5%E5%BF%97.html" />
+    <link rel="prev" title="1.3 我终于把Python中下划线的含义弄清楚了" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,18 +45,19 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python篇</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="01_Excel.html">1.1 Python 操作 Excel 报表自动化指南</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第一章：基础知识</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.1 Python直接赋值、浅拷贝和深拷贝解析</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.3 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.3 我终于把Python中下划线的含义弄清楚了</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1.4 海象运算符</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#walrus">1.41 海象(Walrus)运算符介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#walrus">1.  海象(Walrus)运算符介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#while">2. while配海象运算符</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.5 我终于把Python中下划线的含义弄清楚了</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_%E6%97%A5%E5%BF%97.html">1.6 Python日志</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.6 Python日志</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫基础篇</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
@@ -76,7 +77,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Python篇</a> &raquo;</li>
+          <li><a href="index.html">第一章：基础知识</a> &raquo;</li>
       <li>1.4 海象运算符</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/Python/04_海象运算符.md.txt" rel="nofollow"> View page source</a>
@@ -93,9 +94,9 @@
 <div><p>Python 3.8终于支持直接对表达式的变量赋值啦，代码更简洁优雅了，让我们来见识一下新海象运算符的威力。作为Python语法糖的热心爱好者，我浏览了3.8版本的发行说明，有一个特别的运算符引起了我的注意。该运算符称为<strong>Walrus运算符</strong>（<strong>：=</strong>）或命名表达式运算符。</p>
 </div></blockquote>
 <section id="walrus">
-<h2>1.41 海象(Walrus)运算符介绍<a class="headerlink" href="#walrus" title="Permalink to this headline">¶</a></h2>
+<h2>1.  海象(Walrus)运算符介绍<a class="headerlink" href="#walrus" title="Permalink to this headline">¶</a></h2>
 <p>这个新的运算符（<strong>：=</strong>）使我们可以将值分配给表达式中的变量。该符号有点像海象的眼睛和象牙。</p>
-<p><img alt="img" src="https://pic2.zhimg.com/v2-8886203be2667dd682210da03332edb5_b.jpg" /></p>
+<p><img alt="image1" src="http://image.iswbm.com/image-20200418122739417.png" /></p>
 <p>用海象运算符之前：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;India&#39;</span><span class="p">,</span> <span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">,</span> <span class="s2">&quot;Japan&quot;</span><span class="p">,</span> <span class="s2">&quot;Germany&quot;</span><span class="p">]</span>
 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
@@ -113,14 +114,46 @@
 </pre></div>
 </div>
 </section>
+<hr class="docutils" />
+<section id="while">
+<h2>2. while配海象运算符<a class="headerlink" href="#while" title="Permalink to this headline">¶</a></h2>
+<p>在不使用 海象运算符之前，使用 while 循环来读取文件的时候，你也许会这么写</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;demo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>但有了海象运算符之后，你可以这样</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;demo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">line</span> <span class="o">:=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>使用它替换以往的无限 while 循环写法更为惊艳</p>
+<p>比如，实现一个需要命令行交互输入密码并检验的代码，你也许会这样子写</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+   <span class="n">p</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the password: &quot;</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s2">&quot;youpassword&quot;</span><span class="p">:</span>
+      <span class="k">break</span>
+</pre></div>
+</div>
+<p>有了海象运算符之后，这样子写更为舒服</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">:=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the password: &quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="s2">&quot;youpassword&quot;</span><span class="p">:</span>
+   <span class="k">continue</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" class="btn btn-neutral float-left" title="1.3 Python直接赋值、浅拷贝和深拷贝解析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html" class="btn btn-neutral float-right" title="1.5 我终于把Python中下划线的含义弄清楚了" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html" class="btn btn-neutral float-left" title="1.3 我终于把Python中下划线的含义弄清楚了" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="05_Python%E6%97%A5%E5%BF%97.html" class="btn btn-neutral float-right" title="1.6 Python日志" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

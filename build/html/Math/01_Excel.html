@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1 Python 操作 Excel 报表自动化指南 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Math/01_Excel.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="爬虫基础篇" href="../Other/index.html" />
+    <link rel="prev" title="第二章：数据分析" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">第一章：基础知识</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第二章：数据分析</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1 Python 操作 Excel 报表自动化指南</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xlrd">1. xlrd读取表格</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xlwt-xls">2. xlwt写入表格（仅限xls格式！）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xlutils-excel">3. xlutils 读取 写入 （也就是修改）Excel 表格信息</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">第二章：数据分析</a> &raquo;</li>
+      <li>2.1 Python 操作 Excel 报表自动化指南</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Math/01_Excel.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-excel">
+<h1>2.1 Python 操作 Excel 报表自动化指南<a class="headerlink" href="#python-excel" title="Permalink to this headline">¶</a></h1>
+<p><strong>我们先来看一下python中能操作Excel的库对比（一共九个库）：</strong></p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.110.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.110.png" /></p>
+<section id="xlrd">
+<h2>1. xlrd读取表格<a class="headerlink" href="#xlrd" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>介绍</p>
+<ul class="simple">
+<li><p>python操作excel主要用到xlrd和xlwt这两个库，即xlrd是读excel，xlwt是写excel的库。</p></li>
+<li><p>在UI自动化或者接口自动化中数据维护是一个核心，所以此模块非常实用。</p></li>
+</ul>
+</li>
+<li><p>使用</p>
+<p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.11.jpg" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xlrd</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/../info.xlsx&#39;</span><span class="p">)</span>
+<span class="n">sheet</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheets</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># 通过索引顺序获取</span>
+<span class="n">sheet1</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheet_by_name</span><span class="p">(</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">)</span>  <span class="c1"># 通过名称获取</span>
+<span class="n">sheet2</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 通过索引顺序获取</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sheet</span> <span class="o">==</span> <span class="n">sheet1</span> <span class="o">==</span> <span class="n">sheet2</span><span class="p">)</span>  <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">())</span> <span class="c1"># 返回book中所有工作表的名字</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">nrows</span>  <span class="c1"># 获取行数</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">ncols</span>  <span class="c1"># 获取列数</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="c1"># 获取每一行，以列表形式输出(output：1.11-1)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="c1"># 获取每一行第一列的数据(output: 1.11-2),不加value则返回的是对象</span>
+</pre></div>
+</div>
+<p><img alt="1.11-1.jpg" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.11-1.jpg" /></p>
+</li>
+</ul>
+<p><img alt="1.11-2.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.11-2.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sheet</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">colx</span><span class="p">,</span> <span class="n">start_rowx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_rowx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># 返回由该列中所有的单元格对象组成的列表</span>
+
+<span class="n">sheet</span><span class="o">.</span><span class="n">col_slice</span><span class="p">(</span><span class="n">colx</span><span class="p">,</span> <span class="n">start_rowx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_rowx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># 返回由该列中所有的单元格对象组成的列表</span>
+
+<span class="n">sheet</span><span class="o">.</span><span class="n">col_types</span><span class="p">(</span><span class="n">colx</span><span class="p">,</span> <span class="n">start_rowx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_rowx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># 返回由该列中所有单元格的数据类型组成的列表</span>
+
+<span class="n">sheet</span><span class="o">.</span><span class="n">col_values</span><span class="p">(</span><span class="n">colx</span><span class="p">,</span> <span class="n">start_rowx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_rowx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># 返回由该列中所有单元格的数据组成的列表</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># 获取第三行，第一列的数据output:  text:&#39;武汉大学&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">cell_type</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># 获取第三行，第一列的数据类型output:  text:&#39;武汉大学&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">cell_value</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># 获取第三行，第一列的数据output: &#39;武汉大学&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sheet</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">rowx</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">colx</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># 获取第三行，第一列的数据output:  text:&#39;武汉大学&#39;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="xlwt-xls">
+<h2>2. xlwt写入表格（仅限xls格式！）<a class="headerlink" href="#xlwt-xls" title="Permalink to this headline">¶</a></h2>
+<p>xlwt可以用于写入新的Excel表格或者在原表格基础上进行修改，速度也很快，推荐使用！</p>
+<ul class="simple">
+<li><p>常用操作</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xlwt</span>
+<span class="k">def</span> <span class="nf">fun3_2_2</span><span class="p">():</span>
+    <span class="c1"># 创建新的workbook（其实就是创建新的excel）</span>
+    <span class="n">workbook</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Workbook</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span> <span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 创建新的sheet表</span>
+    <span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_sheet</span><span class="p">(</span><span class="s2">&quot;My new Sheet&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 往表格写入内容</span>
+    <span class="n">worksheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;内容1&quot;</span><span class="p">)</span>
+    <span class="n">worksheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;内容2&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 保存</span>
+    <span class="n">workbook</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;新创建的表格.xls&quot;</span><span class="p">)</span>
+
+<span class="n">fun3_2_2</span><span class="p">()</span> <span class="c1">#结果如下图1.12</span>
+</pre></div>
+</div>
+<p><img alt="1.12.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.12.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="xlutils-excel">
+<h2>3. xlutils 读取 写入 （也就是修改）Excel 表格信息<a class="headerlink" href="#xlutils-excel" title="Permalink to this headline">¶</a></h2>
+<p>要用xlutils，得先使用xlrd读取表格，比如：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xlrd</span>
+<span class="kn">import</span> <span class="nn">xlutils.copy</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="s1">&#39;1.13 xlutils 修改操作练习.xlsx&#39;</span><span class="p">)</span>
+<span class="n">nb</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">wb</span><span class="p">)</span>
+
+<span class="c1">#读取表格信息</span>
+<span class="n">sheet</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">col2</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">col_values</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 取出第二列</span>
+<span class="n">cel_value</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">cell_value</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cel_value</span><span class="p">)</span>
+
+<span class="c1">#写入表格信息</span>
+<span class="n">write_save</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">get_sheet</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">write_Save</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;xlutils写入！&#39;</span><span class="p">)</span>
+<span class="n">nb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;new_test.xls&quot;</span><span class="p">)</span>  <span class="c1"># 保存工作簿</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="第二章：数据分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Other/index.html" class="btn btn-neutral float-right" title="爬虫基础篇" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

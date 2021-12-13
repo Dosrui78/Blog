@@ -1,10 +1,10 @@
-#### 4.1 JS调试干扰专题
+#### 5.1 JS调试干扰专题
 
 > 进行devtool调试时经常会卡debugger或者有各种干扰项，还有F12摁了没反应的情况，此时可以在浏览器右上角找到调试入口。
 
-##### 4.11 构建debugger
+##### 1. 构建debugger
 
-###### 简单粗暴型
+**简单粗暴型**
 
 ```
 while(!![]){
@@ -12,7 +12,7 @@ debugger;
 }
 ```
 
-###### 借助构造器Function构造 
+**借助构造器Function构造 **
 
 ```
 Function("debugger;").call()
@@ -39,7 +39,7 @@ Function("debugger").call()
 
 
 
-##### 4.12 无限debugger处理方法
+##### 2. 无限debugger处理方法
 
 并不是真正的debugger，而是很频繁的去debugger，解决无限debugger才能进行下一步找到函数的入口；
 
@@ -91,7 +91,7 @@ Function.prototype.constructor=function(){
 
 ----
 
-##### 4.13 调试干扰-调试检测
+##### 3. 调试干扰-调试检测
 
 - 禁止F12右键的解决方案，浏览器的更多工具中的开发者工具
 - 呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以Autoresponse干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）
@@ -100,7 +100,7 @@ Function.prototype.constructor=function(){
 
 
 
-##### 4.14 调试干扰-内存爆破
+##### 4. 调试干扰-内存爆破
 
 内存爆破，指js通过死循环/频繁操作数据库（包括cookie）**频繁**调取history等方式，使浏览器崩溃的一种反调试手段。
 
@@ -117,7 +117,7 @@ Function.prototype.constructor=function(){
 
 
 
-##### 4.15 js逆向-事件监听断点
+##### 5. js逆向-事件监听断点
 
 - 非常频繁使用的**事件监听**断点： script、XHR
 
@@ -129,7 +129,7 @@ Function.prototype.constructor=function(){
 
 
 
-##### 4.16 逆向分析找加密参数基本流程
+##### 6. 逆向分析找加密参数基本流程
 
 - 打开抓包软件找到url的位置 进行重放攻击
   - 可行：搜索加密参数

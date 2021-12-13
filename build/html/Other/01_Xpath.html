@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.1 Xpath拓展 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+  <title>3.1 Xpath积累 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="canonical" href="https://magic.iswbm.com/Other/01_Xpath.html" />
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.2 Git教程" href="02_Git.html" />
-    <link rel="prev" title="爬虫基础篇" href="index.html" /> 
+    <link rel="next" title="JS基础篇" href="../JS/index.html" />
+    <link rel="prev" title="第三章：爬虫入门" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,19 +45,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">Python篇</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">爬虫基础篇</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1 Xpath拓展</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#classxpath">2.11 定义包含一个或多个class属性的xpath路径</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">2.12 Xpath不包含某字段字符串的项目</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">2.13 Xpath获取兄弟节点元素</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">2.14 Xpath获取特定长度的文本</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">2.15 Xpath选择不包含某一属性的节点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">2.16 Xpath拼接符号 |</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">第一章：基础知识</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第三章：爬虫入门</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.1 Xpath积累</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classxpath">1. 定义包含一个或多个class属性的xpath路径</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2. Xpath不包含某字段字符串的项目</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3. Xpath获取兄弟节点元素</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4. Xpath获取特定长度的文本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5. Xpath选择不包含某一属性的节点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">6. Xpath拼接符号 |</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="02_Git.html">2.2 Git教程</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_Selenium.html">2.3 Selenium</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
@@ -78,8 +77,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">爬虫基础篇</a> &raquo;</li>
-      <li>2.1 Xpath拓展</li>
+          <li><a href="index.html">第三章：爬虫入门</a> &raquo;</li>
+      <li>3.1 Xpath积累</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/Other/01_Xpath.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,10 +89,10 @@
            <div itemprop="articleBody">
              
   <section id="xpath">
-<h1>2.1 Xpath拓展<a class="headerlink" href="#xpath" title="Permalink to this headline">¶</a></h1>
+<h1>3.1 Xpath积累<a class="headerlink" href="#xpath" title="Permalink to this headline">¶</a></h1>
 <section id="classxpath">
-<h2>2.11 定义包含一个或多个class属性的xpath路径<a class="headerlink" href="#classxpath" title="Permalink to this headline">¶</a></h2>
-<p><img alt="2.11.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.11.png?raw=true" /></p>
+<h2>1. 定义包含一个或多个class属性的xpath路径<a class="headerlink" href="#classxpath" title="Permalink to this headline">¶</a></h2>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.11.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.11.png" /></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>//div[@class=&quot;vsb-container&quot;]    ×
 //div[@class=&quot;vsb-container container clearfix&quot;]   √
 //div[contains(@class, &quot;clearfix&quot;)]   ×
@@ -104,17 +103,17 @@
 </section>
 <hr class="docutils" />
 <section id="id1">
-<h2>2.12 Xpath不包含某字段字符串的项目<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>2. Xpath不包含某字段字符串的项目<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>不包含文本”详情”：</p>
-<p><img alt="2.12.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.12.png?raw=true" /></p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.12.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.12.png" /></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//*</span><span class="p">[</span><span class="nd">@id</span><span class="o">=</span><span class="s2">&quot;content&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">div</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">div</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">ul</span><span class="o">/</span><span class="n">li</span><span class="o">/</span><span class="n">a</span><span class="p">[</span><span class="ow">not</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">text</span><span class="p">(),</span><span class="s2">&quot;详情&quot;</span><span class="p">))]</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
 <section id="id2">
-<h2>2.13 Xpath获取兄弟节点元素<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p><img alt="2.13.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.13.png?raw=true" /></p>
+<h2>3. Xpath获取兄弟节点元素<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.13.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.13.png" /></p>
 <p>preceding-sibling表示上面一个兄弟节点元素，反之，following-sibling则表示下面一个兄弟节点元素。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">body</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">a</span><span class="o">/</span><span class="n">div</span><span class="o">/../../../</span><span class="n">preceding</span><span class="o">-</span><span class="n">sibling</span><span class="p">::</span><span class="n">div</span><span class="p">[</span><span class="nd">@class</span><span class="o">=</span><span class="s2">&quot;zhicheng&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">text</span><span class="p">()</span>
 </pre></div>
@@ -122,8 +121,8 @@
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>2.14 Xpath获取特定长度的文本<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p><img alt="2.14.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.14.png?raw=true" /></p>
+<h2>4. Xpath获取特定长度的文本<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.14.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.14.png" /></p>
 <p>前两项数据不是我们想要的数据，可以用如下语句排除掉：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span><span class="n">ul</span><span class="p">[</span><span class="nd">@class</span><span class="o">=</span><span class="s2">&quot;div_yan_ul&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">li</span><span class="o">/</span><span class="n">a</span><span class="p">[</span><span class="n">string</span><span class="o">-</span><span class="n">length</span><span class="p">(</span><span class="n">text</span><span class="p">())</span><span class="o">&lt;</span><span class="mi">7</span><span class="p">]</span>
 </pre></div>
@@ -132,15 +131,15 @@
 </section>
 <hr class="docutils" />
 <section id="id4">
-<h2>2.15 Xpath选择不包含某一属性的节点<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>5. Xpath选择不包含某一属性的节点<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><p>这里可以用到not。例如排除一个属性的节点可以用//tbody/tr[not(&#64;class)]来写，排除一个或者两个属性可以使用//tbody/tr[not(&#64;class or &#64;id)]来选择。</p>
 </div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="id5">
-<h2>2.16 Xpath拼接符号 |<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p><img alt="2.16.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.16.png?raw=true" /></p>
+<h2>6. Xpath拼接符号 |<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.16.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.16.png" /><img alt="2.16.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/2.16.png?raw=true" /></p>
 <p>想获取全部文本内容可以用拼接符号|</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span><span class="n">div</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">table</span><span class="o">/</span><span class="n">tbody</span><span class="o">/</span><span class="n">tr</span><span class="o">/</span><span class="n">td</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">p</span><span class="o">/</span><span class="n">a</span><span class="o">/</span><span class="n">span</span><span class="o">/</span><span class="n">text</span><span class="p">()</span><span class="o">|//</span><span class="n">div</span><span class="o">/</span><span class="n">div</span><span class="o">/</span><span class="n">table</span><span class="o">/</span><span class="n">tbody</span><span class="o">/</span><span class="n">tr</span><span class="o">/</span><span class="n">td</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">p</span><span class="o">/</span><span class="n">span</span><span class="o">/</span><span class="n">text</span><span class="p">()</span>
 </pre></div>
@@ -152,8 +151,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="爬虫基础篇" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="02_Git.html" class="btn btn-neutral float-right" title="2.2 Git教程" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="第三章：爬虫入门" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../JS/index.html" class="btn btn-neutral float-right" title="JS基础篇" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

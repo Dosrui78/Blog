@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.3 我终于把Python中下划线的含义弄清楚了 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Python/03_Python下划线.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.4 海象运算符" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html" />
+    <link rel="prev" title="1.2 Python打开文件的路径" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第一章：基础知识</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.1 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.3 我终于把Python中下划线的含义弄清楚了</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#var">1. 单引号下划线： <strong><code class="docutils literal notranslate"><span class="pre">_var</span></code></strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2. 单尾划线： <strong><code class="docutils literal notranslate"><span class="pre">var_</span></code></strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3. 双首下划线：<strong><code class="docutils literal notranslate"><span class="pre">__var</span></code></strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4. 双重领先和落后强调： <strong><code class="docutils literal notranslate"><span class="pre">__var__</span></code></strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5. 单下划线 _</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">5. 总结：Python下划线命名模式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.6 Python日志</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">第一章：基础知识</a> &raquo;</li>
+      <li>1.3 我终于把Python中下划线的含义弄清楚了</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Python/03_Python下划线.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python">
+<h1>1.3 我终于把Python中下划线的含义弄清楚了<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p><em>Python变量和方法名称中的下划线和下划线分别</em>是<em>什么意思？</em></p>
+</div></blockquote>
+<p>· 单引号下划线： <code class="docutils literal notranslate"><span class="pre">_var</span></code></p>
+<p>· 单尾划线： <code class="docutils literal notranslate"><span class="pre">var_</span></code></p>
+<p>· 双领先下划线： <code class="docutils literal notranslate"><span class="pre">__var</span></code></p>
+<p>· 领先和落后双下划线： <code class="docutils literal notranslate"><span class="pre">__var__</span></code></p>
+<p>· 单下划线： <code class="docutils literal notranslate"><span class="pre">_</span></code></p>
+<hr class="docutils" />
+<section id="var">
+<h2>1. 单引号下划线： <strong><code class="docutils literal notranslate"><span class="pre">_var</span></code></strong><a class="headerlink" href="#var" title="Permalink to this headline">¶</a></h2>
+<p>当涉及变量和方法名称时，单个下划线前缀仅具有约定的含义。这是对程序员的提示，它意味着Python同意它的含义，但不影响程序的行为。</p>
+<p>下划线前缀是向其他程序员的<em><strong>提示</strong></em>，即以单个下划线开头的变量或方法供内部使用。此约定在PEP 8中定义。</p>
+<p>这不是Python强制执行的。Python在Java的“私有”变量和“公共”变量之间没有明显的区别。就像有人贴了一个很小的下划线警告标志，上面写着：</p>
+<p><em>“嘿，这并不是要真正成为此类的公共接口的一部分。最好不要管它。”</em></p>
+<p>看下面的例子：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">11</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bar</span> <span class="o">=</span> <span class="mi">23</span>
+</pre></div>
+</div>
+<p>如果你实例化这个类并试图访问它的构造函数中定义的foo和_bar属性，会发生什么?让我们来看看:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">foo</span>
+<span class="go">11</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">_bar</span>
+<span class="go">23</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>看到_bar中的前一个下划线并没有阻止我们“进入”类并访问该变量的值。</p>
+<p>这是因为Python中的单个下划线前缀仅仅是一种约定</p>
+<p>但是，前导下划线确实会影响名称从模块导入的方式。假设在一个名为my_module的模块中有以下代码:</p>
+</div></blockquote>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is my_module.py:</span>
+<span class="k">def</span> <span class="nf">external_func</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">23</span>
+
+<span class="k">def</span> <span class="nf">_internal_func</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">42</span>
+</pre></div>
+</div>
+<p>现在，如果使用通配符导入来从模块中导入所有名称，Python将不会导入带有前导下划线的名称(除非模块定义了覆盖此行为的_all__列表):</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kr">from</span> <span class="nx">my_module</span> <span class="k">import</span> <span class="o">*</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">external_func</span><span class="p">()</span>
+<span class="mf">23</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">_internal_func</span><span class="p">()</span>
+<span class="nx">NameError</span><span class="o">:</span> <span class="s2">&quot;name &#39;_internal_func&#39; is not defined&quot;</span>
+</pre></div>
+</div>
+<p>顺便说一下，应该避免通配符导入，因为它们使名称空间中出现的名称变得不清楚。</p>
+<p>与通配符导入不同，常规导入不受主要的单下划线命名约定的影响:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">import</span> <span class="nx">my_module</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">my_module</span><span class="p">.</span><span class="nx">external_func</span><span class="p">()</span>
+<span class="mf">23</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">my_module</span><span class="p">.</span><span class="nx">_internal_func</span><span class="p">()</span>
+<span class="mf">42</span>
+</pre></div>
+</div>
+<p>单下划线是一种Python命名约定，表示某个名称是供内部使用的。它通常不是由Python解释器强制执行的，只是对程序员的提示。</p>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>2. 单尾划线： <strong><code class="docutils literal notranslate"><span class="pre">var_</span></code></strong><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>有时候，一个变量最合适的名字已经被一个关键字代替了。因此，类或def之类的名称在Python中不能用作变量名。在这种情况下，你可以添加一个下划线打破命名冲突:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nx">def</span> <span class="nx">make_object</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="kd">class</span><span class="p">)</span><span class="o">:</span>
+<span class="ne">SyntaxError</span><span class="o">:</span> <span class="s2">&quot;invalid syntax&quot;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">def</span> <span class="nx">make_object</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">class_</span><span class="p">)</span><span class="o">:</span>
+<span class="p">...</span>     <span class="nx">pass</span>
+</pre></div>
+</div>
+<p>总之，惯例使用单个尾划线(后缀)来避免与Python关键字的命名冲突。在PEP 8中解释了这种约定。</p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>3. 双首下划线：<strong><code class="docutils literal notranslate"><span class="pre">__var</span></code></strong><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>到目前为止，我们所讨论的命名模式仅从约定的约定中获得它们的含义。对于以双下划线开头的Python类属性(变量和方法)，情况略有不同。</p>
+<p>双下划线前缀导致Python解释器重写属性名，以避免子类中的命名冲突。</p>
+<p>这也叫做名字拼写——解释器改变变量的名字的方式使得在以后扩展类时很难产生冲突。</p>
+<p>是不是听起来很抽象。所以我把这个小代码示例放在一起，可以用于理解:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">Test</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="o">:</span>
+    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mf">11</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">_bar</span> <span class="o">=</span> <span class="mf">23</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">__baz</span> <span class="o">=</span> <span class="mf">42</span>
+</pre></div>
+</div>
+<p>让我们看看这个对象的属性使用内置的dir()函数:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">Test</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">dir</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;_Test__baz&#39;</span><span class="p">,</span> <span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__weakref__&#39;</span><span class="p">,</span> <span class="s1">&#39;_bar&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>这会给我们一个带有对象属性的列表。让我们看看这个列表，并查找原始变量名foo、<em>bar和</em> bazi—时保证会发现一些有趣的变化。</p>
+<p><code class="docutils literal notranslate"><span class="pre">self.foo</span></code>在属性列表中，foo变量显示为未修改的foo。</p>
+<p>self._bar的行为方式是一样的——它在类中显示为_bar。就像我之前说的，前导下划线只是一种惯例。给程序员的提示。</p>
+<p>然而<code class="docutils literal notranslate"><span class="pre">self.__baz</span></code>看起来有点不同。当在该列表中搜索_baz时，将看到没有具有该名称的变量。</p>
+<p>那么，到底发生了什么呢?</p>
+<p>如果仔细查看，就会看到这个对象上有一个名为_testbaz的属性。这是Python解释器应用的命名混乱。这样做是为了保护变量不被子类覆盖。</p>
+<p>让我们创建另一个类，扩展测试类，并尝试重写添加到构造函数中的现有属性:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">ExtendedTest</span><span class="p">(</span><span class="nx">Test</span><span class="p">)</span><span class="o">:</span>
+	<span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+    	<span class="k">super</span><span class="p">().</span><span class="nx">__init__</span><span class="p">()</span>	
+		<span class="nx">self</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s1">&#39;overridden&#39;</span>
+       	<span class="nx">self</span><span class="p">.</span><span class="nx">_bar</span> <span class="o">=</span> <span class="s1">&#39;overridden&#39;</span>
+       	<span class="nx">self</span><span class="p">.</span><span class="nx">__baz</span> <span class="o">=</span> <span class="s1">&#39;overridden&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nx">t2</span> <span class="o">=</span> <span class="nx">ExtendedTest</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">t2</span><span class="p">.</span><span class="nx">foo</span>
+<span class="s1">&#39;overridden&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">t2</span><span class="p">.</span><span class="nx">_bar</span>
+<span class="s1">&#39;overridden&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">t2</span><span class="p">.</span><span class="nx">__baz</span>
+<span class="nx">AttributeError</span><span class="o">:</span> <span class="s2">&quot;&#39;ExtendedTest&#39; object has no attribute &#39;__baz&#39;&quot;</span>
+</pre></div>
+</div>
+<p>天呐， 当我们试图检查<code class="docutils literal notranslate"><span class="pre">t2.__baz</span></code>的值时，为什么会得到那个AttributeError ?名字混乱又来了!事实证明，这个对象甚至没有一个<code class="docutils literal notranslate"><span class="pre">__baz</span></code>属性:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nx">dir</span><span class="p">(</span><span class="nx">t2</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;_ExtendedTest__baz&#39;</span><span class="p">,</span> <span class="s1">&#39;_Test__baz&#39;</span><span class="p">,</span> <span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">,</span> <span class="s1">&#39;_bar&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;get_vars&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>正如你所看到的，为了防止意外修改，<code class="docutils literal notranslate"><span class="pre">__baz</span></code>变成了<code class="docutils literal notranslate"><span class="pre">_Extendedtest__baz</span></code>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nx">t2</span><span class="p">.</span><span class="nx">_ExtendedTest__baz</span>
+<span class="s1">&#39;overridden&#39;</span>
+</pre></div>
+</div>
+<p>但是最初的<code class="docutils literal notranslate"><span class="pre">_Test__baz</span></code>仍然存在:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nx">t2</span><span class="p">.</span><span class="nx">_Test__baz</span>
+<span class="mf">42</span>
+</pre></div>
+</div>
+<p>双下划线命名错误对我们来说完全是清楚的。看看下面的例子可以证实这一点:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">ManglingTest</span><span class="o">:</span>
+    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">__mangled</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+
+    <span class="nx">def</span> <span class="nx">get_mangled</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">__mangled</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">ManglingTest</span><span class="p">().</span><span class="nx">get_mangled</span><span class="p">()</span>
+<span class="s1">&#39;hello&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">ManglingTest</span><span class="p">().</span><span class="nx">__mangled</span>
+<span class="nx">AttributeError</span><span class="o">:</span> <span class="s2">&quot;&#39;ManglingTest&#39; object has no attribute &#39;__mangled&#39;&quot;</span>
+</pre></div>
+</div>
+<p>名称修饰是否也适用于方法名称？ 是的，也适用。名称修饰会影响在一个类的上下文中，以两个下划线字符（”dunders”）开头的<strong>所有</strong>名称：</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">MangledMethod</span><span class="o">:</span>
+    <span class="nx">def</span> <span class="nx">__method</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">return</span> <span class="mf">42</span>
+
+    <span class="nx">def</span> <span class="nx">call_it</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">__method</span><span class="p">()</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">MangledMethod</span><span class="p">().</span><span class="nx">__method</span><span class="p">()</span>
+<span class="nx">AttributeError</span><span class="o">:</span> <span class="s2">&quot;&#39;MangledMethod&#39; object has no attribute &#39;__method&#39;&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">MangledMethod</span><span class="p">().</span><span class="nx">call_it</span><span class="p">()</span>
+<span class="mf">42</span>
+</pre></div>
+</div>
+<p>下面是另一个名字变形的例子，可能会让你大吃一惊:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">_MangledGlobal__mangled</span> <span class="o">=</span> <span class="mf">23</span>
+
+<span class="kd">class</span> <span class="nx">MangledGlobal</span><span class="o">:</span>
+    <span class="nx">def</span> <span class="nx">test</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">return</span> <span class="nx">__mangled</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">MangledGlobal</span><span class="p">().</span><span class="nx">test</span><span class="p">()</span>
+<span class="mf">23</span>
+</pre></div>
+</div>
+<p>在本例中，我声明了一个名为<code class="docutils literal notranslate"><span class="pre">_Mangledglobal__mangled</span></code>的全局变量。然后，我在名为MangledGlobal的类的上下文中访问了这个变量。由于名称混乱，我能够在类的test()方法中引用<code class="docutils literal notranslate"><span class="pre">_Mangledglobal__mangled</span></code>全局变量，就像在类的test()方法中引用的那样。</p>
+<p>Python解释器会自动将名称解析扩展为<code class="docutils literal notranslate"><span class="pre">_Mangledglobal__mangled</span></code>，因为它以两个下划线字符开头。这证明了名称混乱并不是特定地与类属性绑定在一起的。它适用于在类上下文中以两个下划线开头的任何名称。</p>
+</section>
+<section id="id3">
+<h2>4. 双重领先和落后强调： <strong><code class="docutils literal notranslate"><span class="pre">__var__</span></code></strong><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>也许令人惊讶的是，如果一个名字同时以双下划线开始和结束，则不会应用名称修饰。 由双下划线前缀和后缀包围的变量不会被Python解释器修改：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>class PrefixPostfixTest:
+   def __init__(self):
+       self.__bam__ = 42
+
+&gt;&gt;&gt; PrefixPostfixTest().__bam__
+42
+</pre></div>
+</div>
+<p>但是，Python保留了有双前导和双末尾下划线的名称，用于特殊用途。 这样的例子有，<code class="docutils literal notranslate"><span class="pre">__init__</span></code>对象构造函数，或<code class="docutils literal notranslate"><span class="pre">__call__</span> </code>— 它使得一个对象可以被调用。</p>
+<p>这些dunder方法通常被称为神奇方法 - 但Python社区中的许多人（包括我自己）都不喜欢这种方法。</p>
+</section>
+<section id="id4">
+<h2>5. 单下划线 _<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>按照习惯，有时候单个独立下划线是用作一个名字，来表示某个变量是临时的或无关紧要的。</p>
+<p>例如，在下面的循环中，我们不需要访问正在运行的索引，我们可以使用“_”来表示它只是一个</p>
+<p>还可以在解包表达式中使用单个下划线。同样，这只是“按照约定”的意思，在Python解释器中没有触发任何特殊的行为。单个下划线只是一个有效的变量名。</p>
+<p>在下面的代码示例中，我将一个car元组解压缩到单独的变量中，但我只对颜色和值感兴趣。然而，为了使解包表达式成功，我需要将tuple中包含的所有值赋给变量。这就是“_”作为占位符变量有用的地方:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nx">car</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="mf">12</span><span class="p">,</span> <span class="mf">3812.4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">mileage</span> <span class="o">=</span> <span class="nx">car</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">color</span>
+<span class="s1">&#39;red&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">mileage</span>
+<span class="mf">3812.4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">_</span>
+<span class="mf">12</span>
+</pre></div>
+</div>
+<p>除了用作临时变量之外，“_”在大多数Python REPLs中是一个特殊变量，它表示解释器计算的最后一个表达式的结果。</p>
+<p>如果在解释器会话中工作，并且希望访问前面计算的结果，那么这是很方便的。或者，如果你正在动态构建对象，并且想要与它们交互，而不需要先给它们分配一个名称:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mf">20</span> <span class="o">+</span> <span class="mf">3</span>
+<span class="mf">23</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">_</span>
+<span class="mf">23</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">print</span><span class="p">(</span><span class="nx">_</span><span class="p">)</span>
+<span class="mf">23</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">list</span><span class="p">()</span>
+<span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">_</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">_</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">_</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="mf">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nx">_</span>
+<span class="p">[</span><span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>5. 总结：Python下划线命名模式<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>本文中介绍的五个下划线模式在Python中的含义的简要概述。</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="left">图案</th>
+<th align="left">例</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">单引号下划线</td>
+<td align="left"><code>_var</code></td>
+<td align="left">表示名称的命名约定仅供内部使用。通常不由Python解释器强制执行（通配符导入除外），并且仅作为对程序员的提示。</td>
+</tr>
+<tr>
+<td align="left">单尾划线</td>
+<td align="left"><code>var_</code></td>
+<td align="left">按照惯例使用，以避免与Python关键字命名冲突。</td>
+</tr>
+<tr>
+<td align="left">双领先下划线</td>
+<td align="left"><code>__var</code></td>
+<td align="left">在类上下文中使用时触发名称修改。由Python解释器实施。</td>
+</tr>
+<tr>
+<td align="left">双重领先和落后强调</td>
+<td align="left"><code>__var__</code></td>
+<td align="left">表示由Python语言定义的特殊方法。避免为自己的属性使用此命名方案。</td>
+</tr>
+<tr>
+<td align="left">单下划线</td>
+<td align="left"><code>_</code></td>
+<td align="left">有时用作临时变量或无关紧要变量的名称（“无关紧要”）。</td>
+</tr>
+</tbody>
+</table></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html" class="btn btn-neutral float-left" title="1.2 Python打开文件的路径" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html" class="btn btn-neutral float-right" title="1.4 海象运算符" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,8 +1,8 @@
 #### 1.2 Python打开文件的路径
 
-##### 1.21 `__file__`详解
+##### 1. `__file__`详解
 
-###### `__file__`表示当前文件的绝对/相对路径
+`__file__`表示当前文件的绝对/相对路径
 
 那么这里的`__file__`是什么用呢？
 
@@ -18,21 +18,21 @@
 
 如果在交互式环境中，则会爆出异常。因为此时`__file__`并未生成。
 
-###### Python中模块导入方法
+Python中模块导入方法
 
 ```
 import my_package
 print(my_package.__file__)
 ```
 
-案例：
+**案例：**
 
 ```
 import string
 print(string.__file__)
 ```
 
-输出：
+**输出：**
 
 ![1.21.png](https://github.com/Dosrui78/Blog-Images/blob/master/1.21.png?raw=true)
 
@@ -40,7 +40,7 @@ print(string.__file__)
 
 ---
 
-##### 1.22 os.path()模块
+##### 2. os.path()模块
 
 | 方法                                | 说明                                                         |
 | :---------------------------------- | :----------------------------------------------------------- |
@@ -76,7 +76,7 @@ print(string.__file__)
 | os.path.walk(path, visit, arg)      | 遍历path，进入每个目录都调用visit函数，visit函数必须有3个参数(arg, dirname, names)，dirname表示当前目录的目录名，names代表当前目录下的所有文件名，args则为walk的第三个参数 |
 | os.path.supports_unicode_filenames  | 设置是否支持unicode路径名                                    |
 
-实例：
+**实例：**
 
 ```
 import os
@@ -87,7 +87,7 @@ print( os.path.split('/root/runoob.txt') )      # 分割文件名与路径
 print( os.path.join('root','test','runoob.txt') )  # 将目录和文件名合成一个路径
 ```
 
-输出结果为：
+**输出结果为：**
 
 ```
 runoob.txt
@@ -98,9 +98,9 @@ root/test/runoob.txt
 
 ---------
 
-##### 1.23 configparser模块
+##### 3. configparser模块
 
-###### configparser简介
+**configparser简介**
 
 ```
 ConfigParser 是用来读取配置文件的包。配置文件的格式如下：中括号“[ ]”内包含的为section。section 下面为类似于key-value 的配置内容。
@@ -115,14 +115,11 @@ host_port = 69
 [concurrent]
 thread = 10
 processor = 20
+
 括号“[ ]”内包含的为section。紧接着section 为类似于key-value 的options 的配置内容。
 ```
 
----
-
-
-
-###### configparser初始化文件
+**configparser初始化文件**
 
 ```
 import os

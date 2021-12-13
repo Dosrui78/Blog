@@ -2,11 +2,11 @@
 
 > Python 3.8终于支持直接对表达式的变量赋值啦，代码更简洁优雅了，让我们来见识一下新海象运算符的威力。作为Python语法糖的热心爱好者，我浏览了3.8版本的发行说明，有一个特别的运算符引起了我的注意。该运算符称为**Walrus运算符**（**：=**）或命名表达式运算符。
 
-##### 1.41 海象(Walrus)运算符介绍
+##### 1.  海象(Walrus)运算符介绍
 
 这个新的运算符（**：=**）使我们可以将值分配给表达式中的变量。该符号有点像海象的眼睛和象牙。
 
-![img](https://pic2.zhimg.com/v2-8886203be2667dd682210da03332edb5_b.jpg)
+![image1](http://image.iswbm.com/image-20200418122739417.png)
 
 用海象运算符之前：
 
@@ -29,3 +29,43 @@ if (country_size := len(countries)) < 6:
     print("Length of countries is ", country_size)
 ```
 
+---
+
+##### 2. while配海象运算符
+
+在不使用 海象运算符之前，使用 while 循环来读取文件的时候，你也许会这么写
+
+```
+file = open("demo.txt", "r")
+while True:
+    line = file.readline()
+    if not line:
+        break
+    print(line.strip())
+```
+
+但有了海象运算符之后，你可以这样
+
+```
+file = open("demo.txt", "r")
+while (line := file.readline()):
+    print(line.strip())
+```
+
+使用它替换以往的无限 while 循环写法更为惊艳
+
+比如，实现一个需要命令行交互输入密码并检验的代码，你也许会这样子写
+
+```
+while True:
+   p = input("Enter the password: ")
+   if p == "youpassword":
+      break
+```
+
+有了海象运算符之后，这样子写更为舒服
+
+```
+while (p := input("Enter the password: ")) != "youpassword":
+   continue
+```

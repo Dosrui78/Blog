@@ -1,6 +1,6 @@
-#### 2.3 Selenium
+#### 3.2 Selenium
 
-##### 2.31 selenium启动Chrome配置参数问题
+##### 1. selenium启动Chrome配置参数问题
 
 >每次当selenium启动chrome浏览器的时候，chrome浏览器很干净，没有插件、没有收藏、没有历史记录，这是因为selenium在启动chrome时为了保证最快的运行效率，启动了一个裸浏览器，这就是为什么需要配置参数的原因，但是有些时候我们需要的不仅是一个裸浏览器。selenium启动配置参数接收是ChromeOptions类，创建方式如下：
 
@@ -79,13 +79,13 @@ option.add_experimental_option("useAutomationExtension", False)
 
 ----
 
-##### 2.32 如何将整个HTML作为字符串获取
+##### 2. 如何将整个HTML作为字符串获取
 
 ```
 html = execute_script("document.documentElement.??")   #??可以是innerHTML、outerHTML、innerText、outerText
 ```
 
-###### innerHTML、outerHTML、innerText、outerText的区别
+*innerHTML、outerHTML、innerText、outerText的区别*
 
 ```html
 <!DOCTYPE html>
@@ -127,13 +127,13 @@ outerText:这是div中的文字这是span中的文字
 
 -----
 
-##### 2.33 iframe
+##### 3. iframe
 
 > ​        在做web自动化的过程中会遇到一些弹出的登录页面，定位后，执行程序发现还是出现报错，其实定位可能没有问题，而是表单再作怪，也就是iframe，iframe是HTML标签，作用是文档中的文档，或者浮动的框架(FRAME)。iframe元素会创建包含另外一个文档的内联框架，也就html中在嵌套一个网页，可以通过F12查看。
 
 ![img](https://github.com/Dosrui78/Blog-Images/blob/master/2.33.jpg?raw=true "2.33")
 
-###### 如何定位iframe
+**如何定位iframe**
 
 我们知道什么是iframe了，那么如何定位？我们可以使用selenium中自带的一个方法 switch_to_frame ，这里的定位iframe可以是id属性也可以是name属性。
 

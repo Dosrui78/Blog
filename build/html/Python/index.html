@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python篇 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+  <title>第一章：基础知识 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="canonical" href="https://magic.iswbm.com/Python/index.html" />
@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.1 Python 操作 Excel 报表自动化指南" href="01_Excel.html" />
+    <link rel="next" title="1.1 Python直接赋值、浅拷贝和深拷贝解析" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" />
     <link rel="prev" title="DOSRUI’s Blog" href="../index.html" /> 
 </head>
 
@@ -45,16 +45,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Python篇</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_Excel.html">1.1 Python 操作 Excel 报表自动化指南</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第一章：基础知识</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.1 Python直接赋值、浅拷贝和深拷贝解析</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.3 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.3 我终于把Python中下划线的含义弄清楚了</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.5 我终于把Python中下划线的含义弄清楚了</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_%E6%97%A5%E5%BF%97.html">1.6 Python日志</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.6 Python日志</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">爬虫基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JS/index.html">JS基础篇</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">JS逆向篇</a></li>
 </ul>
@@ -73,7 +73,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Python篇</li>
+      <li>第一章：基础知识</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/Python/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,41 +83,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="python">
-<h1>Python篇<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+  <section id="id1">
+<h1>第一章：基础知识<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>本章主要介绍Python的基础知识或者其他一些有用的却不清楚难理解的Python语法知识。</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="01_Excel.html">1.1 Python 操作 Excel 报表自动化指南</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_Excel.html#xlrd">1.11 xlrd读取表格</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_Excel.html#xlwt-xls">1.12 xlwt写入表格（仅限xls格式！）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_Excel.html#xlutils-excel">1.13 xlutils 读取 写入 （也就是修改）Excel 表格信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.1 Python直接赋值、浅拷贝和深拷贝解析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#id1">1. 字典浅拷贝实例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#copy">2. 深度拷贝需要引入 copy 模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#id2">3. 更多实例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#file">1.21 <code class="docutils literal notranslate"><span class="pre">__file__</span></code>详解</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#os-path">1.22 os.path()模块</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#configparser">1.23 configparser模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#file">1. <code class="docutils literal notranslate"><span class="pre">__file__</span></code>详解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#os-path">2. os.path()模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#configparser">3. configparser模块</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="03_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.3 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.3 我终于把Python中下划线的含义弄清楚了</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#var">1. 单引号下划线： <strong><code class="docutils literal notranslate"><span class="pre">_var</span></code></strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id1">2. 单尾划线： <strong><code class="docutils literal notranslate"><span class="pre">var_</span></code></strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id2">3. 双首下划线：<strong><code class="docutils literal notranslate"><span class="pre">__var</span></code></strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id3">4. 双重领先和落后强调： <strong><code class="docutils literal notranslate"><span class="pre">__var__</span></code></strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id4">5. 单下划线 _</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id5">5. 总结：Python下划线命名模式</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html#walrus">1.41 海象(Walrus)运算符介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html#walrus">1.  海象(Walrus)运算符介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html#while">2. while配海象运算符</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.5 我终于把Python中下划线的含义弄清楚了</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#var">1.51 单引号下划线： <strong><code class="docutils literal notranslate"><span class="pre">_var</span></code></strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id1">1.52 单尾划线： <strong><code class="docutils literal notranslate"><span class="pre">var_</span></code></strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id2">1.53 双首下划线：<strong><code class="docutils literal notranslate"><span class="pre">__var</span></code></strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id3">1.54 双重领先和落后强调： <strong><code class="docutils literal notranslate"><span class="pre">__var__</span></code></strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id4">1.55 总结：Python下划线命名模式</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="06_%E6%97%A5%E5%BF%97.html">1.6 Python日志</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="06_%E6%97%A5%E5%BF%97.html#id1">1.61 日志基础教程</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_%E6%97%A5%E5%BF%97.html#id3">1.62 进阶日志教程</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_%E6%97%A5%E5%BF%97.html#loguru">1.63 loguru</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.6 Python日志</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html#id1">1. 日志基础教程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html#id2">2. 进阶日志教程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html#loguru">3. loguru</a></li>
 </ul>
 </li>
 </ul>
@@ -129,7 +130,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="DOSRUI’s Blog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="01_Excel.html" class="btn btn-neutral float-right" title="1.1 Python 操作 Excel 报表自动化指南" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html" class="btn btn-neutral float-right" title="1.1 Python直接赋值、浅拷贝和深拷贝解析" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,4 +1,4 @@
-#### 1.5 我终于把Python中下划线的含义弄清楚了
+#### 1.3 我终于把Python中下划线的含义弄清楚了
 
 > *Python变量和方法名称中的下划线和下划线分别*是*什么意思？*
 
@@ -14,7 +14,7 @@
 
 ---
 
-##### 1.51 单引号下划线： **`_var`**
+##### 1. 单引号下划线： **`_var`**
 
 当涉及变量和方法名称时，单个下划线前缀仅具有约定的含义。这是对程序员的提示，它意味着Python同意它的含义，但不影响程序的行为。
 
@@ -84,7 +84,7 @@ NameError: "name '_internal_func' is not defined"
 
 ----------
 
-##### 1.52 单尾划线： **`var_`**
+##### 2. 单尾划线： **`var_`**
 
 有时候，一个变量最合适的名字已经被一个关键字代替了。因此，类或def之类的名称在Python中不能用作变量名。在这种情况下，你可以添加一个下划线打破命名冲突:
 
@@ -100,7 +100,7 @@ SyntaxError: "invalid syntax"
 
 ------------------
 
-##### 1.53 双首下划线：**`__var`**
+##### 3. 双首下划线：**`__var`**
 
 到目前为止，我们所讨论的命名模式仅从约定的约定中获得它们的含义。对于以双下划线开头的Python类属性(变量和方法)，情况略有不同。
 
@@ -111,11 +111,11 @@ SyntaxError: "invalid syntax"
 是不是听起来很抽象。所以我把这个小代码示例放在一起，可以用于理解:
 
 ```javascript
-class Test:
+class Test(object):
     def __init__(self):
         self.foo = 11
         self._bar = 23
-        self.__baz = 23
+        self.__baz = 42
 ```
 
 让我们看看这个对象的属性使用内置的dir()函数:
@@ -137,7 +137,7 @@ class Test:
 
 self._bar的行为方式是一样的——它在类中显示为_bar。就像我之前说的，前导下划线只是一种惯例。给程序员的提示。
 
-然而self.__baz看起来有点不同。当在该列表中搜索_baz时，将看到没有具有该名称的变量。
+然而`self.__baz`看起来有点不同。当在该列表中搜索_baz时，将看到没有具有该名称的变量。
 
 那么，到底发生了什么呢?
 
@@ -146,16 +146,13 @@ self._bar的行为方式是一样的——它在类中显示为_bar。就像我�
 让我们创建另一个类，扩展测试类，并尝试重写添加到构造函数中的现有属性:
 
 ```javascript
->>> t2 = ExtendedTest()
->>> t2.foo
-'overridden'
->>> t2._bar
-'overridden'
->>> t2.__baz
-AttributeError: "'ExtendedTest' object has no attribute '__baz'"
+class ExtendedTest(Test):
+	def __init__(self):
+    	super().__init__()	
+		self.foo = 'overridden'
+       	self._bar = 'overridden'
+       	self.__baz = 'overridden'
 ```
-
-天呐， 当我们试图检查t2. baz的值时，为什么会得到那个AttributeError ?名字混乱又来了!事实证明，这个对象甚至没有一个_baz属性:
 
 ```javascript
 >>> t2 = ExtendedTest()
@@ -167,7 +164,7 @@ AttributeError: "'ExtendedTest' object has no attribute '__baz'"
 AttributeError: "'ExtendedTest' object has no attribute '__baz'"
 ```
 
-天呐， 当我们试图检查t2. baz的值时，为什么会得到那个AttributeError ?名字混乱又来了!事实证明，这个对象甚至没有一个_baz属性:
+天呐， 当我们试图检查`t2.__baz`的值时，为什么会得到那个AttributeError ?名字混乱又来了!事实证明，这个对象甚至没有一个`__baz`属性:
 
 ```javascript
 >>> dir(t2)
@@ -179,14 +176,14 @@ AttributeError: "'ExtendedTest' object has no attribute '__baz'"
  '__subclasshook__', '__weakref__', '_bar', 'foo', 'get_vars']
 ```
 
-正如你所看到的，为了防止意外修改，_baz变成了_extendedtest_ baz:
+正如你所看到的，为了防止意外修改，`__baz`变成了`_Extendedtest__baz`:
 
 ```javascript
 >>> t2._ExtendedTest__baz
 'overridden'
 ```
 
-但是最初的_test_ baz仍然存在:
+但是最初的`_Test__baz`仍然存在:
 
 ```javascript
 >>> t2._Test__baz
@@ -209,7 +206,7 @@ class ManglingTest:
 AttributeError: "'ManglingTest' object has no attribute '__mangled'"
 ```
 
-在一个类的上下文中，名称混乱也适用于方法名称吗? 所有以两个下划线字符(“dunders”)开头的名字都会受到名字混乱的影响:
+名称修饰是否也适用于方法名称？ 是的，也适用。名称修饰会影响在一个类的上下文中，以两个下划线字符（"dunders"）开头的**所有**名称：
 
 ```javascript
 class MangledMethod:
@@ -238,20 +235,32 @@ class MangledGlobal:
 23
 ```
 
-在本例中，我声明了一个名为_mangledglobalmangled的全局变量。然后，我在名为MangledGlobal的类的上下文中访问了这个变量。由于名称混乱，我能够在类的test()方法中引用_mangledglobalmangled全局变量，就像在类的test()方法中引用的那样。
+在本例中，我声明了一个名为`_Mangledglobal__mangled`的全局变量。然后，我在名为MangledGlobal的类的上下文中访问了这个变量。由于名称混乱，我能够在类的test()方法中引用`_Mangledglobal__mangled`全局变量，就像在类的test()方法中引用的那样。
 
-Python解释器会自动将名称解析扩展为_mangledglobalmangled，因为它以两个下划线字符开头。这证明了名称混乱并不是特定地与类属性绑定在一起的。它适用于在类上下文中以两个下划线开头的任何名称。
+Python解释器会自动将名称解析扩展为`_Mangledglobal__mangled`，因为它以两个下划线字符开头。这证明了名称混乱并不是特定地与类属性绑定在一起的。它适用于在类上下文中以两个下划线开头的任何名称。
 
-##### 1.54 双重领先和落后强调： **`__var__`**
+##### 4. 双重领先和落后强调： **`__var__`**
 
-根据约定，一个单独的下划线有时用作一个名称，表示一个变量是临时的或是不重要的。
+也许令人惊讶的是，如果一个名字同时以双下划线开始和结束，则不会应用名称修饰。 由双下划线前缀和后缀包围的变量不会被Python解释器修改：
 
-例如，在下面的循环中，我们不需要访问正在运行的索引，我们可以使用“_”来表示它只是一个临时值:
+```text
+class PrefixPostfixTest:
+   def __init__(self):
+       self.__bam__ = 42
 
-```javascript
->>> for _ in range(32):
-...     print('Hello, World.')
+>>> PrefixPostfixTest().__bam__
+42
 ```
+
+但是，Python保留了有双前导和双末尾下划线的名称，用于特殊用途。 这样的例子有，`__init__`对象构造函数，或`__call__ `--- 它使得一个对象可以被调用。
+
+这些dunder方法通常被称为神奇方法 - 但Python社区中的许多人（包括我自己）都不喜欢这种方法。
+
+##### 5. 单下划线 _
+
+按照习惯，有时候单个独立下划线是用作一个名字，来表示某个变量是临时的或无关紧要的。
+
+例如，在下面的循环中，我们不需要访问正在运行的索引，我们可以使用“_”来表示它只是一个
 
 还可以在解包表达式中使用单个下划线。同样，这只是“按照约定”的意思，在Python解释器中没有触发任何特殊的行为。单个下划线只是一个有效的变量名。
 
@@ -290,14 +299,15 @@ Python解释器会自动将名称解析扩展为_mangledglobalmangled，因为�
 [1, 2, 3]
 ```
 
-##### 1.55 总结：Python下划线命名模式
+##### 5. 总结：Python下划线命名模式
 
 本文中介绍的五个下划线模式在Python中的含义的简要概述。
 
-| 图案               | 例      | 含义                                                         |
-| :----------------- | :------ | :----------------------------------------------------------- |
-| 单引号下划线       | _var    | 表示名称的命名约定仅供内部使用。通常不由Python解释器强制执行（通配符导入除外），并且仅作为对程序员的提示。 |
-| 单尾划线           | var_    | 按照惯例使用，以避免与Python关键字命名冲突。                 |
-| 双领先下划线       | __var   | 在类上下文中使用时触发名称修改。由Python解释器实施。         |
-| 双重领先和落后强调 | __var__ | 表示由Python语言定义的特殊方法。避免为自己的属性使用此命名方案。 |
-| 单下划线           | _       | 有时用作临时变量或无关紧要变量的名称（“无关紧要”）。         |
+| 图案               | 例        | 含义                                                         |
+| :----------------- | :-------- | :----------------------------------------------------------- |
+| 单引号下划线       | `_var`    | 表示名称的命名约定仅供内部使用。通常不由Python解释器强制执行（通配符导入除外），并且仅作为对程序员的提示。 |
+| 单尾划线           | `var_`    | 按照惯例使用，以避免与Python关键字命名冲突。                 |
+| 双领先下划线       | `__var`   | 在类上下文中使用时触发名称修改。由Python解释器实施。         |
+| 双重领先和落后强调 | `__var__` | 表示由Python语言定义的特殊方法。避免为自己的属性使用此命名方案。 |
+| 单下划线           | `_`       | 有时用作临时变量或无关紧要变量的名称（“无关紧要”）。         |
+

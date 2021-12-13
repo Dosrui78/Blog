@@ -1,10 +1,10 @@
-#### 1.1 Python 操作 Excel 报表自动化指南
+#### 2.1 Python 操作 Excel 报表自动化指南
 
 **我们先来看一下python中能操作Excel的库对比（一共九个库）：**
 
-![1.110.png](https://github.com/Dosrui78/Blog-Images/blob/master/1.110.png?raw=true)
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.110.png)
 
-##### 1.11 xlrd读取表格
+##### 1. xlrd读取表格
 
 - 介绍
 
@@ -12,11 +12,9 @@
 
   - 在UI自动化或者接口自动化中数据维护是一个核心，所以此模块非常实用。
 
-
-
 - 使用
 
-  ![img](https://github.com/Dosrui78/Blog-Images/blob/master/1.11.jpg?raw=true)
+  ![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.11.jpg)
 
   ```
   import xlrd
@@ -37,9 +35,9 @@
       print(sheet.row(i)[0].value) # 获取每一行第一列的数据(output: 1.11-2),不加value则返回的是对象
   ```
 
-  ![1.11-1.jpg](https://github.com/Dosrui78/Blog-Images/blob/master/1.11-1.jpg?raw=true "1.11-1")
+  ![1.11-1.jpg](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.11-1.jpg "1.11-1")
 
-![1.11-2.png](https://github.com/Dosrui78/Blog-Images/blob/master/1.11-2.png?raw=true "1.11-2")
+![1.11-2.png](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.11-2.png "1.11-2")
 
 ```
 sheet.col(colx, start_rowx=0, end_rowx=None)
@@ -64,7 +62,7 @@ print(sheet.cell(rowx=2, colx=0))  # 获取第三行，第一列的数据output:
 
 
 
-##### 1.12 xlwt写入表格（仅限xls格式！）
+##### 2. xlwt写入表格（仅限xls格式！）
 
 xlwt可以用于写入新的Excel表格或者在原表格基础上进行修改，速度也很快，推荐使用！
 
@@ -89,13 +87,13 @@ def fun3_2_2():
 fun3_2_2() #结果如下图1.12
 ```
 
-![1.12.png](https://github.com/Dosrui78/Blog-Images/blob/master/1.12.png?raw=true "1.12")
+![1.12.png](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/1.12.png "1.12")
 
 ----
 
-##### 1.13 xlutils 读取 写入 （也就是修改）Excel 表格信息
+##### 3. xlutils 读取 写入 （也就是修改）Excel 表格信息
 
-> 要用xlutils，得先使用xlrd读取表格比如：
+要用xlutils，得先使用xlrd读取表格，比如：
 
 ```
 import xlrd

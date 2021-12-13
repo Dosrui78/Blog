@@ -1,8 +1,8 @@
-#### 2.1 Xpath拓展
+#### 3.1 Xpath积累
 
-##### 2.11 定义包含一个或多个class属性的xpath路径
+##### 1. 定义包含一个或多个class属性的xpath路径
 
-![2.11.png](https://github.com/Dosrui78/Blog-Images/blob/master/2.11.png?raw=true)
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.11.png)
 
 ```
 //div[@class="vsb-container"]    ×
@@ -14,11 +14,11 @@
 
 -----
 
-##### 2.12 Xpath不包含某字段字符串的项目
+##### 2. Xpath不包含某字段字符串的项目
 
 不包含文本"详情"：
 
-![2.12.png](https://github.com/Dosrui78/Blog-Images/blob/master/2.12.png?raw=true)
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.12.png)
 
 ```
 //*[@id="content"]/div/div/div[2]/div[2]/ul/li/a[not(contains(text(),"详情"))]
@@ -26,9 +26,9 @@
 
 ---
 
-##### 2.13 Xpath获取兄弟节点元素
+##### 3. Xpath获取兄弟节点元素
 
-![2.13.png](https://github.com/Dosrui78/Blog-Images/blob/master/2.13.png?raw=true)
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.13.png)
 
 preceding-sibling表示上面一个兄弟节点元素，反之，following-sibling则表示下面一个兄弟节点元素。
 
@@ -38,9 +38,9 @@ preceding-sibling表示上面一个兄弟节点元素，反之，following-sibli
 
 ---
 
-##### 2.14 Xpath获取特定长度的文本
+##### 4. Xpath获取特定长度的文本
 
-![2.14.png](https://github.com/Dosrui78/Blog-Images/blob/master/2.14.png?raw=true)
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.14.png)
 
 前两项数据不是我们想要的数据，可以用如下语句排除掉：
 
@@ -52,15 +52,15 @@ preceding-sibling表示上面一个兄弟节点元素，反之，following-sibli
 
 ----
 
-##### 2.15 Xpath选择不包含某一属性的节点
+##### 5. Xpath选择不包含某一属性的节点
 
 > 这里可以用到not。例如排除一个属性的节点可以用//tbody/tr[not(@class)]来写，排除一个或者两个属性可以使用//tbody/tr[not(@class or @id)]来选择。
 
 ------
 
-##### 2.16 Xpath拼接符号 | 
+##### 6. Xpath拼接符号 | 
 
-![2.16.png](https://github.com/Dosrui78/Blog-Images/blob/master/2.16.png?raw=true)
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.16.png)![2.16.png](https://github.com/Dosrui78/Blog-Images/blob/master/2.16.png?raw=true)
 
 想获取全部文本内容可以用拼接符号|
 
