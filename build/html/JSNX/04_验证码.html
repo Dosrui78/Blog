@@ -89,20 +89,20 @@
 <h1>5.4 验证码识别<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <section id="id2">
 <h2>1. 验证码原理<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p><img alt="4.41.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.41.png?raw=true" /></p>
+<p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41.png" /></p>
 <blockquote>
 <div><p>练习：输入验证码查看数据</p>
 <p>请依次点击：—叕—迳-–酡-–囤—
 提示：若找不到对应的字，请点击9个区域内空白的区域</p>
 </div></blockquote>
-<p><img alt="4.41-1.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.41-1.png?raw=true" /></p>
+<p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-1.png" /></p>
 <p>抓包工具会出现如下图所示的结果：是一个由base64编码而成的二进制图片</p>
-<p><img alt="4.41-3.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.41-3.png?raw=true" /></p>
+<p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-3.png" /></p>
 <p>下图是返回的set-cookie，sessionid会被设为服务器返回的sessionid</p>
-<p><img alt="4.41-4.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.41-4.png?raw=true" /></p>
+<p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-4.png" /></p>
 <p>接收到set-cookie之后就建立了和服务器端图片（第一张）的联系。手动过完验证码后返回了值</p>
-<p><img alt="4.41-5.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.41-5.png?raw=true" /></p>
-<p><img alt="4.41-6.png" src="https://github.com/Dosrui78/Blog-Images/blob/master/4.41-6.png?raw=true" /></p>
+<p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-5.png" /></p>
+<p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-6.png" /></p>
 <p>然后将传值发给服务器，服务器会检测并<strong>验证</strong>它的传值（四个点的坐标），验证发给我们的set-cookie和这个answer是否匹配，如果匹配则返回正常内容，并会把之前的set-cookie删掉，下发一个新的set-cookie。</p>
 <hr class="docutils" />
 </section>

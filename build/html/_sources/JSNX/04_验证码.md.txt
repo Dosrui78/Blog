@@ -2,28 +2,28 @@
 
 #### 1. 验证码原理
 
-![4.41.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.41.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41.png)
 
 > 练习：输入验证码查看数据
 >
 > 请依次点击：---叕---迳\---酡\---囤---
 > 提示：若找不到对应的字，请点击9个区域内空白的区域
 
-![4.41-1.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.41-1.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-1.png)
 
 抓包工具会出现如下图所示的结果：是一个由base64编码而成的二进制图片
 
-![4.41-3.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.41-3.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-3.png)
 
 下图是返回的set-cookie，sessionid会被设为服务器返回的sessionid
 
-![4.41-4.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.41-4.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-4.png)
 
 接收到set-cookie之后就建立了和服务器端图片（第一张）的联系。手动过完验证码后返回了值
 
-![4.41-5.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.41-5.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-5.png)
 
-![4.41-6.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.41-6.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.41-6.png)
 
 然后将传值发给服务器，服务器会检测并**验证**它的传值（四个点的坐标），验证发给我们的set-cookie和这个answer是否匹配，如果匹配则返回正常内容，并会把之前的set-cookie删掉，下发一个新的set-cookie。
 
