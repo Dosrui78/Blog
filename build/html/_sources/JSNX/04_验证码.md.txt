@@ -1,6 +1,6 @@
-### 4.4 验证码识别
+### 5.4 验证码识别
 
-#### 4.41 验证码原理
+#### 1. 验证码原理
 
 ![4.41.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.41.png?raw=true)
 
