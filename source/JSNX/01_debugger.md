@@ -113,9 +113,9 @@ Function.prototype.constructor=function(){
 3. 利用正则/toString()判断代码是否进行格式化
 4. 利用浏览器指纹判断是否为浏览器环境
 
+
+
 ---
-
-
 
 ##### 5. js逆向-事件监听断点
 

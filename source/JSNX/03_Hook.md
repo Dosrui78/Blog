@@ -1,6 +1,6 @@
-### 4.3 Hook的使用
+### 5.3 Hook的使用
 
-#### 4.31 Hook定义
+#### 1. Hook定义
 
 > Hook技术又叫钩子函数，在系统没有调用该函数前，钩子程序就先捕获该消息，钩子函数先得到控制权，这时钩子函数既可以加工处理（改变）该函数的执行行为，还可以强制结束消息的传递。简单来说，就是把**系统的程序**拉出来变成我们自己执行代码片段。
 
@@ -10,7 +10,7 @@
 
 ---
 
-####  4.32 Hook步骤
+####  2. Hook步骤
 
 1. 寻找hook点
 2. 编写hook逻辑
@@ -45,7 +45,7 @@ Object.defineProperty(obj,'attr',{
 
 ----------
 
-#### 4.34 Hook案例
+#### 3. Hook案例
 
 ##### 中国专利网（常用案例）
 
@@ -64,7 +64,7 @@ eval.toString = function(){
 
 ----
 
-#### 4.35 油猴脚本Hook
+#### 4. 油猴脚本Hook
 
 ```
 @name :脚本名，你爱叫什么叫什么。
@@ -122,5 +122,81 @@ eval.toString = function(){
 	return "function eval() { [native code] }"
 	};
 eval.length = 1;
+```
+
+------
+
+#### 5. Hook set-cookie
+
+**HTTP cookies**
+
+> HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向**同一服务器**再发起请求时被携带并发送到服务器上。通常，它用于告知服务端两个请求是否来自**同一浏览器**，如保持用户的登录状态。Cookie 使基于[无状态](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#http_is_stateless_but_not_sessionless)的HTTP协议记录稳定的状态信息成为了可能。Cookie 主要用于以下三个方面：
+>
+> - 会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）
+> - 个性化设置（如用户自定义设置、主题等）
+> - 浏览器行为跟踪（如跟踪分析用户行为等）
+>
+> Cookie 曾一度用于客户端数据的存储，因当时并没有其它合适的存储办法而作为唯一的存储手段，但现在随着现代浏览器开始支持各种各样的存储方式，Cookie 渐渐被淘汰。由于服务器指定 Cookie 后，浏览器的每次请求都会携带 Cookie 数据，会带来额外的性能开销（尤其是在移动环境下）。新的浏览器API已经允许开发者直接将数据存储到本地，如使用 [Web storage API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API) （本地存储和会话存储）或 [IndexedDB](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API) 。
+
+**创建Cookie**
+
+> 当服务器收到 HTTP 请求时，服务器可以在**响应头**里面添加一个 [`Set-Cookie`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie) 选项。**浏览器**收到响应后通常会保存下 Cookie，之后对该服务器每一次请求中都通过 [`Cookie`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cookie) **请求头部**将 Cookie 信息发送给服务器。另外，Cookie 的过期时间、域、路径、有效期、适用站点都可以根据需要来指定。
+
+服务器使用 [`Set-Cookie`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Set-Cookie) 响应头部向用户代理（一般是浏览器）发送 Cookie信息。一个简单的 Cookie 可能像这样：
+
+```
+Set-Cookie: <cookie名>=<cookie值>
+```
+
+服务器通过该头部告知客户端保存 Cookie 信息。
+
+```
+HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: yummy_cookie=choco
+Set-Cookie: tasty_cookie=strawberry
+
+[页面内容]
+```
+
+现在，对该服务器发起的每一次新请求，浏览器都会将之前保存的Cookie信息通过 [`Cookie`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cookie) 请求头部再发送给服务器。
+
+```
+GET /sample_page.html HTTP/1.1
+Host: www.example.org
+Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+```
+
+----
+
+上一节讲了hook动态cookie的方法，那么如何hook set-cookie呢？从大佬那白嫖来的方法如下：
+
+```
+var cookie_cache = document.cookie;
+Object.defineProperty(document, 'cookie', {
+    get: function() {
+        console.log(cookie_cache);
+        return cookie_cache;
+    },
+    set: function(val) {
+    	debugger;
+        var cookie = val.split(";")[0];
+        var ncookie = cookie.split("=");
+        var flag = false;
+        var cache = cookie_cache.split(";");
+        cache = cache.map(function(a){
+        	if (a.split("=")[0] === ncookie[0]){
+                flag = true;
+                return cookie;
+        }
+        return a;
+        })
+        cookie_cache = cache.join(";");
+        if (!flag){
+        	cookie_cache += cookie + ";";
+        	}
+        },
+   });
+
 ```
 
