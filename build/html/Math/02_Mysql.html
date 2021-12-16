@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.2 mysql不完全指北 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Math/02_Mysql.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="第三章：爬虫入门" href="../Other/index.html" />
+    <link rel="prev" title="2.1 Python 操作 Excel 报表自动化指南" href="01_Excel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">第一章：基础知识</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第二章：数据分析</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Excel.html">2.1 Python 操作 Excel 报表自动化指南</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.2 mysql不完全指北</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1. mysql安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2. mysql简单配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3. 操作命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4. 左连接 ，右连接，内连接和全外连接</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-concat">5.  踩坑日志——使用GROUP_CONCAT报错</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">第四章：JS基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">第五章：JS逆向</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">第二章：数据分析</a> &raquo;</li>
+      <li>2.2 mysql不完全指北</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Math/02_Mysql.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mysql">
+<h1>2.2 mysql不完全指北<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h1>
+<section id="id1">
+<h2>1. mysql安装<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>安装：去官网下载好后解压在根目录下</p>
+<p>然后cmd以管理员身份打开</p>
+<p>cd至数据库解压目录，注：不可进入bin目录下</p>
+<p>然后在命令提示符下输入命令 bin\mysqld –initialize-insecure（实现MYSQL的初始化）注：如果这一步报错无法启动就要安装VC++</p>
+<p>再运行命令 bin\mysqld –install 安装MySQL服务到系统服务中</p>
+<p>最后在计算机管理中的服务中找到MySQL并启动就行了。</p>
+</li>
+</ul>
+<ul class="simple">
+<li><p>卸载：\bin\mysqld – remove，然后删掉解压目录。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>2. mysql简单配置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>此时执行mysql -u root -p还无法执行，因为还没有配置环境变量。</p>
+<p>复制bin目录的路径E:\mysql-8.0.22-winx64\bin</p>
+<p>MYSQL服务也可以用命令启动或停止（<strong>须以管理身份进行</strong>）</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="k">start</span> <span class="n">mysql</span>
+<span class="n">net</span> <span class="k">stop</span> <span class="n">mysql</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>3. 操作命令<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>数据库操作：
+mysql&gt;show databases;                                    --查看当前用户下的所有数据
+mysql&gt;create database  (if not exists) xxx;              --创建数据库
+mysql&gt;use test;                                          --选择进入test数据库
+mysql&gt;show create database xxx\G                         --查看数据库创建语句
+mysql&gt;select database();                                 --查看当前所在的数据库位置
+mysql&gt;drop database (if exists) xxx;                     --删除一个数据库
+
+数据表操作：
+mysql&gt;show tables;                                       --查看当前数据库下所有表格mysql&gt;desc tb1;                                          --查看表tb1的表结构
+mysql&gt;show create table xxx\G                            --查看表的建表语句
+mysql&gt;create table demo(
+	-&gt;name varchar(16) not null,
+	-&gt;age int,
+	-&gt;sex enum(&#39;w&#39;,&#39;m&#39;) not null default &#39;m&#39;);           --创建demo表格  
+mysql&gt;show columns from demo;                            --查看表结构
+mysql&gt;desc demo;                                         --查看表结构
+mysql&gt;drop table (if exists) xxx;                        --尝试删除表格
+
+数据操作：
+mysql&gt;insert into demo(name,age,sex) values(&#39;zhangsan&#39;, 20, &#39;w&#39;); 
+													     --添加数据
+mysql&gt;select * from demo                                 --查询数据
+mysql&gt;update demo set age=24 where name=&#39;aaa&#39;;           --修改数据
+mysql&gt;delete from demo where name=&#39;bbb&#39;;        	     --删除
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">表的字段约束：</span>
+<span class="n">unsigned无符号（正数）</span>
+<span class="n">zerofill前导零填充</span>
+<span class="n">auto_increment自增</span>
+<span class="n">default默认值</span>
+<span class="k">not</span> <span class="n">null非空</span>
+<span class="k">primary</span> <span class="n">key主键（非null并不重复）</span>
+<span class="n">unique唯一性（可以为null但并不重复）</span>
+<span class="n">index常规索引</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>MySQL的建表语句格式：
+create table 表名(
+	字段名 类型 [字段约束],
+	字段名 类型 [字段约束],
+	字段名 类型 [字段约束],
+	…
+	)
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">布尔型：</span>
+<span class="k">select</span> <span class="mi">10</span> <span class="k">in</span> <span class="n">（1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>  								    <span class="o">-&gt;</span> <span class="no">False</span>
+<span class="k">select</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">100</span>             							    <span class="o">-&gt;</span> <span class="no">False</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>修改表结构格式：alter table 表名 action(更改选项)
+修改字段名：alter table 表名 rename 字段名信息 as xxx
+添加字段：alter table 表名 add 字段名信息
+删除字段：alter table 表名 drop 被删除的字段名
+修改字段：alter table 表名 change[modify] 被修改后的字段名
+修改数据库引擎类型： alter table 表名 engine innodb[myisam]前者稳定安全，后者速度快
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">修改数据</span>                         
+<span class="k">update</span> <span class="n">表名</span> <span class="k">set</span> <span class="n">age</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span><span class="n">sex</span><span class="o">=</span><span class="s1">&#39;w&#39;</span> <span class="k">where</span> <span class="n">id</span> <span class="k">in</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+<span class="k">update</span> <span class="n">表名</span> <span class="k">set</span> <span class="n">age</span><span class="o">=</span><span class="mi">29</span><span class="p">,</span><span class="n">sex</span><span class="o">=</span><span class="s1">&#39;w&#39;</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span><span class="mi">10</span><span class="p">;</span>        <span class="p">(</span><span class="n">就算id</span><span class="o">=</span><span class="n">100不在表中也不会报错</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">删除数据</span>
+<span class="k">delete</span> <span class="k">from</span> <span class="n">表名</span> <span class="k">where</span> <span class="n">id</span> <span class="k">in</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+<span class="k">delete</span> <span class="k">from</span> <span class="n">表名</span> <span class="k">where</span> <span class="n">id</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">;</span>
+<span class="k">delete</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">id</span> <span class="k">between</span> <span class="mi">100</span> <span class="k">and</span> <span class="mi">200</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>--数据查询
+select [字段列表]|* from 表名 
+		[where 搜索条件]
+		[group by 分组字段 [having子条件]]
+		[order by 排序 asc|desc]
+		[limit分页参数]
+
+select id,name from stu;
+select id,name,age,age+5 from stu;
+select * ,&quot;beijing&quot; as city from stu;
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">添加字段</span>
+<span class="k">alter</span> <span class="k">table</span> <span class="n">stu</span> <span class="k">add</span> <span class="k">column</span> <span class="n">hobby</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">default</span> <span class="no">null</span> <span class="k">comment</span> <span class="s1">&#39;爱好&#39;</span> <span class="k">after</span> <span class="n">age</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">添加搜索条件</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">id</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">id</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+<span class="k">select</span>  <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">age</span> <span class="k">between</span> <span class="mi">20</span> <span class="k">and</span> <span class="mi">25</span><span class="p">;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">age</span><span class="o">&lt;</span><span class="mi">20</span> <span class="k">or</span> <span class="n">age</span><span class="o">&gt;</span><span class="mi">25</span><span class="p">;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">mydb</span><span class="p">.</span><span class="n">tt2</span> <span class="k">where</span> <span class="n">addtime</span> <span class="k">is</span> <span class="no">null</span><span class="p">;</span> <span class="p">(</span><span class="n">addtime为字段名）</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">模糊查询</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="k">name</span> <span class="k">like</span> <span class="s2">&quot;%ang%&quot;</span><span class="p">;</span> <span class="n">（包含式查询，中间含ang的）</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="k">name</span> <span class="k">like</span> <span class="s2">&quot;____&quot;</span><span class="p">;</span> <span class="n">（含四位字母的）</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="k">name</span> <span class="k">like</span> <span class="s2">&quot;%02&quot;</span><span class="p">;</span><span class="n">（开头为02的）</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">MySQL中的运算符：</span>
+<span class="n">算术运算符：</span><span class="o">+-*/%</span>
+<span class="n">比较运算符：</span><span class="o">=</span> <span class="o">&gt;</span> <span class="o">&lt;</span> <span class="o">&gt;=</span> <span class="o">&lt;=</span> <span class="o">&lt;&gt;</span> <span class="o">!=</span>
+<span class="n">数据库特有的比较：</span> <span class="k">in</span><span class="p">,</span> <span class="k">not</span> <span class="k">in</span> <span class="p">,</span> <span class="k">is</span> <span class="no">null</span><span class="p">,</span> <span class="k">is</span> <span class="k">not</span> <span class="no">null</span><span class="p">,</span> <span class="k">like</span><span class="p">,</span> <span class="n">bwtween</span> <span class="k">and</span>
+<span class="n">逻辑运算符：and</span> <span class="k">or</span> <span class="k">not</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="nf">count</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">from</span> <span class="n">stu</span><span class="p">;</span>             <span class="o">--</span><span class="n">读取数据条数</span>
+<span class="k">select</span> <span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="nf">max</span><span class="p">(</span><span class="n">age</span><span class="p">),</span><span class="nf">min</span><span class="p">(</span><span class="n">age</span><span class="p">),</span><span class="nf">sum</span><span class="p">(</span><span class="n">age</span><span class="p">),</span><span class="k">avg</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="k">from</span> <span class="n">stu</span><span class="p">;</span>    
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">分组查询</span> <span class="k">group</span> <span class="k">by</span>
+<span class="k">select</span> <span class="n">classid</span><span class="p">,</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">group</span> <span class="k">by</span> <span class="n">classid</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">classid</span><span class="p">,</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="k">avg</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">group</span> <span class="k">by</span> <span class="n">classid</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">classid</span><span class="p">,</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">group</span> <span class="k">by</span> <span class="n">classid</span> <span class="k">having</span> <span class="n">age</span><span class="o">&gt;</span><span class="mi">23</span><span class="p">;</span>
+<span class="n">查询顺序</span>
+<span class="n">①where</span> <span class="n">②group</span> <span class="k">by</span> <span class="n">xxx</span> <span class="k">having</span> <span class="n">xxx③order</span> <span class="k">by</span> <span class="n">④limit</span> 
+<span class="o">--</span><span class="n">一般having都在group</span> <span class="n">by之后，顺序不能颠倒；</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">聚合函数：count</span><span class="p">()</span><span class="n">、max</span><span class="p">()</span><span class="n">、min</span><span class="p">()</span><span class="n">、sum</span><span class="p">()</span><span class="n">、avg</span><span class="p">()</span><span class="n">、sum</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="o">:</span> <span class="n">统计每个班男生、女生各有多少人</span>
+<span class="n">A</span><span class="o">:</span> <span class="k">select</span> <span class="n">classid</span><span class="p">,</span><span class="n">sex</span><span class="p">,</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">group</span> <span class="k">by</span> <span class="n">classid</span><span class="p">,</span><span class="n">sex</span><span class="p">;</span> 
+
+<span class="n">升降序排序：</span>
+<span class="k">select</span> <span class="o">*</span> <span class="n">form</span> <span class="n">stu</span> <span class="k">order</span> <span class="k">by</span> <span class="n">age</span> <span class="k">desc</span><span class="p">;</span>                 <span class="n">对年龄降序排序</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">order</span> <span class="k">by</span> <span class="n">classid</span> <span class="k">asc</span><span class="p">,</span><span class="n">age</span> <span class="k">desc</span><span class="p">;</span>   <span class="n">对年龄降序，对序号升序排序</span>
+
+<span class="n">有时候数据是成千上万的，不能完全显示，因此用limit来显示前xx条便于观看</span>
+<span class="n">limit查询：</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">order</span> <span class="k">by</span> <span class="n">age</span> <span class="k">desc</span> <span class="k">limit</span> <span class="mi">3</span><span class="p">;</span>           <span class="o">--</span><span class="n">按年龄降序排序只拿前三条</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">limit</span> <span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span>      <span class="n">（第一个排除，第二个取）</span>          <span class="o">--</span><span class="n">跳过两条取三条</span>
+<span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">stu</span> <span class="k">where</span> <span class="n">classid</span><span class="o">=</span><span class="s1">&#39;python03&#39;</span> <span class="k">order</span> <span class="k">by</span> <span class="n">age</span> <span class="k">asc</span> <span class="k">limit</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>数据库授权，备份和恢复
+授权：
+	show databases;可以看到一个user表；
+	desc user;查看user表字段；
+	select host,user,password from mysql.user;
+	select * from user\G
+格式：grant 允许操作 on 库名.表名 to 账号@来源 identified by &#39;密码&#39;;
+示例：grant all on *.* to zhangsan@&#39;%&#39; identified by ＂123&quot;;
+     msyql -h ip地址 -u zhagnsan -p 远程连接数据库
+     show databases;
+     drop user &#39;zhangsan&#39; @&#39;%&#39;;
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>备份：
+	mysqldump -u root -p 数据库名 [表名] &gt; 文件名.sql
+	use mydemo
+	select * from stu;
+	cd 要备份的路径
+	导库：mysqldump -u root -p mydemo&gt;mydemo.sql   将mydemo.sql导入到路径下
+	导表：mysqldump -u root -p mydemo&gt;stu.sql  
+恢复：
+	mysql -u root -p 数据库名 &lt; 文件名.sql
+	use mydemo
+	show tables;
+	drop table stu;
+	mysql -u root -p mydemo&lt;mydemo.sql 
+mysql -u root -p mydemo&gt;mydb_tt2.sql
+</pre></div>
+</div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">多表联查</span>
+<span class="n">表与表之间关系：1对1</span> <span class="n">1对多</span> <span class="n">多对多</span>
+<span class="n">多表联查方式：</span>
+<span class="mf">1.</span><span class="n">嵌套查询</span>
+<span class="mf">2.</span><span class="n">where管理查询</span>
+<span class="mf">3.</span><span class="n">连接join查询</span>
+
+<span class="k">left</span> <span class="k">join</span> <span class="n">（左连接）：返回包括左表中的所有记录和右表中连接字段相等的记录。</span>
+<span class="k">right</span> <span class="k">join</span> <span class="n">（右连接）：返回包括右表中的所有记录和左表中连接字段相等的记录。</span>
+<span class="k">inner</span> <span class="k">join</span> <span class="n">（等值连接或者叫内连接）：只返回两个表中连接字段相等的行。</span>
+<span class="k">full</span> <span class="k">join</span> <span class="n">（全外连接）：返回左右表中所有的记录和左右表中连接字段相等的记录。</span>
+
+<span class="n">一个查询结果是另一个查询的查询条件：</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">plan</span> <span class="k">where</span> <span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="k">select</span> <span class="nf">max</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">from</span> <span class="n">plan</span><span class="p">);</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">plan</span> <span class="k">where</span> <span class="n">id</span> <span class="k">in</span> <span class="p">(</span><span class="k">select</span> <span class="n">id</span> <span class="k">from</span> <span class="n">plan</span> <span class="k">where</span> <span class="k">name</span><span class="o">=</span><span class="s1">&#39;延边大学&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>4. 左连接 ，右连接，内连接和全外连接<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>例子：</p>
+<p>A表</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>小王</td>
+</tr>
+<tr>
+<td>2</td>
+<td>小李</td>
+</tr>
+<tr>
+<td>3</td>
+<td>小刘</td>
+</tr>
+</tbody>
+</table><p>B表</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>id</th>
+<th>A_id</th>
+<th>job</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>老师</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+<td>程序猿</td>
+</tr>
+</tbody>
+</table><p><strong>内连接：（只有2张表匹配的行才能显示）</strong></p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="k">name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">job</span> <span class="k">from</span> <span class="n">A</span> <span class="n">a</span> <span class="k">inner</span> <span class="k">join</span> <span class="n">B</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">A_id</span>
+</pre></div>
+</div>
+<p>只能得到一条记录</p>
+<p>小李　　老师</p>
+<p><strong>左连接：（左边的表不加限制）</strong></p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="k">name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">job</span> <span class="k">from</span> <span class="n">A</span> <span class="n">a</span>  <span class="k">left</span> <span class="k">join</span> <span class="n">B</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">A_id</span>
+</pre></div>
+</div>
+<p>三条记录</p>
+<p>小王　　null</p>
+<p>小李　　老师</p>
+<p>小刘　　null</p>
+<p><strong>右连接：（右边的表不加限制）</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">b</span><span class="o">.</span><span class="n">job</span> <span class="kn">from</span> <span class="nn">A</span> <span class="n">a</span> <span class="n">right</span> <span class="n">join</span> <span class="n">B</span> <span class="n">b</span> <span class="n">on</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">A_id</span>
+</pre></div>
+</div>
+<p>两条记录</p>
+<p>小李　　老师</p>
+<p>null         程序猿</p>
+<p><strong>全外连接：(左右2张表都不加限制）</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">b</span><span class="o">.</span><span class="n">job</span> <span class="kn">from</span> <span class="nn">A</span> <span class="n">a</span> <span class="n">full</span> <span class="n">join</span> <span class="n">B</span> <span class="n">b</span> <span class="n">on</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">A_id</span>
+</pre></div>
+</div>
+<p>四条数据</p>
+<p>小王　　null</p>
+<p>小李　　老师</p>
+<p>小刘　　null</p>
+<p>null　　 程序猿</p>
+<p><em>注：在sql中l外连接包括左连接（left join ）和右连接（right join），全外连接（full join），等值连接（inner join）又叫内连接。</em></p>
+</section>
+<hr class="docutils" />
+<section id="group-concat">
+<h2>5.  踩坑日志——使用GROUP_CONCAT报错<a class="headerlink" href="#group-concat" title="Permalink to this headline">¶</a></h2>
+<p>贴一下查询语句</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">database</span> <span class="n">zyr666</span> <span class="p">(</span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">校名</span><span class="p">,</span> <span class="nf">group_concat</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">b</span><span class="p">.</span><span class="n">中文名</span><span class="p">)</span> <span class="k">as</span> <span class="n">cn_name</span> <span class="k">from</span> <span class="n">inst2</span> <span class="n">a</span> <span class="k">left</span> <span class="k">join</span> <span class="n n-Quoted">`2020库论文翻译20211131汇总_去研究机构`</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">校名</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">校名</span> <span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="n">国家</span> <span class="o">=</span> <span class="s1">&#39;中国&#39;</span> <span class="k">group</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">校名</span> <span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="k">asc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Q:报错信息</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="mi">1260</span> <span class="o">-</span> <span class="k">Row</span> <span class="mi">231</span> <span class="n">was</span> <span class="n">cut</span> <span class="k">by</span> <span class="nf">GROUP_CONCAT</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>由以上信息初步判断是创表时语句过长导致；查询一番得到解决办法如下</p>
+<p>A:您可以将<code class="docutils literal notranslate"><span class="pre">group_concat_max_len</span></code>变量设置为更大的值。或者可能用于<code class="docutils literal notranslate"><span class="pre">GROUP_CONCAT(DISTINCT</span> <span class="pre">...)</span></code>缩短结果。</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SET</span> <span class="k">global</span> <span class="n">group_concat_max_len</span><span class="o">=</span><span class="mi">15000</span><span class="p">;</span>
+<span class="n">或者</span>
+<span class="k">SET</span> <span class="k">session</span> <span class="n">group_concat_max_len</span><span class="o">=</span><span class="mi">15000</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01_Excel.html" class="btn btn-neutral float-left" title="2.1 Python 操作 Excel 报表自动化指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Other/index.html" class="btn btn-neutral float-right" title="第三章：爬虫入门" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
