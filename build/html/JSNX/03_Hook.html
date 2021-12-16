@@ -54,16 +54,22 @@
 <li class="toctree-l2"><a class="reference internal" href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html">5.2 入门级JS反爬</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.3 Hook的使用</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">1. Hook定义</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">2. Hook步骤</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">3. Hook案例</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">中国专利网（常用案例）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2. Hook步骤</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">原型链Hook</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">4. 油猴脚本Hook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3. Hook案例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">猿人学联系平台第一题</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">中国专利网（常用案例）</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4. 油猴脚本Hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hook-set-cookie">5. Hook set-cookie</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="04_%E9%AA%8C%E8%AF%81%E7%A0%81.html">5.4 验证码识别</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html">5.5 常见反爬介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_ob%E6%B7%B7%E6%B7%86.html">5.6 ob混淆解决方案</a></li>
 </ul>
 </li>
 </ul>
@@ -97,120 +103,206 @@
 <h1>5.3 Hook的使用<a class="headerlink" href="#hook" title="Permalink to this headline">¶</a></h1>
 <section id="id1">
 <h2>1. Hook定义<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>Hook技术又叫钩子函数，在系统没有调用该函数前，钩子程序就先捕获该消息，钩子函数先得到控制权，这时钩子函数既可以加工处理（改变）该函数的执行行为，还可以强制结束消息的传递。简单来说，就是把<strong>系统的程序</strong>拉出来变成我们自己执行代码片段。</p>
-</div></blockquote>
-<p>在js中，系统程序可以指浏览器API，也可以之代码中实现的一些方法等</p>
-<p>分类：手动hook，自动hook</p>
+<p>Hook技术又叫<code class="docutils literal notranslate"><span class="pre">钩子函数</span></code>，在系统没有调用该函数前，钩子程序就先捕获该消息，钩子函数先得到控制权，这时钩子函数既可以加工处理（改变）该函数的执行行为，还可以强制结束消息的传递。</p>
+<p>简单来说，就是把<strong>系统的程序</strong>拉出来变成我们自己执行代码片段。</p>
+<p>在js中，系统程序可以指<code class="docutils literal notranslate"><span class="pre">浏览器API</span></code>，也可以之代码中实现的一些方法等。</p>
+<p>分类：手动hook，自动hook。</p>
 </section>
 <hr class="docutils" />
 <section id="id2">
 <h2>2. Hook步骤<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
+<ul class="simple">
 <li><p>寻找hook点</p></li>
 <li><p>编写hook逻辑</p></li>
 <li><p>调试</p></li>
-</ol>
+</ul>
 <p>函数hook公式：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>old_func = func
-func = function(argument){
-	my task;
-	return func.apply(argument)
-}
-func.prototype...... = ......
-//func：要hook的函数
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">old_func</span> <span class="o">=</span> <span class="nx">func</span>
+<span class="nx">func</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">argument</span><span class="p">){</span>
+	<span class="nx">my</span> <span class="nx">task</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">argument</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">func</span><span class="p">.</span><span class="nx">prototype</span><span class="p">......</span> <span class="o">=</span> <span class="p">......</span>
+<span class="c1">//func：要hook的函数</span>
 </pre></div>
 </div>
-<p>对象中属性Hook公式：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">obj_attr</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">attr</span>
-<span class="n">Object</span><span class="o">.</span><span class="n">defineProperty</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="s1">&#39;attr&#39;</span><span class="p">,{</span>
-		<span class="n">get</span><span class="p">:</span><span class="n">function</span><span class="p">(){</span>
-			<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">cookie_cache</span><span class="p">);</span>
-			<span class="k">return</span> <span class="n">old_attr</span>
+<p>对象中属性Hook公式:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">obj_attr</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">attr</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="s1">&#39;attr&#39;</span><span class="p">,{</span>
+		<span class="nx">get</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cookie_cache</span><span class="p">);</span>
+			<span class="k">return</span> <span class="nx">old_attr</span>
 		<span class="p">},</span>
-		<span class="nb">set</span><span class="p">:</span><span class="n">function</span><span class="p">(</span><span class="n">val</span><span class="p">){</span>
-			<span class="k">return</span> <span class="o">......</span>
+		<span class="nx">set</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+			<span class="k">return</span> <span class="p">......</span>
 		<span class="p">}</span>
 <span class="p">})</span>
 </pre></div>
 </div>
+<section id="id3">
+<h3>原型链Hook<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>原型链关系图</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/%E5%9B%BE%E7%89%871.jpg" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/%E5%9B%BE%E7%89%871.jpg" /></p>
+<p>原split函数（须在原型链下调用）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span><span class="n">split</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;加密字符串&#39;</span>
+<span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;加密&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-15_23-17-03.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-15_23-17-03.png" /></p>
+<p>接下来在原基础上对split进行hook，发现不管用，因为split是String对象原型链上的方法</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-15_23-19-59.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-15_23-19-59.png" /></p>
+<p>再次hook原型链，会卡在<code class="docutils literal notranslate"><span class="pre">debugger</span></code>处</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">split_bk</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="k">debugger</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>为了使Hook函数更完整，可以这样写，但是这样会堆栈溢出</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">split</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="nx">str</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="k">debugger</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>于是可以这样重写函数，但是这样返回的是<code class="docutils literal notranslate"><span class="pre">str.split_bk</span></code>，而第一句的<code class="docutils literal notranslate"><span class="pre">split_bk</span></code>方法没用上，所以下述方法也是不行的。</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">split_bk</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">split</span>
+<span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">split</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="nx">str</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="k">debugger</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split_bk</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们不仅可以重写原型链，也可添加原型链的内容</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">split_bk</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">split</span>
+<span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">split</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="nx">str</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="k">debugger</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split_bk</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>返回的<code class="docutils literal notranslate"><span class="pre">split_bk</span></code>就是一开始重写定义的<code class="docutils literal notranslate"><span class="pre">split_bk</span></code></p>
+</section>
 </section>
 <hr class="docutils" />
-<section id="id3">
-<h2>3. Hook案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <section id="id4">
-<h3>中国专利网（常用案例）<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h2>3. Hook案例<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<section id="id5">
+<h3>猿人学联系平台第一题<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>猿人学联系平台第一题可以用Hook setRequestHeader函数的办法找到函数入口</p>
+<blockquote>
+<div><p>该<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest"><code class="docutils literal notranslate"><span class="pre">XMLHttpRequest</span></code></a>方法 <code class="docutils literal notranslate"><span class="pre">setRequestHeader()</span></code>设置 HTTP 请求标头的值。使用<code class="docutils literal notranslate"><span class="pre">setRequestHeader()</span></code>时必须在调用之后调用 <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open"><code class="docutils literal notranslate"><span class="pre">open()</span></code></a>，调用之前调用 <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a>。如果使用相同的标头多次调用此方法，则这些值将合并为一个请求标头。</p>
+<p><code class="docutils literal notranslate"><span class="pre">setRequestHeader()</span></code>在第一次 调用之后，每次调用时，指定的文本都会附加到现有标题内容的末尾。</p>
+<p>如果没有<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept"><code class="docutils literal notranslate"><span class="pre">Accept</span></code></a>使用此设置<code class="docutils literal notranslate"><span class="pre">Accept</span></code> 标头，则<code class="docutils literal notranslate"><span class="pre">&quot;*/*&quot;</span></code>在<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a>调用时随请求发送具有该 类型的标头。</p>
+<p>出于安全原因，某些标头只能由用户代理控制。这些头包括<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name">禁止头名称</a> 和<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_response_header_name">禁止响应头名称</a>。</p>
+</div></blockquote>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-16_23-09-27.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-16_23-09-27.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">setRequestHeader方法</span></code>属于<code class="docutils literal notranslate"><span class="pre">XMLHTTPRequest原型链</span></code>下的方法，可以简单重写一下。</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">XMLHttpRequest</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setRequestHeader</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">debugger</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后翻页就会发现卡在debugger处</p>
+</section>
+<section id="id6">
+<h3>中国专利网（常用案例）<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>Hook eval函数</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eval_bk</span> <span class="o">=</span> <span class="nb">eval</span>
-<span class="nb">eval</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">val</span><span class="p">){</span>
-	<span class="n">debugger</span><span class="p">;</span>
-	<span class="k">return</span> <span class="n">eval_bk</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>  <span class="o">//</span> <span class="n">重写eval函数</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">eval_bk</span> <span class="o">=</span> <span class="nb">eval</span>
+<span class="nb">eval</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+	<span class="k">debugger</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nx">eval_bk</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>  <span class="c1">// 重写eval函数</span>
 <span class="p">}</span>
-<span class="nb">eval</span><span class="o">.</span><span class="n">toString</span> <span class="o">=</span> <span class="n">function</span><span class="p">(){</span>
-	<span class="k">return</span> <span class="s2">&quot;function eval() { [native code] }&quot;</span>  <span class="o">//</span> <span class="n">指纹的伪装</span>
+<span class="nb">eval</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="s2">&quot;function eval() { [native code] }&quot;</span>  <span class="c1">// 指纹的伪装</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 </section>
 <hr class="docutils" />
-<section id="id5">
-<h2>4. 油猴脚本Hook<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<section id="id7">
+<h2>4. 油猴脚本Hook<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@name :脚本名，你爱叫什么叫什么。
+
 @namespace ：脚本的命名空间。（一般就是写个url，告诉自己用在哪里）。
+
 @version：版本，你爱写多少写多少。
+
 @author：作者，你爱写谁写谁。
+
 @description：描述，你爱怎么描述怎么描述。反正别人也看不懂。
-@homepage, @homepageURL, @website and @source： 一般正常人都不写这几个参数。从脚本												名称链接到给定页面的作者主页。
+
+@homepage, @homepageURL, @website and @source： 一般正常人都不写这几个参数。从脚本名称链接到给定页面的作者主页。
+
 @icon, @iconURL and @defaulticon：一般正常人都不写这几个参数，低分辨率脚本图标。
+
 @icon64 and @icon64URL：一般正常人都不写这几个参数，高分辨率脚本图标。
+
 @updateURL： 更新检查的url，@version参数开启，会向url检查更新。
+
 @downloadURL：定时监测到更新会自动下载url内容，若为 none则不检查
-@include @match @exclude：匹配规则相关。支持精确匹配与正则匹配。@exclude是排除，						    不写相当于脚本白写
+
+@include @match @exclude：匹配规则相关。支持精确匹配与正则匹配。@exclude是排除，不写相当于脚本白写
 @require @resource ：导包，支持url引入。比如引入 jquery，可以使用$
+
 @connect：标记定义域，感觉很有用，但是我菜，所以很少用。
-@grant：白名单函数：比如：@grant window.close 。很强大，如果默认不写则会对一些原生		函数如：eval等进行保护，显然这不是我们所期待的，所以就直接 @grant none了
+
+@grant：白名单函数：比如：@grant window.close 。很强大，如果默认不写则会对一些原生函数如:eval等进行保护，显然这不是我们所期待的，所以就直接 @grant none了
+
 @antifeature ：官方文档的意思：开发人员是否允许别人把脚本货币化。
+
 @noframes：在主页上运行而不在iframes上运行。
+
 @unwrap：卵用没有，官方文档的意思：在chrome上，不需要它，自动被忽略了（淦！）
-@nocompat：一般默认，官方文档写了好长，大概的意思指支持标记浏览器。如： 								@nocompat Chrome，这样就不能在火狐浏览器运行它了。
+
+@nocompat：一般默认，官方文档写了好长，大概的意思指支持标记浏览器。如：@nocompat Chrome，这样就不能在火狐浏览器运行它了。
 
 逆向中最重要的参数！！！！
 @run-at： 指定油猴脚本在什么时候执行，默认是在所有js加载完成后执行。（那hook脚本还有个屁用啊！）
+
 参数：
 @run-at document-start  ：脚本尽快注入（相当于script断点之后，进入页面一瞬间注入）
+
 @run-at document-body ：如果页面body元素存在，则注入（所以练习平台第二题就注不进去了）
+
 @run-at document-end ：脚本将在DOMContentLoaded事件发生注入。
+
 @run-at document-idle：默认值。脚本将在DOMContentLoaded事件发生之后才注入。
-@run-at context-menu：如果在浏览器上下文菜单中单击脚本（仅限于基于桌面Chrome的浏览						 器），则会注入脚本。
+
+@run-at context-menu：如果在浏览器上下文菜单中单击脚本（仅限于基于桌面Chrome的浏览器），则会注入脚本。
 </pre></div>
 </div>
 <p>油猴脚本——万能hook eval函数</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// ==UserScript==
-// @name         万能hook eval函数
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  eval-everything
-// @author       You
-// @match        https://www.tampermonkey.net/scripts.php?version=4.13&amp;ext=dhdg&amp;updated=true
-// @icon         https://www.google.com/s2/favicons?domain=tampermonkey.net
-// @grant        none
-// @run-at       document-start
-// ==/UserScript==
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// ==UserScript==</span>
+<span class="c1">// @name         万能hook eval函数</span>
+<span class="c1">// @namespace    http://tampermonkey.net/</span>
+<span class="c1">// @version      0.1</span>
+<span class="c1">// @description  eval-everything</span>
+<span class="c1">// @author       You</span>
+<span class="c1">// @match        https://www.tampermonkey.net/scripts.php?version=4.13&amp;ext=dhdg&amp;updated=true</span>
+<span class="c1">// @icon         https://www.google.com/s2/favicons?domain=tampermonkey.net</span>
+<span class="c1">// @grant        none</span>
+<span class="c1">// @run-at       document-start</span>
+<span class="c1">// ==/UserScript==</span>
 
-alert(&#39;hook success&#39;);
-var eval_bk = eval;
-eval = function(val){
-    debugger;
-    console.log(val)
-    return eval_bk(val);
-}
-eval.toString = function(){
-	return &quot;function eval() { [native code] }&quot;
-	};
-eval.length = 1;
+<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;hook success&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">eval_bk</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">;</span>
+<span class="nb">eval</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="k">debugger</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">eval_bk</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nb">eval</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="s2">&quot;function eval() { [native code] }&quot;</span>
+	<span class="p">};</span>
+<span class="nb">eval</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mf">1</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>

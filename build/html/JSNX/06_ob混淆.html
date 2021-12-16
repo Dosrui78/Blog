@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.6 ob混淆解决方案 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/JSNX/06_ob混淆.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="5.5 常见反爬介绍" href="05_%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">第一章：基础知识</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">第四章：JS基础</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第五章：JS逆向</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_debugger.html">5.1 JS调试干扰专题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html">5.2 入门级JS反爬</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Hook.html">5.3 Hook的使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_%E9%AA%8C%E8%AF%81%E7%A0%81.html">5.4 验证码识别</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html">5.5 常见反爬介绍</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.6 ob混淆解决方案</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ob-obfuscator">1. ob（Obfuscator）介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2. ob混淆破解方案</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3. 简易ob混淆破解逻辑</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">第五章：JS逆向</a> &raquo;</li>
+      <li>5.6 ob混淆解决方案</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/JSNX/06_ob混淆.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ob">
+<h1>5.6 ob混淆解决方案<a class="headerlink" href="#ob" title="Permalink to this headline">¶</a></h1>
+<section id="ob-obfuscator">
+<h2>1. ob（<a class="reference external" href="https://obfuscator.io/">Obfuscator</a>）介绍<a class="headerlink" href="#ob-obfuscator" title="Permalink to this headline">¶</a></h2>
+<p>ob混淆是一种非常常见的混淆</p>
+<p>通过一系列的转换，例如变量/函数/参数重命名、字符串删除等，您的源代码被转换成不可读的东西，同时还能像以前一样工作。</p>
+<p>混淆前</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Paste your JavaScript code here</span>
+<span class="kd">function</span> <span class="nx">hi</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">hi</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>混淆后</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">_0x79b7</span><span class="p">(</span><span class="nx">_0x3d4c03</span><span class="p">,</span><span class="nx">_0x3ce9f7</span><span class="p">){</span><span class="kd">var</span> <span class="nx">_0x52f434</span><span class="o">=</span><span class="nx">_0x28df</span><span class="p">();</span><span class="k">return</span> <span class="nx">_0x79b7</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">_0x154b7d</span><span class="p">,</span><span class="nx">_0x10c421</span><span class="p">){</span><span class="nx">_0x154b7d</span><span class="o">=</span><span class="nx">_0x154b7d</span><span class="o">-</span><span class="mh">0x6a</span><span class="p">;</span><span class="kd">var</span> <span class="nx">_0x28df91</span><span class="o">=</span><span class="nx">_0x52f434</span><span class="p">[</span><span class="nx">_0x154b7d</span><span class="p">];</span><span class="k">return</span> <span class="nx">_0x28df91</span><span class="p">;},</span><span class="nx">_0x79b7</span><span class="p">(</span><span class="nx">_0x3d4c03</span><span class="p">,</span><span class="nx">_0x3ce9f7</span><span class="p">);}</span><span class="kd">function</span> <span class="nx">_0x28df</span><span class="p">(){</span><span class="kd">var</span> <span class="nx">_0x2a90f6</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;10olLnmN&#39;</span><span class="p">,</span><span class="s1">&#39;28415lbgVeC&#39;</span><span class="p">,</span><span class="s1">&#39;Hello\x20World!&#39;</span><span class="p">,</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="s1">&#39;52kJHrUo&#39;</span><span class="p">,</span><span class="s1">&#39;constructor&#39;</span><span class="p">,</span><span class="s1">&#39;41982FrtaYt&#39;</span><span class="p">,</span><span class="s1">&#39;6009201middJu&#39;</span><span class="p">,</span><span class="s1">&#39;1851636rbBRRN&#39;</span><span class="p">,</span><span class="s1">&#39;(((.+)+)+)+$&#39;</span><span class="p">,</span><span class="s1">&#39;6846MhZzOc&#39;</span><span class="p">,</span><span class="s1">&#39;toString&#39;</span><span class="p">,</span><span class="s1">&#39;48zsgBAZ&#39;</span><span class="p">,</span><span class="s1">&#39;apply&#39;</span><span class="p">,</span><span class="s1">&#39;search&#39;</span><span class="p">,</span><span class="s1">&#39;736777PknBUd&#39;</span><span class="p">,</span><span class="s1">&#39;7408tWJeNS&#39;</span><span class="p">,</span><span class="s1">&#39;17447045aCLcsW&#39;</span><span class="p">];</span><span class="nx">_0x28df</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span><span class="k">return</span> <span class="nx">_0x2a90f6</span><span class="p">;};</span><span class="k">return</span> <span class="nx">_0x28df</span><span class="p">();}(</span><span class="kd">function</span><span class="p">(</span><span class="nx">_0x1a0227</span><span class="p">,</span><span class="nx">_0x4f012b</span><span class="p">){</span><span class="kd">var</span> <span class="nx">_0x40e763</span><span class="o">=</span><span class="nx">_0x79b7</span><span class="p">,</span><span class="nx">_0x1ac67a</span><span class="o">=</span><span class="nx">_0x1a0227</span><span class="p">();</span><span class="k">while</span><span class="p">(</span><span class="o">!!</span><span class="p">[]){</span><span class="k">try</span><span class="p">{</span><span class="kd">var</span> <span class="nx">_0x581d54</span><span class="o">=-</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x6a</span><span class="p">))</span><span class="o">/</span><span class="mh">0x1</span><span class="o">+-</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x79</span><span class="p">))</span><span class="o">/</span><span class="mh">0x2</span><span class="o">*</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x73</span><span class="p">))</span><span class="o">/</span><span class="mh">0x3</span><span class="p">)</span><span class="o">+-</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x71</span><span class="p">))</span><span class="o">/</span><span class="mh">0x4</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x6e</span><span class="p">))</span><span class="o">/</span><span class="mh">0x5</span><span class="p">)</span><span class="o">+-</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x75</span><span class="p">))</span><span class="o">/</span><span class="mh">0x6</span><span class="o">+</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x77</span><span class="p">))</span><span class="o">/</span><span class="mh">0x7</span><span class="o">*</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x6b</span><span class="p">))</span><span class="o">/</span><span class="mh">0x8</span><span class="p">)</span><span class="o">+-</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x74</span><span class="p">))</span><span class="o">/</span><span class="mh">0x9</span><span class="o">+</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x6d</span><span class="p">))</span><span class="o">/</span><span class="mh">0xa</span><span class="o">*</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">_0x40e763</span><span class="p">(</span><span class="mh">0x6c</span><span class="p">))</span><span class="o">/</span><span class="mh">0xb</span><span class="p">);</span><span class="k">if</span><span class="p">(</span><span class="nx">_0x581d54</span><span class="o">===</span><span class="nx">_0x4f012b</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="k">else</span> <span class="nx">_0x1ac67a</span><span class="p">[</span><span class="s1">&#39;push&#39;</span><span class="p">](</span><span class="nx">_0x1ac67a</span><span class="p">[</span><span class="s1">&#39;shift&#39;</span><span class="p">]());}</span><span class="k">catch</span><span class="p">(</span><span class="nx">_0x1a8509</span><span class="p">){</span><span class="nx">_0x1ac67a</span><span class="p">[</span><span class="s1">&#39;push&#39;</span><span class="p">](</span><span class="nx">_0x1ac67a</span><span class="p">[</span><span class="s1">&#39;shift&#39;</span><span class="p">]());}}}(</span><span class="nx">_0x28df</span><span class="p">,</span><span class="mh">0x7e242</span><span class="p">));</span><span class="kd">function</span> <span class="nx">hi</span><span class="p">(){</span><span class="kd">var</span> <span class="nx">_0x10dca9</span><span class="o">=</span><span class="nx">_0x79b7</span><span class="p">,</span><span class="nx">_0x194d47</span><span class="o">=</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="kd">var</span> <span class="nx">_0x18b8d4</span><span class="o">=!!</span><span class="p">[];</span><span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">_0x53e325</span><span class="p">,</span><span class="nx">_0x55b0e9</span><span class="p">){</span><span class="kd">var</span> <span class="nx">_0x5d0ff1</span><span class="o">=</span><span class="nx">_0x18b8d4</span><span class="o">?</span><span class="kd">function</span><span class="p">(){</span><span class="kd">var</span> <span class="nx">_0xb369b8</span><span class="o">=</span><span class="nx">_0x79b7</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="nx">_0x55b0e9</span><span class="p">){</span><span class="kd">var</span> <span class="nx">_0x7d3db5</span><span class="o">=</span><span class="nx">_0x55b0e9</span><span class="p">[</span><span class="nx">_0xb369b8</span><span class="p">(</span><span class="mh">0x7a</span><span class="p">)](</span><span class="nx">_0x53e325</span><span class="p">,</span><span class="nx">arguments</span><span class="p">);</span><span class="k">return</span> <span class="nx">_0x55b0e9</span><span class="o">=</span><span class="kc">null</span><span class="p">,</span><span class="nx">_0x7d3db5</span><span class="p">;}}</span><span class="o">:</span><span class="kd">function</span><span class="p">(){};</span><span class="k">return</span> <span class="nx">_0x18b8d4</span><span class="o">=!</span><span class="p">[],</span><span class="nx">_0x5d0ff1</span><span class="p">;};}()),</span><span class="nx">_0x34fa23</span><span class="o">=</span><span class="nx">_0x194d47</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span><span class="kd">var</span> <span class="nx">_0x125c73</span><span class="o">=</span><span class="nx">_0x79b7</span><span class="p">;</span><span class="k">return</span> <span class="nx">_0x34fa23</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">]()[</span><span class="s1">&#39;search&#39;</span><span class="p">](</span><span class="s1">&#39;(((.+)+)+)+$&#39;</span><span class="p">)[</span><span class="nx">_0x125c73</span><span class="p">(</span><span class="mh">0x78</span><span class="p">)]()[</span><span class="nx">_0x125c73</span><span class="p">(</span><span class="mh">0x72</span><span class="p">)](</span><span class="nx">_0x34fa23</span><span class="p">)[</span><span class="nx">_0x125c73</span><span class="p">(</span><span class="mh">0x7b</span><span class="p">)](</span><span class="nx">_0x125c73</span><span class="p">(</span><span class="mh">0x76</span><span class="p">));});</span><span class="nx">_0x34fa23</span><span class="p">(),</span><span class="nx">console</span><span class="p">[</span><span class="nx">_0x10dca9</span><span class="p">(</span><span class="mh">0x70</span><span class="p">)](</span><span class="nx">_0x10dca9</span><span class="p">(</span><span class="mh">0x6f</span><span class="p">));}</span><span class="nx">hi</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>2. ob混淆破解方案<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>ob混淆有众多的参数，但是万变不离其宗。记住以下的结构</p>
+<ol class="simple">
+<li><p>大数组</p></li>
+<li><p>数组移位（有内存泄露风险、建议不格式化）</p></li>
+<li><p>解密函数（有内存泄露风险、建议不格式化）</p></li>
+</ol>
+<p>—— 可能有定时器 ——–（看加密的开关开启数量）</p>
+<ol class="simple">
+<li><p>实际代码+控制流平坦化（整体ob的强度几乎完全取决于这段的代码强度，这里面是加密前的逻辑）</p></li>
+<li><p>控制流平坦化+无限debugger自执行函数+死代码注入。一般情况下不会有业务逻辑</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>3. 简易ob混淆破解逻辑<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>案例取自猿人学联系平台第二题，前三部分等于是给整个代码加了层壳儿，通过前三部分推敲出源代码逻辑的过程叫<code class="docutils literal notranslate"><span class="pre">脱壳</span></code></p>
+<p>可以eval前三部分，得到的解密参数，再replace掉就可以见到壳下面的东西了，等于是脱了一层壳，但是一般后面的第四部分最好还是用<code class="docutils literal notranslate"><span class="pre">AST抽象语法树</span></code>来脱壳比较好</p>
+<p>完整代码长这样：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span>&lt;script src=&quot;/static/boke/js/md5.js&quot;&gt;&lt;/script&gt;&lt;script&gt;var _$oa=[&#39;UXpYSlE=&#39;,&#39;V05yalE=&#39;,&#39;dlhJcUw=&#39;,&#39;VENCUnU=&#39;,&#39;YXBwbHk=&#39;,&#39;S2J5UUs=&#39;,&#39;YnRvYQ==&#39;,&#39;d2hpbGUgKHRydWUpIHt9&#39;,&#39;UFVqY04=&#39;,&#39;b3p5Z2Y=&#39;,&#39;c2Nza1Q=&#39;,&#39;T2VEYWo=&#39;,&#39;bG9n&#39;,&#39;dXdWQXQ=&#39;,&#39;dm9FQ1I=&#39;,&#39;b1dOT0o=&#39;,&#39;aW5pdA==&#39;,&#39;T3hCd2M=&#39;,&#39;Y291bnRlcg==&#39;,&#39;cHdHTEk=&#39;,&#39;SVV2R1c=&#39;,&#39;bGVuZ3Ro&#39;,&#39;c3RyaW5n&#39;,&#39;c3RhdGVPYmplY3Q=&#39;,&#39;c2lnbj0=&#39;,&#39;dmFGWVk=&#39;,&#39;Y0h4SWQ=&#39;,&#39;ZUZDRnE=&#39;,&#39;WmhJT3A=&#39;,&#39;allkblo=&#39;,&#39;Y3dIYkQ=&#39;,&#39;RE1BenE=&#39;,&#39;b2RjTk8=&#39;,&#39;SmV1Y1Q=&#39;,&#39;cE9ra1c=&#39;,&#39;cFl6eFo=&#39;,&#39;Vnp3UUc=&#39;,&#39;dGVzdA==&#39;,&#39;Y2hhaW4=&#39;,&#39;VU9JWmU=&#39;,&#39;V2ZvSWI=&#39;,&#39;Y29va2ll&#39;,&#39;WUNaVno=&#39;,&#39;eHZ4V00=&#39;,&#39;RWJrVkU=&#39;,&#39;aW5wdXQ=&#39;,&#39;cEdXU0Q=&#39;,&#39;cnF0TEo=&#39;,&#39;Y0JnQU0=&#39;,&#39;bERMbEI=&#39;,&#39;WmlDekw=&#39;,&#39;cm91bmQ=&#39;,&#39;elNxT0I=&#39;,&#39;S1FFSWI=&#39;,&#39;ZlJKUkU=&#39;,&#39;ZG9MS0g=&#39;,&#39;VndqbUc=&#39;,&#39;ZGVidQ==&#39;,&#39;cGhCbGc=&#39;,&#39;5q2k572R6aG15Y+X44CQ54ix6ZSt5LqR55u+IFYxLjAg5Yqo5oCB54mI44CR5L+d5oqk&#39;,&#39;aWlvenc=&#39;,&#39;Z29Jc1A=&#39;,&#39;REVDd2M=&#39;,&#39;Y29uc3RydWN0b3I=&#39;,&#39;SW94VFQ=&#39;,&#39;Z0JobHo=&#39;,&#39;Y0hDa1Q=&#39;,&#39;b2RVWFI=&#39;,&#39;cEhHbG4=&#39;,&#39;Z2dlcg==&#39;,&#39;VU9uTE0=&#39;,&#39;eHRrcVA=&#39;,&#39;ZnVuY3Rpb24gKlwoICpcKQ==&#39;,&#39;WnBYYXY=&#39;,&#39;Y2FsbA==&#39;,&#39;XCtcKyAqKD86W2EtekEtWl8kXVswLTlhLXpBLVpfJF0qKQ==&#39;,&#39;cmVsb2Fk&#39;,&#39;Z2hEYlE=&#39;,&#39;ekFqR3M=&#39;,&#39;Y0t3SlU=&#39;,&#39;d3R5a2E=&#39;,&#39;alVYZHI=&#39;,&#39;WUlxYnk=&#39;,&#39;WnJxQ2c=&#39;,&#39;YWN0aW9u&#39;,&#39;WFpLakY=&#39;,&#39;cnF4d0w=&#39;,&#39;a05NV0g=&#39;,&#39;bEVZRWY=&#39;,&#39;TFhabmQ=&#39;,&#39;VUJYbmI=&#39;];
+(function(a,b){var c=function(f){while(--f){a[&#39;push&#39;](a[&#39;shift&#39;]())}};c(++b)}(_$oa,0x100));var _$ob=function(a,b){a=a-0x0;var c=_$oa[a];if(_$ob[&#39;lxsNZU&#39;]===undefined){(function(){var f;try{var h=Function(&#39;return\x20(function()\x20{}.constructor(\x22return\x20this\x22)(\x20));&#39;);f=h()}catch(i){f=window}var g=&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=&#39;;f[&#39;atob&#39;]||(f[&#39;atob&#39;]=function(j){var k=String(j)[&#39;replace&#39;](/=+$/,&#39;&#39;);var l=&#39;&#39;;for(var m=0x0,n,o,p=0x0;o=k[&#39;charAt&#39;](p++);~o&amp;&amp;(n=m%0x4?n*0x40+o:o,m++%0x4)?l+=String[&#39;fromCharCode&#39;](0xff&amp;n&gt;&gt;(-0x2*m&amp;0x6)):0x0){o=g[&#39;indexOf&#39;](o)}return l})}());_$ob[&#39;kaJWam&#39;]=function(e){var f=atob(e);var g=[];for(var h=0x0,j=f[&#39;length&#39;];h&lt;j;h++){g+=&#39;%&#39;+(&#39;00&#39;+f[&#39;charCodeAt&#39;](h)[&#39;toString&#39;](0x10))[&#39;slice&#39;](-0x2)}return decodeURIComponent(g)};_$ob[&#39;iChftW&#39;]={};_$ob[&#39;lxsNZU&#39;]=!![]}var d=_$ob[&#39;iChftW&#39;][a];if(d===undefined){c=_$ob[&#39;kaJWam&#39;](c);_$ob[&#39;iChftW&#39;][a]=c}else{c=d}return c};(function(){var a={&#39;IoxTT&#39;:function(d,e){return d(e)},&#39;TCBRu&#39;:function(d,e){return d!==e},&#39;lDLlB&#39;:&#39;lLDEZ&#39;,&#39;QRLJN&#39;:_$ob(&#39;0x1a&#39;),&#39;doLKH&#39;:_$ob(&#39;0x18&#39;),&#39;QzXJQ&#39;:_$ob(&#39;0x23&#39;),&#39;gBhlz&#39;:function(d,e){return d===e},&#39;scskT&#39;:&#39;NWibE&#39;,&#39;YIqby&#39;:_$ob(&#39;0x59&#39;),&#39;ZiCzL&#39;:_$ob(&#39;0x1&#39;),&#39;wtyka&#39;:_$ob(&#39;0x21&#39;),&#39;FUzRV&#39;:function(d,e){return d+e},&#39;pOkkW&#39;:_$ob(&#39;0x37&#39;),&#39;DMAzq&#39;:function(d,e){return d+e},&#39;xtkqP&#39;:_$ob(&#39;0x3e&#39;),&#39;rqtLJ&#39;:function(d,e){return d===e},&#39;cBgAM&#39;:_$ob(&#39;0x3d&#39;),&#39;uwVAt&#39;:function(d,e){return d(e)},&#39;XZKjF&#39;:function(d){return d()},&#39;rqxwL&#39;:_$ob(&#39;0x4a&#39;),&#39;mOwVQ&#39;:&#39;gger&#39;,&#39;thvmn&#39;:_$ob(&#39;0xa&#39;),&#39;odcNO&#39;:function(d,e,f){return d(e,f)},&#39;gbaZv&#39;:_$ob(&#39;0x4c&#39;),&#39;xvxWM&#39;:&#39;aiding_win&#39;,&#39;pGWSD&#39;:function(d,e){return d(e)},&#39;DECwc&#39;:function(d,e){return d+e},&#39;gUIIU&#39;:function(d,e){return d(e)},&#39;UOIZe&#39;:function(d,e){return d/e},&#39;KQEIb&#39;:function(d,e){return d+e},&#39;UOnLM&#39;:function(d,e){return d+e},&#39;mcjWU&#39;:_$ob(&#39;0x29&#39;),&#39;OxBwc&#39;:&#39;;\x20path=/&#39;};var b=function(){var d={&#39;pYzxZ&#39;:a[_$ob(&#39;0x48&#39;)],&#39;phBlg&#39;:a[_$ob(&#39;0x11&#39;)]};if(a[_$ob(&#39;0x52&#39;)](a[_$ob(&#39;0x1b&#39;)],a[_$ob(&#39;0x1b&#39;)])){var e=!![];return function(f,g){var h={&#39;vaFYY&#39;:function(j,k){return a[_$ob(&#39;0x51&#39;)](j,k)},&#39;VzwQG&#39;:function(j,k){return a[_$ob(&#39;0x14&#39;)](j,k)},&#39;ZhIOp&#39;:a[_$ob(&#39;0x42&#39;)],&#39;kNMWH&#39;:a[&#39;QRLJN&#39;]};var i=e?function(){var j={&#39;KbyQK&#39;:function(l,m){return h[_$ob(&#39;0x2a&#39;)](l,m)}};if(h[_$ob(&#39;0x35&#39;)](h[_$ob(&#39;0x2d&#39;)],h[_$ob(&#39;0xd&#39;)])){if(g){var k=g[_$ob(&#39;0x15&#39;)](f,arguments);g=null;return k}}else{if(ret){return debuggerProtection}else{RkNFHN[_$ob(&#39;0x16&#39;)](debuggerProtection,0x0)}}}:function(){};e=![];return i}}else{return function(g){}[_$ob(&#39;0x50&#39;)](PKKBCj[_$ob(&#39;0x34&#39;)])[&#39;apply&#39;](PKKBCj[_$ob(&#39;0x4b&#39;)])}}();(function(){var d={&#39;ZpXav&#39;:function(e,f){return a[_$ob(&#39;0x30&#39;)](e,f)},&#39;LXZnd&#39;:a[_$ob(&#39;0xc&#39;)],&#39;JeucT&#39;:a[&#39;mOwVQ&#39;],&#39;goIsP&#39;:a[&#39;thvmn&#39;]};a[_$ob(&#39;0x31&#39;)](b,this,function(){var e=new RegExp(a[_$ob(&#39;0x8&#39;)]);var f=new RegExp(a[_$ob(&#39;0x43&#39;)],&#39;i&#39;);var g=a[_$ob(&#39;0x51&#39;)](_$oc,a[_$ob(&#39;0x6&#39;)]);if(!e[_$ob(&#39;0x36&#39;)](a[&#39;FUzRV&#39;](g,a[_$ob(&#39;0x33&#39;)]))||!f[_$ob(&#39;0x36&#39;)](a[_$ob(&#39;0x30&#39;)](g,a[_$ob(&#39;0x58&#39;)]))){if(a[_$ob(&#39;0x40&#39;)](a[&#39;cBgAM&#39;],a[_$ob(&#39;0x41&#39;)])){a[_$ob(&#39;0x1e&#39;)](g,&#39;0&#39;)}else{(function(){return!![]}[_$ob(&#39;0x50&#39;)](dnwsCy[_$ob(&#39;0x5a&#39;)](dnwsCy[_$ob(&#39;0xf&#39;)],dnwsCy[_$ob(&#39;0x32&#39;)]))[&#39;call&#39;](dnwsCy[_$ob(&#39;0x4e&#39;)]))}}else{a[_$ob(&#39;0xb&#39;)](_$oc)}})()}());console[_$ob(&#39;0x1d&#39;)](a[&#39;gbaZv&#39;]);var c=new Date()[&#39;valueOf&#39;]();token=window[&#39;btoa&#39;](a[&#39;DMAzq&#39;](a[_$ob(&#39;0x3c&#39;)],a[_$ob(&#39;0x3f&#39;)](String,c)));md=a[_$ob(&#39;0x3f&#39;)](hex_md5,window[_$ob(&#39;0x17&#39;)](a[_$ob(&#39;0x4f&#39;)](a[_$ob(&#39;0x3c&#39;)],a[&#39;gUIIU&#39;](String,Math[&#39;round&#39;](a[_$ob(&#39;0x38&#39;)](c,0x3e8))))));document[_$ob(&#39;0x3a&#39;)]=a[_$ob(&#39;0x4f&#39;)](a[_$ob(&#39;0x46&#39;)](a[&#39;KQEIb&#39;](a[_$ob(&#39;0x57&#39;)](a[_$ob(&#39;0x57&#39;)](a[_$ob(&#39;0x57&#39;)](a[&#39;mcjWU&#39;],Math[_$ob(&#39;0x44&#39;)](a[&#39;UOIZe&#39;](c,0x3e8))),&#39;~&#39;),token),&#39;|&#39;),md),a[_$ob(&#39;0x22&#39;)]);location[_$ob(&#39;0x2&#39;)]()}());function _$oc(a){var b={&#39;XfMjd&#39;:function(d,e){return d(e)},&#39;zSqOB&#39;:function(d,e){return d!==e},&#39;WfoIb&#39;:&#39;TKgfj&#39;,&#39;cHCkT&#39;:function(d,e){return d!==e},&#39;IUvGW&#39;:_$ob(&#39;0x7&#39;),&#39;pwGLI&#39;:_$ob(&#39;0x47&#39;),&#39;cwHbD&#39;:function(d,e){return d===e},&#39;UBXnb&#39;:_$ob(&#39;0x27&#39;),&#39;oWNOJ&#39;:&#39;while\x20(true)\x20{}&#39;,&#39;ziQwn&#39;:_$ob(&#39;0x23&#39;),&#39;VwjmG&#39;:function(d,e){return d!==e},&#39;OeDaj&#39;:function(d,e){return d+e},&#39;YCZVz&#39;:function(d,e){return d/e},&#39;iiozw&#39;:_$ob(&#39;0x26&#39;),&#39;pYijU&#39;:function(d,e){return d===e},&#39;ghDbQ&#39;:function(d,e){return d%e},&#39;odUXR&#39;:_$ob(&#39;0x4a&#39;),&#39;jYdnZ&#39;:_$ob(&#39;0x56&#39;),&#39;QPCaS&#39;:_$ob(&#39;0xa&#39;),&#39;WNrjQ&#39;:_$ob(&#39;0x28&#39;),&#39;eFCFq&#39;:function(d,e){return d(e)},&#39;vXIqL&#39;:function(d){return d()},&#39;cHxId&#39;:&#39;RJWTA&#39;,&#39;PUjcN&#39;:_$ob(&#39;0x1f&#39;),&#39;pHGln&#39;:function(d,e){return d(e)}};function c(d){var e={&#39;zAjGs&#39;:function(f,g){return b[_$ob(&#39;0x53&#39;)](f,g)},&#39;lEYEf&#39;:b[_$ob(&#39;0x25&#39;)],&#39;ZrqCg&#39;:b[_$ob(&#39;0x24&#39;)]};if(b[_$ob(&#39;0x2f&#39;)](typeof d,b[_$ob(&#39;0x10&#39;)])){return function(f){}[_$ob(&#39;0x50&#39;)](b[_$ob(&#39;0x20&#39;)])[_$ob(&#39;0x15&#39;)](b[&#39;ziQwn&#39;])}else{if(b[_$ob(&#39;0x49&#39;)](b[_$ob(&#39;0x1c&#39;)](&#39;&#39;,b[_$ob(&#39;0x3b&#39;)](d,d))[b[_$ob(&#39;0x4d&#39;)]],0x1)||b[&#39;pYijU&#39;](b[_$ob(&#39;0x3&#39;)](d,0x14),0x0)){(function(){var f={&#39;cKwJU&#39;:function(g,h){return b[&#39;XfMjd&#39;](g,h)}};if(b[_$ob(&#39;0x45&#39;)](b[&#39;WfoIb&#39;],b[_$ob(&#39;0x39&#39;)])){f[_$ob(&#39;0x5&#39;)](result,&#39;0&#39;)}else{return!![]}}[_$ob(&#39;0x50&#39;)](b[_$ob(&#39;0x1c&#39;)](b[_$ob(&#39;0x54&#39;)],b[_$ob(&#39;0x2e&#39;)]))[_$ob(&#39;0x0&#39;)](b[&#39;QPCaS&#39;]))}else{(function(){if(e[_$ob(&#39;0x4&#39;)](e[_$ob(&#39;0xe&#39;)],e[_$ob(&#39;0x9&#39;)])){return![]}else{return c}}[&#39;constructor&#39;](b[_$ob(&#39;0x1c&#39;)](b[_$ob(&#39;0x54&#39;)],b[_$ob(&#39;0x2e&#39;)]))[_$ob(&#39;0x15&#39;)](b[_$ob(&#39;0x12&#39;)]))}}b[_$ob(&#39;0x2c&#39;)](c,++d)}try{if(b[_$ob(&#39;0x49&#39;)](b[_$ob(&#39;0x2b&#39;)],b[_$ob(&#39;0x19&#39;)])){if(a){return c}else{b[_$ob(&#39;0x55&#39;)](c,0x0)}}else{b[_$ob(&#39;0x13&#39;)](_$oc)}}catch(e){}}&lt;/script&gt;
+</pre></div>
+</div>
+<p>最显而易见的是大数组部分</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">_$oa</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;UXpYSlE=&#39;</span><span class="p">,</span><span class="s1">&#39;V05yalE=&#39;</span><span class="p">,</span><span class="s1">&#39;dlhJcUw=&#39;</span><span class="p">,</span><span class="s1">&#39;VENCUnU=&#39;</span><span class="p">,</span><span class="s1">&#39;YXBwbHk=&#39;</span><span class="p">,</span><span class="s1">&#39;S2J5UUs=&#39;</span><span class="p">,</span><span class="s1">&#39;YnRvYQ==&#39;</span><span class="p">,</span><span class="s1">&#39;d2hpbGUgKHRydWUpIHt9&#39;</span><span class="p">,</span><span class="s1">&#39;UFVqY04=&#39;</span><span class="p">,</span><span class="s1">&#39;b3p5Z2Y=&#39;</span><span class="p">,</span><span class="s1">&#39;c2Nza1Q=&#39;</span><span class="p">,</span><span class="s1">&#39;T2VEYWo=&#39;</span><span class="p">,</span><span class="s1">&#39;bG9n&#39;</span><span class="p">,</span><span class="s1">&#39;dXdWQXQ=&#39;</span><span class="p">,</span><span class="s1">&#39;dm9FQ1I=&#39;</span><span class="p">,</span><span class="s1">&#39;b1dOT0o=&#39;</span><span class="p">,</span><span class="s1">&#39;aW5pdA==&#39;</span><span class="p">,</span><span class="s1">&#39;T3hCd2M=&#39;</span><span class="p">,</span><span class="s1">&#39;Y291bnRlcg==&#39;</span><span class="p">,</span><span class="s1">&#39;cHdHTEk=&#39;</span><span class="p">,</span><span class="s1">&#39;SVV2R1c=&#39;</span><span class="p">,</span><span class="s1">&#39;bGVuZ3Ro&#39;</span><span class="p">,</span><span class="s1">&#39;c3RyaW5n&#39;</span><span class="p">,</span><span class="s1">&#39;c3RhdGVPYmplY3Q=&#39;</span><span class="p">,</span><span class="s1">&#39;c2lnbj0=&#39;</span><span class="p">,</span><span class="s1">&#39;dmFGWVk=&#39;</span><span class="p">,</span><span class="s1">&#39;Y0h4SWQ=&#39;</span><span class="p">,</span><span class="s1">&#39;ZUZDRnE=&#39;</span><span class="p">,</span><span class="s1">&#39;WmhJT3A=&#39;</span><span class="p">,</span><span class="s1">&#39;allkblo=&#39;</span><span class="p">,</span><span class="s1">&#39;Y3dIYkQ=&#39;</span><span class="p">,</span><span class="s1">&#39;RE1BenE=&#39;</span><span class="p">,</span><span class="s1">&#39;b2RjTk8=&#39;</span><span class="p">,</span><span class="s1">&#39;SmV1Y1Q=&#39;</span><span class="p">,</span><span class="s1">&#39;cE9ra1c=&#39;</span><span class="p">,</span><span class="s1">&#39;cFl6eFo=&#39;</span><span class="p">,</span><span class="s1">&#39;Vnp3UUc=&#39;</span><span class="p">,</span><span class="s1">&#39;dGVzdA==&#39;</span><span class="p">,</span><span class="s1">&#39;Y2hhaW4=&#39;</span><span class="p">,</span><span class="s1">&#39;VU9JWmU=&#39;</span><span class="p">,</span><span class="s1">&#39;V2ZvSWI=&#39;</span><span class="p">,</span><span class="s1">&#39;Y29va2ll&#39;</span><span class="p">,</span><span class="s1">&#39;WUNaVno=&#39;</span><span class="p">,</span><span class="s1">&#39;eHZ4V00=&#39;</span><span class="p">,</span><span class="s1">&#39;RWJrVkU=&#39;</span><span class="p">,</span><span class="s1">&#39;aW5wdXQ=&#39;</span><span class="p">,</span><span class="s1">&#39;cEdXU0Q=&#39;</span><span class="p">,</span><span class="s1">&#39;cnF0TEo=&#39;</span><span class="p">,</span><span class="s1">&#39;Y0JnQU0=&#39;</span><span class="p">,</span><span class="s1">&#39;bERMbEI=&#39;</span><span class="p">,</span><span class="s1">&#39;WmlDekw=&#39;</span><span class="p">,</span><span class="s1">&#39;cm91bmQ=&#39;</span><span class="p">,</span><span class="s1">&#39;elNxT0I=&#39;</span><span class="p">,</span><span class="s1">&#39;S1FFSWI=&#39;</span><span class="p">,</span><span class="s1">&#39;ZlJKUkU=&#39;</span><span class="p">,</span><span class="s1">&#39;ZG9MS0g=&#39;</span><span class="p">,</span><span class="s1">&#39;VndqbUc=&#39;</span><span class="p">,</span><span class="s1">&#39;ZGVidQ==&#39;</span><span class="p">,</span><span class="s1">&#39;cGhCbGc=&#39;</span><span class="p">,</span><span class="s1">&#39;5q2k572R6aG15Y+X44CQ54ix6ZSt5LqR55u+IFYxLjAg5Yqo5oCB54mI44CR5L+d5oqk&#39;</span><span class="p">,</span><span class="s1">&#39;aWlvenc=&#39;</span><span class="p">,</span><span class="s1">&#39;Z29Jc1A=&#39;</span><span class="p">,</span><span class="s1">&#39;REVDd2M=&#39;</span><span class="p">,</span><span class="s1">&#39;Y29uc3RydWN0b3I=&#39;</span><span class="p">,</span><span class="s1">&#39;SW94VFQ=&#39;</span><span class="p">,</span><span class="s1">&#39;Z0JobHo=&#39;</span><span class="p">,</span><span class="s1">&#39;Y0hDa1Q=&#39;</span><span class="p">,</span><span class="s1">&#39;b2RVWFI=&#39;</span><span class="p">,</span><span class="s1">&#39;cEhHbG4=&#39;</span><span class="p">,</span><span class="s1">&#39;Z2dlcg==&#39;</span><span class="p">,</span><span class="s1">&#39;VU9uTE0=&#39;</span><span class="p">,</span><span class="s1">&#39;eHRrcVA=&#39;</span><span class="p">,</span><span class="s1">&#39;ZnVuY3Rpb24gKlwoICpcKQ==&#39;</span><span class="p">,</span><span class="s1">&#39;WnBYYXY=&#39;</span><span class="p">,</span><span class="s1">&#39;Y2FsbA==&#39;</span><span class="p">,</span><span class="s1">&#39;XCtcKyAqKD86W2EtekEtWl8kXVswLTlhLXpBLVpfJF0qKQ==&#39;</span><span class="p">,</span><span class="s1">&#39;cmVsb2Fk&#39;</span><span class="p">,</span><span class="s1">&#39;Z2hEYlE=&#39;</span><span class="p">,</span><span class="s1">&#39;ekFqR3M=&#39;</span><span class="p">,</span><span class="s1">&#39;Y0t3SlU=&#39;</span><span class="p">,</span><span class="s1">&#39;d3R5a2E=&#39;</span><span class="p">,</span><span class="s1">&#39;alVYZHI=&#39;</span><span class="p">,</span><span class="s1">&#39;WUlxYnk=&#39;</span><span class="p">,</span><span class="s1">&#39;WnJxQ2c=&#39;</span><span class="p">,</span><span class="s1">&#39;YWN0aW9u&#39;</span><span class="p">,</span><span class="s1">&#39;WFpLakY=&#39;</span><span class="p">,</span><span class="s1">&#39;cnF4d0w=&#39;</span><span class="p">,</span><span class="s1">&#39;a05NV0g=&#39;</span><span class="p">,</span><span class="s1">&#39;bEVZRWY=&#39;</span><span class="p">,</span><span class="s1">&#39;TFhabmQ=&#39;</span><span class="p">,</span><span class="s1">&#39;VUJYbmI=&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>紧随其后的是数组移位操作</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">a</span><span class="p">[</span><span class="s1">&#39;push&#39;</span><span class="p">](</span><span class="nx">a</span><span class="p">[</span><span class="s1">&#39;shift&#39;</span><span class="p">]());</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="nx">c</span><span class="p">(</span><span class="o">++</span><span class="nx">b</span><span class="p">);</span>
+    <span class="p">}(</span><span class="nx">_$oa</span><span class="p">,</span> <span class="mh">0x100</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>再就是解密函数部分</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">_$ob</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">-</span> <span class="mh">0x0</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">_$oa</span><span class="p">[</span><span class="nx">a</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_$ob</span><span class="p">[</span><span class="s1">&#39;lxsNZU&#39;</span><span class="p">]</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">f</span><span class="p">;</span>
+                <span class="k">try</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;return\x20(function()\x20&#39;</span> <span class="o">+</span> <span class="s1">&#39;{}.constructor(\x22return\x20this\x22)(\x20)&#39;</span> <span class="o">+</span> <span class="s1">&#39;);&#39;</span><span class="p">);</span>
+                    <span class="nx">f</span> <span class="o">=</span> <span class="nx">h</span><span class="p">();</span>
+                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">f</span> <span class="o">=</span> <span class="nb">window</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="s1">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=&#39;</span><span class="p">;</span>
+                <span class="nx">f</span><span class="p">[</span><span class="s1">&#39;atob&#39;</span><span class="p">]</span> <span class="o">||</span> <span class="p">(</span><span class="nx">f</span><span class="p">[</span><span class="s1">&#39;atob&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">j</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">j</span><span class="p">)[</span><span class="s1">&#39;replace&#39;</span><span class="p">](</span><span class="sr">/=+$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+                    <span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">o</span><span class="p">,</span> <span class="nx">p</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">;</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">k</span><span class="p">[</span><span class="s1">&#39;charAt&#39;</span><span class="p">](</span><span class="nx">p</span><span class="o">++</span><span class="p">);</span> <span class="o">~</span><span class="nx">o</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">=</span> <span class="nx">m</span> <span class="o">%</span> <span class="mh">0x4</span> <span class="o">?</span> <span class="nx">n</span> <span class="o">*</span> <span class="mh">0x40</span> <span class="o">+</span> <span class="nx">o</span> <span class="o">:</span> <span class="nx">o</span><span class="p">,</span>
+                    <span class="nx">m</span><span class="o">++</span> <span class="o">%</span> <span class="mh">0x4</span><span class="p">)</span> <span class="o">?</span> <span class="nx">l</span> <span class="o">+=</span> <span class="nb">String</span><span class="p">[</span><span class="s1">&#39;fromCharCode&#39;</span><span class="p">](</span><span class="mh">0xff</span> <span class="o">&amp;</span> <span class="nx">n</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mh">0x2</span> <span class="o">*</span> <span class="nx">m</span> <span class="o">&amp;</span> <span class="mh">0x6</span><span class="p">))</span> <span class="o">:</span> <span class="mh">0x0</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">o</span> <span class="o">=</span> <span class="nx">g</span><span class="p">[</span><span class="s1">&#39;indexOf&#39;</span><span class="p">](</span><span class="nx">o</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">return</span> <span class="nx">l</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="p">);</span>
+            <span class="p">}());</span>
+            <span class="nx">_$ob</span><span class="p">[</span><span class="s1">&#39;kaJWam&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">atob</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="p">[];</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">f</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">];</span> <span class="nx">h</span> <span class="o">&lt;</span> <span class="nx">j</span><span class="p">;</span> <span class="nx">h</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">g</span> <span class="o">+=</span> <span class="s1">&#39;%&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;00&#39;</span> <span class="o">+</span> <span class="nx">f</span><span class="p">[</span><span class="s1">&#39;charCodeAt&#39;</span><span class="p">](</span><span class="nx">h</span><span class="p">)[</span><span class="s1">&#39;toString&#39;</span><span class="p">](</span><span class="mh">0x10</span><span class="p">))[</span><span class="s1">&#39;slice&#39;</span><span class="p">](</span><span class="o">-</span><span class="mh">0x2</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">g</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="p">;</span>
+            <span class="nx">_$ob</span><span class="p">[</span><span class="s1">&#39;iChftW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+            <span class="nx">_$ob</span><span class="p">[</span><span class="s1">&#39;lxsNZU&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">!!</span><span class="p">[];</span>
+        <span class="p">}</span>
+        <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">_$ob</span><span class="p">[</span><span class="s1">&#39;iChftW&#39;</span><span class="p">][</span><span class="nx">a</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">d</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">c</span> <span class="o">=</span> <span class="nx">_$ob</span><span class="p">[</span><span class="s1">&#39;kaJWam&#39;</span><span class="p">](</span><span class="nx">c</span><span class="p">);</span>
+            <span class="nx">_$ob</span><span class="p">[</span><span class="s1">&#39;iChftW&#39;</span><span class="p">][</span><span class="nx">a</span><span class="p">]</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">c</span> <span class="o">=</span> <span class="nx">d</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+    <span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="05_%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html" class="btn btn-neutral float-left" title="5.5 常见反爬介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
