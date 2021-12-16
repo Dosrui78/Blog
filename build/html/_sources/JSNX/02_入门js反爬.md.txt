@@ -2,15 +2,15 @@
 
 ##### 1. 加密参数直接出现
 
-![img](https://github.com/Dosrui78/Blog-Images/blob/master/4.21.png?raw=true) 
+ ![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.21.png)
 
 这种带翻页的，打开fiddler，查看翻页会有哪些参数变化，然后进行堆栈查找
 
-![img](https://github.com/Dosrui78/Blog-Images/blob/master/4.21-1.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.21-1.png)
 
 可发现m是变化的，cookie是不变的，于是可以确定是参数m动了手脚，因为返回数据是json格式的，我们可以打XHR断点去观察。
 
-![img](https://github.com/Dosrui78/Blog-Images/blob/master/4.21-2.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.21-2.png)
 
 可以看到m直接就映入眼帘，m是通过base64加密后得到，而且是未经魔改的btoa，可以直接用python自带的base64编码库来执行。代码如下：
 
@@ -78,7 +78,7 @@ cookie = execjs.compile(text).call('a')
 
 于是打script断点后一直F8调到1界面，搜索safe发现逻辑显而易见，然后对这些加密逻辑打上断点
 
-![4.23.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.23.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.23.png)
 
 这个setRequestHeader函数不认识也没关系，搜了一下就相当于赋值（设置请求头部）
 
@@ -123,15 +123,13 @@ cookie = execjs.compile(text).call('a')
 
 打个scripct断点，然后一直f8前进到有js的界面
 
-![img](https://github.com/Dosrui78/Blog-Images/blob/master/4.24-1.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.24-1.png)
 
-如果不是这个界面，删除Application里cookie的sign重头来一次直到进入到这个界面，因为和时间有关，多半是date，于是搜索date就可以找到加密参数的位置，然后全部打上断点。
-
-![img](https://github.com/Dosrui78/Blog-Images/blob/master/4.24-2.png?raw=true)
+如果不是这个界面，删除Application里cookie的sign重头来一次直到进入到这个界面，因为和时间有关，多半是date，于是搜索date就可以找到加密参数的位置，然后全部打上断点。![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.24-2.png)
 
 再f8发现出现debugger，可以用never pause过了；然后单步调试到如下界面：
 
-![4.24-3.png](https://github.com/Dosrui78/Blog-Images/blob/master/4.24-3.png?raw=true)
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.24-3.png)
 
 接下来是抠代码环节，一步步抠就完事了，btoa，atob可以用nodejs的模块导入。
 
@@ -146,5 +144,4 @@ document[xxxxx]就是document.cookie.
 
 Tips：如果抠代码时代码明明是缺啥补啥但还是报如下错误可能是因为代码格式化导致的，此时可在代码压缩网站<https://www.sojson.com/yasuojs.html>将代码压缩后解决
 
-![4.24-4.jpg](https://github.com/Dosrui78/Blog-Images/blob/master/4.24-4.jpg?raw=true)
-
+![img](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.24-4.jpg)
