@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.7 JS逆向之补环境 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/JSNX/07_补环境.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="5.6 ob混淆解决方案" href="06_ob%E6%B7%B7%E6%B7%86.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">第一章：基础知识</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">第四章：JS基础</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第五章：JS逆向</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_debugger.html">5.1 JS调试干扰专题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E5%85%A5%E9%97%A8js%E5%8F%8D%E7%88%AC.html">5.2 入门级JS反爬</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Hook.html">5.3 Hook的使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_%E9%AA%8C%E8%AF%81%E7%A0%81.html">5.4 验证码识别</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html">5.5 常见反爬介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_ob%E6%B7%B7%E6%B7%86.html">5.6 ob混淆解决方案</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.7 JS逆向之补环境</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1. 补环境入门</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">第五章：JS逆向</a> &raquo;</li>
+      <li>5.7 JS逆向之补环境</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/JSNX/07_补环境.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="js">
+<h1>5.7 JS逆向之补环境<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
+<section id="id1">
+<h2>1. 补环境入门<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>案例：猿人学练习11题</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-43-16.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-43-16.png" /></p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-43-33.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-43-33.png" /></p>
+<p>抓包发现<code class="docutils literal notranslate"><span class="pre">jsl</span></code>的cookie是变化的，于是就先分析第一段的js代码：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="s2">&quot;div@Expires@@captcha@while@length@@reverse@0xEDB88320@substr@fromCharCode@757@@0@@@LBWywKW@1500@@cookie@@36@createElement@JgSe0upZ@rOm9XFMtA3QKV7nYsPGT4lifyWwkq5vcjH2IdxUoCbhERLaz81DNB6@Dec@Tue@eval@@window@href@3@String@attachEvent@false@toLowerCase@09@clD@Array@@26@@Path@@@@f@if@@@D@@addEventListener@@@try@return@location@toString@@@50@@@pathname@@@@setTimeout@@replace@a@innerHTML@@@@1639913978@else@@document@V@@@@https@join@for@@DOMContentLoaded@6@e@@@@@new@catch@var@@2@30@split@@function@1@charAt@12@__jsl_clearance@0xFF@firstChild@search@k@chars@charCodeAt@2FZyf@parseInt@8@@match@RegExp@fq@challenge@@g@onreadystatechange@@d@GMT&quot;</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/@*$/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">),</span>
+    <span class="nx">y</span> <span class="o">=</span> <span class="s2">&quot;1L N=22(){1i(&#39;17.v=17.1e+17.29.1k(/[\\?|&amp;]4-2k/,\\&#39;\\&#39;)&#39;,i);1t.k=&#39;26=1q.c|e|&#39;+(22(){1L t=[22(N){16 N},22(t){16 t},(22(){1L N=1t.n(&#39;1&#39;);N.1m=&#39;&lt;1l v=\\&#39;/\\&#39;&gt;1H&lt;/1l&gt;&#39;;N=N.28.v;1L t=N.2h(/1y?:\\/\\//)[e];N=N.a(t.6).A();16 22(t){1A(1L 1H=e;1H&lt;t.6;1H++){t[1H]=N.24(t[1H])};16 t.1z(&#39;&#39;)}})(),22(N){1A(1L t=e;t&lt;N.6;t++){N[t]=2e(N[t]).18(m)};16 N.1z(&#39;&#39;)}],N=[&#39;C&#39;,[(-~~~{}&lt;&lt;-~~~{})+(-~~~{}&lt;&lt;-~~~{})],&#39;1u&#39;,[(-~[]+[]+[[]][e])+[-~-~{}]],&#39;2j&#39;,[(-~[]+[]+[[]][e])+[-~[]-~[]-~!/!/+(-~[]-~[])*[-~[]-~[]]],(-~[]+[]+[[]][e])+(-~[-~-~{}]+[[]][e]),(-~[]+[]+[[]][e])+[(+!![[][[]]][23])]],&#39;h&#39;,[(1N-~[-~-~{}]+[]+[[]][e])],&#39;%2d&#39;,[(-~[]+[]+[[]][e])+(-~[-~-~{}]+[[]][e])],&#39;1D&#39;,[(-~[]+[]+[[]][e])+(-~[-~-~{}]+[[]][e])],&#39;deec0fa4961ebb1b086cad36c56063aa&#39;,(-~[-~-~{}]+[[]][e]),&#39;10&#39;];1A(1L 1H=e;1H&lt;N.6;1H++){N[1H]=t[[23,e,23,1N,23,w,23,1N,23,1N,23,w,23,e,23][1H]](N[1H])};16 N.1z(&#39;&#39;)})()+&#39;;2=r, 25-q-1O B:1b:F 2q;H=/;&#39;};M((22(){15{16 !!u.12;}1K(1E){16 z;}})()){1t.12(&#39;1C&#39;,N,z)}1r{1t.y(&#39;2n&#39;,N)}&quot;</span><span class="p">,</span>
+<span class="nx">f</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">c</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+        <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+        <span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">||</span> <span class="mf">99</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">((</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">shift</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">77.5</span><span class="p">))</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">13</span> <span class="o">?</span> <span class="p">(</span><span class="nx">b</span> <span class="o">+</span> <span class="mf">48.5</span><span class="p">)</span> <span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mf">36</span><span class="p">))</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">c</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">c</span>
+    <span class="p">},</span> <span class="nx">z</span> <span class="o">=</span> <span class="nx">f</span><span class="p">(</span><span class="nx">y</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\w/g</span><span class="p">).</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">-</span> <span class="nx">f</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span>
+    <span class="p">}).</span><span class="nx">pop</span><span class="p">());</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">z</span><span class="o">++</span><span class="p">)</span> <span class="k">try</span> <span class="p">{</span>
+    <span class="nb">eval</span><span class="p">(</span><span class="nx">y</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\b\w+\b/g</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">x</span><span class="p">[</span><span class="nx">f</span><span class="p">(</span><span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1</span><span class="p">]</span> <span class="o">||</span> <span class="p">(</span><span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nx">y</span><span class="p">)</span>
+    <span class="p">}));</span>
+    <span class="k">break</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">_</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>运行后发现是阻塞的，代码先是定义变量x，然后变量y，这两部应该都没啥好说的，没有任何阻塞的可能。然后发现下面有个try，可以猜测它是这个try引发的死循环，可能是catch后没有跳出。验证一下是不是这个原因</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-53-54.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-53-54.png" /></p>
+<p>运行后发现一直输出error，于是可以判定就是这里引发阻塞</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-54-44.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-54-44.png" /></p>
+<p>为何会引发阻塞呢？多半是这个try下面的内容，这个eval引起了我们的主意，把eval换成console.log</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-56-27.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_19-56-27.png" /></p>
+<p>运行后发现输出如下代码：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">_N</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="s1">&#39;location.href=location.pathname+location.search.replace(/[\?|&amp;]captcha-challenge/,\&#39;\&#39;)&#39;</span><span class="p">,</span>
+    <span class="mf">1500</span>
+<span class="p">);</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s1">&#39;__jsl_clearance=1639913978.757|0|&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_t</span> <span class="o">=</span> <span class="p">[</span><span class="kd">function</span> <span class="p">(</span><span class="nx">_N</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">_N</span>
+        <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">_t</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">_t</span>
+        <span class="p">},</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">_N</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+            <span class="nx">_N</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=\&#39;/\&#39;&gt;_1H&lt;/a&gt;&#39;</span><span class="p">;</span>
+            <span class="nx">_N</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">_t</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/https?:\/\//</span><span class="p">)[</span><span class="mf">0</span><span class="p">];</span>
+            <span class="nx">_N</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">_t</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">();</span>
+            <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">_t</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">_1H</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">_1H</span> <span class="o">&lt;</span> <span class="nx">_t</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_1H</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">_t</span><span class="p">[</span><span class="nx">_1H</span><span class="p">]</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">_t</span><span class="p">[</span><span class="nx">_1H</span><span class="p">])</span>
+                <span class="p">};</span>
+                <span class="k">return</span> <span class="nx">_t</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})(),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">_N</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">_t</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">_t</span> <span class="o">&lt;</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_N</span><span class="p">[</span><span class="nx">_t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">_N</span><span class="p">[</span><span class="nx">_t</span><span class="p">])</span>
+                    <span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mf">36</span><span class="p">)</span>
+            <span class="p">};</span>
+            <span class="k">return</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="p">}],</span> <span class="nx">_N</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;clD&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~~~</span><span class="p">{}</span><span class="o">&lt;&lt;</span> <span class="o">-</span> <span class="o">~~~</span><span class="p">{})</span><span class="o">+</span><span class="p">(</span><span class="o">-~~~</span><span class="p">{}</span><span class="o">&lt;&lt;</span> <span class="o">-</span> <span class="o">~~~</span><span class="p">{})],</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="o">-~-~</span><span class="p">{}]],</span> <span class="s1">&#39;fq&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="o">-~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~!</span><span class="sr">/!/</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~</span><span class="p">[])</span> <span class="o">*</span> <span class="p">[</span><span class="o">-~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~</span><span class="p">[]]],</span> <span class="p">(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">]),</span> <span class="p">(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">[(</span><span class="o">+!!</span><span class="p">[[][[]]][</span><span class="mf">1</span><span class="p">])]],</span> <span class="s1">&#39;LBWywKW&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="mf">2</span> <span class="o">-</span> <span class="o">~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])],</span> <span class="s1">&#39;%2FZyf&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])],</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])],</span> <span class="s1">&#39;_deec0fa4961ebb1b086cad36c56063aa&#39;</span><span class="p">,</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">]),</span> <span class="s1">&#39;D&#39;</span>
+    <span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">_1H</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">_1H</span> <span class="o">&lt;</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_1H</span><span class="o">++</span>
+    <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">_N</span><span class="p">[</span><span class="nx">_1H</span><span class="p">]</span> <span class="o">=</span> <span class="nx">_t</span><span class="p">[[</span><span class="mf">1</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">3</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">3</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span><span class="p">][</span><span class="nx">_1H</span><span class="p">]](</span><span class="nx">_N</span><span class="p">[</span><span class="nx">_1H</span><span class="p">])</span>
+        <span class="p">};</span>
+        <span class="k">return</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)})()</span> <span class="o">+</span> <span class="s1">&#39;;Expires=Tue, 12-Dec-30 09:50:26GMT;Path = /;&#39;</span><span class="p">};</span><span class="k">if</span><span class="p">((</span><span class="kd">function</span><span class="p">(){</span><span class="k">try</span><span class="p">{</span><span class="k">return</span> <span class="o">!!</span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">;}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="k">return</span> <span class="kc">false</span><span class="p">;}})()){</span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span> <span class="nx">_N</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">&#39;onreadystatechange&#39;</span><span class="p">,</span> <span class="nx">_N</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>将第二层代码复制出来分析，然后正题开始了；</p>
+<p>分析：一开始设置一个1500延时的定时器，然后对cookie进行了一些处理，再就是加上了一些事件监听，<code class="docutils literal notranslate"><span class="pre">setTimeout('location.href=location.pathname+location.search.replace(/[\|&amp;]captcha-challenge/,\'\')',1500);</span></code>肯定没什么用了，是对<code class="docutils literal notranslate"><span class="pre">location.href</span></code>进行的一个刷新操作；运行发现<code class="docutils literal notranslate"><span class="pre">document</span></code>未定义。我们可以把<code class="docutils literal notranslate"><span class="pre">setTimeout</span></code>置空</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">setTimeout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="nb">document</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>不知道这个<code class="docutils literal notranslate"><span class="pre">location.href</span></code>是什么的可以打上script断点去看一眼；</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_20-06-56.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_20-06-56.png" /></p>
+<p>根据控制台显示的内容可以继续补上环境</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">&quot;https://www.python-spider.com/challenge/11&quot;</span>
+<span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span> <span class="o">=</span> <span class="s2">&quot;/challenge/11&quot;</span>
+<span class="nx">location</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  
+</pre></div>
+</div>
+<p>接着看代码发现<code class="docutils literal notranslate"><span class="pre">_N</span></code>是document创建了一个div标签；然后<code class="docutils literal notranslate"><span class="pre">_N</span></code>读取<code class="docutils literal notranslate"><span class="pre">innerHTML</span></code>；这个我们也要补上，但是这个<code class="docutils literal notranslate"><span class="pre">innerHTML</span></code>它是个a标签，我们是不能对他补环境的，就把它置空；</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_20-22-52.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-19_20-22-52.png" /></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="p">{</span>
+		<span class="nx">innerHTML</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+		<span class="nx">firstChild</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">href</span><span class="o">:</span> <span class="s2">&quot;https://www.python-spider.com/&quot;</span><span class="p">,</span>
+		<span class="p">},</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>最后看监听，这两个监听没什么用，可以直接置空掉</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">window</span> <span class="o">=</span> <span class="nb">global</span><span class="p">;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">attachEvent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+</pre></div>
+</div>
+<p>由于我们把这三个都置空后这个<code class="docutils literal notranslate"><span class="pre">_N</span></code>就不会执行了，需要手动执行<code class="docutils literal notranslate"><span class="pre">_N</span></code></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// var x = &quot;div@Expires@@captcha@while@length@@reverse@0xEDB88320@substr@fromCharCode@757@@0@@@LBWywKW@1500@@cookie@@36@createElement@JgSe0upZ@rOm9XFMtA3QKV7nYsPGT4lifyWwkq5vcjH2IdxUoCbhERLaz81DNB6@Dec@Tue@eval@@window@href@3@String@attachEvent@false@toLowerCase@09@clD@Array@@26@@Path@@@@f@if@@@D@@addEventListener@@@try@return@location@toString@@@50@@@pathname@@@@setTimeout@@replace@a@innerHTML@@@@1639913978@else@@document@V@@@@https@join@for@@DOMContentLoaded@6@e@@@@@new@catch@var@@2@30@split@@function@1@charAt@12@__jsl_clearance@0xFF@firstChild@search@k@chars@charCodeAt@2FZyf@parseInt@8@@match@RegExp@fq@challenge@@g@onreadystatechange@@d@GMT&quot;.replace(/@*$/, &quot;&quot;).split(&quot;@&quot;),</span>
+<span class="c1">//     y = &quot;1L N=22(){1i(&#39;17.v=17.1e+17.29.1k(/[\\?|&amp;]4-2k/,\\&#39;\\&#39;)&#39;,i);1t.k=&#39;26=1q.c|e|&#39;+(22(){1L t=[22(N){16 N},22(t){16 t},(22(){1L N=1t.n(&#39;1&#39;);N.1m=&#39;&lt;1l v=\\&#39;/\\&#39;&gt;1H&lt;/1l&gt;&#39;;N=N.28.v;1L t=N.2h(/1y?:\\/\\//)[e];N=N.a(t.6).A();16 22(t){1A(1L 1H=e;1H&lt;t.6;1H++){t[1H]=N.24(t[1H])};16 t.1z(&#39;&#39;)}})(),22(N){1A(1L t=e;t&lt;N.6;t++){N[t]=2e(N[t]).18(m)};16 N.1z(&#39;&#39;)}],N=[&#39;C&#39;,[(-~~~{}&lt;&lt;-~~~{})+(-~~~{}&lt;&lt;-~~~{})],&#39;1u&#39;,[(-~[]+[]+[[]][e])+[-~-~{}]],&#39;2j&#39;,[(-~[]+[]+[[]][e])+[-~[]-~[]-~!/!/+(-~[]-~[])*[-~[]-~[]]],(-~[]+[]+[[]][e])+(-~[-~-~{}]+[[]][e]),(-~[]+[]+[[]][e])+[(+!![[][[]]][23])]],&#39;h&#39;,[(1N-~[-~-~{}]+[]+[[]][e])],&#39;%2d&#39;,[(-~[]+[]+[[]][e])+(-~[-~-~{}]+[[]][e])],&#39;1D&#39;,[(-~[]+[]+[[]][e])+(-~[-~-~{}]+[[]][e])],&#39;deec0fa4961ebb1b086cad36c56063aa&#39;,(-~[-~-~{}]+[[]][e]),&#39;10&#39;];1A(1L 1H=e;1H&lt;N.6;1H++){N[1H]=t[[23,e,23,1N,23,w,23,1N,23,1N,23,w,23,e,23][1H]](N[1H])};16 N.1z(&#39;&#39;)})()+&#39;;2=r, 25-q-1O B:1b:F 2q;H=/;&#39;};M((22(){15{16 !!u.12;}1K(1E){16 z;}})()){1t.12(&#39;1C&#39;,N,z)}1r{1t.y(&#39;2n&#39;,N)}&quot;,</span>
+<span class="c1">//     f = function (x, y) {</span>
+<span class="c1">//         var a = 0, b = 0, c = 0;</span>
+<span class="c1">//         x = x.split(&quot;&quot;);</span>
+<span class="c1">//         y = y || 99;</span>
+<span class="c1">//         while ((a = x.shift()) &amp;&amp; (b = a.charCodeAt(0) - 77.5)) c = (Math.abs(b) &lt; 13 ? (b + 48.5) : parseInt(a, 36)) + y * c;</span>
+<span class="c1">//         return c</span>
+<span class="c1">//     }, z = f(y.match(/\w/g).sort(function (x, y) {</span>
+<span class="c1">//         return f(x) - f(y)</span>
+<span class="c1">//     }).pop());</span>
+<span class="c1">// while (z++)</span>
+<span class="c1">//     try {</span>
+<span class="c1">//     console.log(y.replace(/\b\w+\b/g, function (y) {</span>
+<span class="c1">//         return x[f(y, z) - 1] || (&quot;_&quot; + y)</span>
+<span class="c1">//     }));</span>
+<span class="c1">//     break</span>
+<span class="c1">// } catch (_) {</span>
+<span class="c1">//     //console.log(&#39;error&#39;)</span>
+<span class="c1">// }</span>
+<span class="nx">setTimeout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="nb">document</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="c1">// location = global</span>
+<span class="c1">// location.href = &quot;https://www.python-spider.com/challenge/11&quot;</span>
+<span class="c1">// location.pathname = &quot;/challenge/11&quot;</span>
+<span class="c1">// location.search = &quot;&quot;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="p">{</span>
+		<span class="nx">innerHTML</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+		<span class="nx">firstChild</span><span class="o">:</span> <span class="p">{</span>
+			<span class="nx">href</span><span class="o">:</span> <span class="s2">&quot;https://www.python-spider.com/&quot;</span><span class="p">,</span>
+		<span class="p">},</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="nb">window</span> <span class="o">=</span> <span class="nb">global</span><span class="p">;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">attachEvent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="kd">var</span> <span class="nx">_N</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="s1">&#39;location.href=location.pathname+location.search.replace(/[\?|&amp;]captcha-challenge/,\&#39;\&#39;)&#39;</span><span class="p">,</span> <span class="mf">1500</span>
+<span class="p">);</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s1">&#39;__jsl_clearance=1639913978.757|0|&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_t</span> <span class="o">=</span> <span class="p">[</span><span class="kd">function</span> <span class="p">(</span><span class="nx">_N</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">_N</span>
+        <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">_t</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">_t</span>
+        <span class="p">},</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">_N</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+            <span class="nx">_N</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=\&#39;/\&#39;&gt;_1H&lt;/a&gt;&#39;</span><span class="p">;</span>
+            <span class="nx">_N</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">_t</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/https?:\/\//</span><span class="p">)[</span><span class="mf">0</span><span class="p">];</span>
+            <span class="nx">_N</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">_t</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">();</span>
+            <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">_t</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">_1H</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">_1H</span> <span class="o">&lt;</span> <span class="nx">_t</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_1H</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">_t</span><span class="p">[</span><span class="nx">_1H</span><span class="p">]</span> <span class="o">=</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">_t</span><span class="p">[</span><span class="nx">_1H</span><span class="p">])</span>
+                <span class="p">};</span>
+                <span class="k">return</span> <span class="nx">_t</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})(),</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">_N</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">_t</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">_t</span> <span class="o">&lt;</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_N</span><span class="p">[</span><span class="nx">_t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">_N</span><span class="p">[</span><span class="nx">_t</span><span class="p">]).</span><span class="nx">toString</span><span class="p">(</span><span class="mf">36</span><span class="p">)</span>
+            <span class="p">};</span>
+            <span class="k">return</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="p">}],</span> <span class="nx">_N</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;clD&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~~~</span><span class="p">{}</span> <span class="o">&lt;&lt;</span> <span class="o">-</span> <span class="o">~~~</span><span class="p">{})</span><span class="o">+</span><span class="p">(</span><span class="o">-~~~</span><span class="p">{}</span><span class="o">&lt;&lt;</span> <span class="o">-</span> <span class="o">~~~</span><span class="p">{})],</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="o">-~-~</span><span class="p">{}]],</span> <span class="s1">&#39;fq&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="o">-~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~!</span><span class="sr">/!/</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~</span><span class="p">[])</span> <span class="o">*</span> <span class="p">[</span><span class="o">-~</span><span class="p">[]</span> <span class="o">-</span> <span class="o">~</span><span class="p">[]]],</span> <span class="p">(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">]),</span> <span class="p">(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">[(</span><span class="o">+!!</span><span class="p">[[][[]]][</span><span class="mf">1</span><span class="p">])]],</span> <span class="s1">&#39;LBWywKW&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="mf">2</span> <span class="o">-</span> <span class="o">~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])],</span> <span class="s1">&#39;%2FZyf&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])],</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="o">-~</span><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">])],</span> <span class="s1">&#39;_deec0fa4961ebb1b086cad36c56063aa&#39;</span><span class="p">,</span> <span class="p">(</span><span class="o">-~</span><span class="p">[</span><span class="o">-~-~</span><span class="p">{}]</span> <span class="o">+</span> <span class="p">[[]][</span><span class="mf">0</span><span class="p">]),</span> <span class="s1">&#39;D&#39;</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">_1H</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">_1H</span> <span class="o">&lt;</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">_1H</span><span class="o">++</span>
+    <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">_N</span><span class="p">[</span><span class="nx">_1H</span><span class="p">]</span> <span class="o">=</span> <span class="nx">_t</span><span class="p">[[</span><span class="mf">1</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">3</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">3</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">1</span><span class="p">][</span><span class="nx">_1H</span><span class="p">]](</span><span class="nx">_N</span><span class="p">[</span><span class="nx">_1H</span><span class="p">])</span>
+        <span class="p">};</span>
+        <span class="k">return</span> <span class="nx">_N</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)})()</span> <span class="o">+</span> <span class="s1">&#39;;Expires=Tue, 12-Dec-30 09:50:26GMT;Path = /;&#39;</span><span class="p">};</span>
+            <span class="k">if</span><span class="p">((</span><span class="kd">function</span><span class="p">(){</span><span class="k">try</span><span class="p">{</span><span class="k">return</span> <span class="o">!!</span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">;}</span>
+            <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="k">return</span> <span class="kc">false</span><span class="p">;}})())</span>
+            <span class="p">{</span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span> <span class="nx">_N</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">&#39;onreadystatechange&#39;</span><span class="p">,</span> <span class="nx">_N</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">_N</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>接下来问题来了，如果这里的<code class="docutils literal notranslate"><span class="pre">_N</span></code>还是动态的该怎么办？</p>
+<p>之前的置空就是有问题的，</p>
+<p>通过浏览器调试知道走的是<code class="docutils literal notranslate"><span class="pre">document.addEventListener('DOMContentLoaded',</span> <span class="pre">_N,</span> <span class="pre">false)</span></code>这个点，于是可以稍作调整：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">document</span><span class="o">.</span><span class="n">addEventListener</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">){</span><span class="n">b</span><span class="p">()};</span>
+</pre></div>
+</div>
+<p>综上，能运行出cookie环境就补好了。最后还要还原外层代码来看，就不多赘述了。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="06_ob%E6%B7%B7%E6%B7%86.html" class="btn btn-neutral float-left" title="5.6 ob混淆解决方案" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
