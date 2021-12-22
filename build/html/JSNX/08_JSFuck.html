@@ -59,9 +59,9 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.8 JSFuck混淆</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">1. 水一贴JSFuck</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#js-fuck">2. 吾爱破解JS_Fuck混淆解密</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3. 网洛者第四题JSFuck 加密</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">3. 网洛者第四题JSFuck 加密</a></li>
 </ul>
 </li>
 </ul>
@@ -256,10 +256,9 @@
 </pre></div>
 </div>
 </section>
-</section>
 <hr class="docutils" />
 <section id="id2">
-<h1>3. 网洛者第四题JSFuck 加密<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<h2>3. 网洛者第四题JSFuck 加密<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/c06e33ecec96e2c8d73c9ab80577af73.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/c06e33ecec96e2c8d73c9ab80577af73.png" /></p>
 <p>通过抓包软件发现加密参数是<code class="docutils literal notranslate"><span class="pre">_signature</span></code></p>
 <p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-23_00-23-29.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-23_00-23-29.png" /></p>
@@ -327,6 +326,7 @@
 </div>
 <p>可以看到就是一个 AES 加密，这里主要注意有两个 if-else 语句，第一个判断是否存在 <code class="docutils literal notranslate"><span class="pre">window.document.onclick</span></code>，第二个是时间差的判断，我们可以在控制台去尝试取一下 <code class="docutils literal notranslate"><span class="pre">window.document.onclick</span></code> 和 <code class="docutils literal notranslate"><span class="pre">window.time</span></code>，看一下到底走的是 if 还是 else，在本地把这两个值也补全即可，实际上经过K哥测试 <code class="docutils literal notranslate"><span class="pre">window.document.onclick</span></code> 为 null，然后不管是走 if 还是 else 都是可以拿到结果的，所以对于本题来说，两个 window 对象都无所谓，直接去掉，<code class="docutils literal notranslate"><span class="pre">key_tmp</span></code> 和 <code class="docutils literal notranslate"><span class="pre">iv_tmp</span></code> 任意取值都可以。</p>
 <p>自此本题分析完毕，本地改写之后，配合 Python 代码携带 _signature 挨个计算每一页的数据，最终提交成功</p>
+</section>
 </section>
 
 
