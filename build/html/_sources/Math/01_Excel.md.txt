@@ -110,6 +110,6 @@ print(cel_value)
 
 #写入表格信息
 write_save = nb.get_sheet(0)
-write_Save.write(0, 0, 'xlutils写入！')
+write_save.write(0, 0, 'xlutils写入！')
 nb.save("new_test.xls")  # 保存工作簿
 ```

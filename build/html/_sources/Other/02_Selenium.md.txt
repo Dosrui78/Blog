@@ -131,7 +131,7 @@ outerText:这是div中的文字这是span中的文字
 
 > ​        在做web自动化的过程中会遇到一些弹出的登录页面，定位后，执行程序发现还是出现报错，其实定位可能没有问题，而是表单再作怪，也就是iframe，iframe是HTML标签，作用是文档中的文档，或者浮动的框架(FRAME)。iframe元素会创建包含另外一个文档的内联框架，也就html中在嵌套一个网页，可以通过F12查看。
 
-![img](https://github.com/Dosrui78/Blog-Images/blob/master/2.33.jpg?raw=true "2.33")
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-23_01-45-53.png)
 
 **如何定位iframe**
 
