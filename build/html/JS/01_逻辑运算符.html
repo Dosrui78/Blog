@@ -49,7 +49,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">第四章：JS基础</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1 JS的逻辑运算符</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1 JS的逻辑运算符</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1. 逻辑运算符实例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2. 更多实例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3. 运算符规律</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">第五章：JS逆向</a></li>
@@ -83,9 +88,14 @@
   <section id="js">
 <h1>4.1 JS的逻辑运算符<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><p><strong>语法糖</strong>（英語：Syntactic sugar）指计算机语言中<strong>添加</strong>的某种语法，這种语法对语言的功能沒有影响，但是更方便程序员使用。语法糖让程序更简洁，有更高的可读性。</p>
+<div><ul class="simple">
+<li><p><strong>语法糖</strong>（英語：Syntactic sugar）指计算机语言中<strong>添加</strong>的某种语法，這种语法对语言的功能沒有影响，但是更方便程序员使用。语法糖让程序更简洁，有更高的可读性。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">||</span> <span class="pre">&amp;&amp;</span></code>当不是逻辑判断的时候而是执行返回的时候会有些奇妙的特点（语法糖）</p></li>
+</ul>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">||</span> <span class="pre">&amp;&amp;</span></code>当不是逻辑判断的时候而是执行返回的时候会有些奇妙的特点（语法糖）</p>
+<section id="id1">
+<h2>1. 逻辑运算符实例<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>下面请看以下例子，并猜测执行结果result</p>
 <div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">a</span><span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span><span class="k">return</span> <span class="kc">true</span><span class="p">}</span> 
 
 <span class="kd">function</span> <span class="nx">b</span><span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">);</span><span class="k">return</span> <span class="kc">false</span><span class="p">}</span>
@@ -95,7 +105,6 @@
 <span class="kd">function</span> <span class="nx">d</span><span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">);</span><span class="k">return</span> <span class="kc">null</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>下面请看以下例子，并猜测执行结果</p>
 <div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">result</span> <span class="o">=</span> <span class="nx">a</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="nx">b</span><span class="p">()</span>
 
 <span class="nx">result</span> <span class="o">=</span> <span class="nx">a</span><span class="p">()</span><span class="o">||</span><span class="nx">b</span><span class="p">()</span>  <span class="c1">// 无论后面是什么都无关</span>
@@ -120,18 +129,24 @@
 </pre></div>
 </div>
 <p>结果如下：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">false</span><span class="p">,</span><span class="n">true</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">true</span><span class="p">,</span><span class="n">undefined</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">true</span><span class="p">,</span><span class="n">true</span><span class="p">,</span><span class="mi">0</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kc">false</span><span class="p">,</span><span class="kc">true</span><span class="p">,</span><span class="mf">0</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="kc">true</span><span class="p">,</span><span class="kc">undefined</span><span class="p">,</span><span class="kc">null</span><span class="p">,</span><span class="kc">null</span><span class="p">,</span><span class="kc">true</span><span class="p">,</span><span class="kc">true</span><span class="p">,</span><span class="mf">0</span>
 </pre></div>
 </div>
+</section>
+<section id="id2">
+<h2>2. 更多实例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-20_23-20-16.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-20_23-20-16.png" /></p>
+</section>
+<section id="id3">
+<h2>3. 运算符规律<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><p>口诀：true<code class="docutils literal notranslate"><span class="pre">或</span></code>任何都是true，false<code class="docutils literal notranslate"><span class="pre">与</span></code>任何都是false，undefined是<code class="docutils literal notranslate"><span class="pre">未定义</span></code>，比起null就是false.</p>
 <p><code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>运算符的优先级高于<code class="docutils literal notranslate"><span class="pre">||</span></code>，<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>运算符的优先级高于<code class="docutils literal notranslate"><span class="pre">|</span></code>，按位运算符优先级高于逻辑运算符.</p>
 </div></blockquote>
-<hr class="docutils" />
 <p>要背！！</p>
-<p><a class="reference external" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">运算符优先级</a></p>
+<p><a class="reference external" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">运算符优先级表</a></p>
 <hr class="docutils" />
+</section>
 </section>
 
 

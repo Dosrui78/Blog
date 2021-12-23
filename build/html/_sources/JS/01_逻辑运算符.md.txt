@@ -1,8 +1,11 @@
 #### 4.1 JS的逻辑运算符
 
-> **语法糖**（英語：Syntactic sugar）指计算机语言中**添加**的某种语法，這种语法对语言的功能沒有影响，但是更方便程序员使用。语法糖让程序更简洁，有更高的可读性。
+> - **语法糖**（英語：Syntactic sugar）指计算机语言中**添加**的某种语法，這种语法对语言的功能沒有影响，但是更方便程序员使用。语法糖让程序更简洁，有更高的可读性。
+> - `|| &&`当不是逻辑判断的时候而是执行返回的时候会有些奇妙的特点（语法糖）
 
-`|| &&`当不是逻辑判断的时候而是执行返回的时候会有些奇妙的特点（语法糖）
+##### 1. 逻辑运算符实例
+
+下面请看以下例子，并猜测执行结果result
 
 ```js
 function a(){console.log('a');return true} 
@@ -13,8 +16,6 @@ function c(){console.log('c');return undefined}
 
 function d(){console.log('d');return null}
 ```
-
-下面请看以下例子，并猜测执行结果
 
 ```js
 result = a()&&b()
@@ -42,21 +43,27 @@ result = a()&&c()|d()
 
 结果如下：
 
-```
+```js
 false,true,0,1,true,undefined,null,null,true,true,0
 ```
 
+##### 2. 更多实例
+
 ![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-20_23-20-16.png)
+
+
+
+##### 3. 运算符规律
 
 > 口诀：true`或`任何都是true，false`与`任何都是false，undefined是`未定义`，比起null就是false.
 >
 > `&&`运算符的优先级高于`||`，`&`运算符的优先级高于`|`，按位运算符优先级高于逻辑运算符.
 
------------
+
 
 要背！！
 
-[运算符优先级](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+[运算符优先级表](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
 
 ----------
 

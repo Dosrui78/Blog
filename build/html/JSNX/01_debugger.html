@@ -102,21 +102,21 @@
 </div></blockquote>
 <section id="debugger">
 <h2>1. 构建debugger<a class="headerlink" href="#debugger" title="Permalink to this headline">¶</a></h2>
-<p><strong>简单粗暴型</strong></p>
+<p>简单粗暴型</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>while(!![]){
 debugger;
 }
 </pre></div>
 </div>
-<p>**借助构造器Function构造 **</p>
+<p>借助构造器<a class="reference external" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a>构造</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
 <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 
 <span class="n">a</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">();</span>
 <span class="n">a</span><span class="p">()</span>
 
-<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constrctor</span><span class="o">=</span><span class="n">Function</span><span class="p">()</span>    
-<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">();</span>   
+<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constrctor</span><span class="o">=</span><span class="n">Function</span><span class="p">()</span>    <span class="o">//</span> <span class="n">因为这个</span>
+<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">();</span>  <span class="o">//</span> <span class="n">所以这个</span>
 
 <span class="p">(</span><span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
 </pre></div>
@@ -135,10 +135,10 @@ Function(&quot;debugger&quot;).call()
 <p>并不是真正的debugger，而是很频繁的去debugger，解决无限debugger才能进行下一步找到函数的入口；</p>
 <p>常用方法如下：</p>
 <ul class="simple">
-<li><p>如果是Function原理的debugger，可以重写函数构造器</p></li>
-<li><p>如果是eval型构造器，可以重构eval函数</p></li>
-<li><p>如果是定时器，且②失效了，可以重构定时器</p></li>
-<li><p>如果以上都失效，向上找堆栈，在进入无限debugger之前打上断点将触发无限debugger的函数q置空（最麻烦，但是适用性最广）</p></li>
+<li><p>如果是Function原理的debugger，可以重写函数构造器；</p></li>
+<li><p>如果是eval型构造器，可以重构eval函数；</p></li>
+<li><p>如果是定时器，且上条办法失效了，可以重构定时器；</p></li>
+<li><p>如果以上都失效，向上找堆栈，在进入无限debugger之前打上断点将触发无限debugger的函数置空（最麻烦，但是适用性最广）。</p></li>
 </ul>
 <p>debugger与计时器搭配型，他的原理就是定时器设置一个很短的时间，频繁的去执行含有debugger的方法，以达到无限debugger的效果，这里我就写一个简单的demo来举例吧</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">a</span><span class="p">(){</span>
@@ -152,12 +152,12 @@ Function(&quot;debugger&quot;).call()
 </pre></div>
 </div>
 <p>这时候就可以通过hook的方式去重写这个定时器方法：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>setInterval_new=setInterval
-setInterval=function(a,b){
-if(a.indexOf(&quot;debugger&quot;)==-1){
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>setInterval_new=setInterval   	// 把setInterval赋给新的setInterval方法
+setInterval=function(a,b){		// 重写旧的setInterval方法
+if(a.indexOf(&quot;debugger&quot;)==-1){  // -1表示没有debugger
 	return setInterval_new(a,b)
 	}
-}	//如果这里的定时器只是单纯的用来频繁触发debugger的话，就直接将其干掉了
+}	// 如果这里的定时器只是单纯的用来频繁触发debugger的话，就直接将其干掉了
 </pre></div>
 </div>
 <p>上面所提的eval手段也是通过这样的手段将其重写。</p>
