@@ -4,7 +4,7 @@
 
 ##### 1. 构建debugger
 
-**简单粗暴型**
+简单粗暴型
 
 ```
 while(!![]){
@@ -12,7 +12,7 @@ debugger;
 }
 ```
 
-**借助构造器Function构造 **
+借助构造器[Function](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function)构造 
 
 ```
 Function("debugger;").call()
@@ -21,8 +21,8 @@ Function("debugger;").apply()
 a = Function("debugger;").bind();
 a()
 
-Function().constrctor=Function()    
-Function().constructor("debugger;").call();   
+Function().constrctor=Function()    // 因为这个
+Function().constructor("debugger;").call();  // 所以这个
 
 (Function().constructor("debugger")).call()
 ```
@@ -45,10 +45,10 @@ Function("debugger").call()
 
 常用方法如下：
 
-- 如果是Function原理的debugger，可以重写函数构造器
-- 如果是eval型构造器，可以重构eval函数
-- 如果是定时器，且②失效了，可以重构定时器
-- 如果以上都失效，向上找堆栈，在进入无限debugger之前打上断点将触发无限debugger的函数q置空（最麻烦，但是适用性最广）
+- 如果是Function原理的debugger，可以重写函数构造器；
+- 如果是eval型构造器，可以重构eval函数；
+- 如果是定时器，且上条办法失效了，可以重构定时器；
+- 如果以上都失效，向上找堆栈，在进入无限debugger之前打上断点将触发无限debugger的函数置空（最麻烦，但是适用性最广）。
 
 debugger与计时器搭配型，他的原理就是定时器设置一个很短的时间，频繁的去执行含有debugger的方法，以达到无限debugger的效果，这里我就写一个简单的demo来举例吧
 
@@ -64,12 +64,12 @@ debugger与计时器搭配型，他的原理就是定时器设置一个很短的
 这时候就可以通过hook的方式去重写这个定时器方法：
 
 ```
-setInterval_new=setInterval
-setInterval=function(a,b){
-if(a.indexOf("debugger")==-1){
+setInterval_new=setInterval   	// 把setInterval赋给新的setInterval方法
+setInterval=function(a,b){		// 重写旧的setInterval方法
+if(a.indexOf("debugger")==-1){  // -1表示没有debugger
 	return setInterval_new(a,b)
 	}
-}	//如果这里的定时器只是单纯的用来频繁触发debugger的话，就直接将其干掉了
+}	// 如果这里的定时器只是单纯的用来频繁触发debugger的话，就直接将其干掉了
 ```
 
 上面所提的eval手段也是通过这样的手段将其重写。
