@@ -119,7 +119,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_bar</span> <span class="o">=</span> <span class="mi">23</span>
 </pre></div>
 </div>
-<p>如果你实例化这个类并试图访问它的构造函数中定义的foo和_bar属性，会发生什么?让我们来看看:</p>
+<p>如果你实例化这个类并试图访问它的构造函数中定义的<code class="docutils literal notranslate"><span class="pre">foo</span></code>和<code class="docutils literal notranslate"><span class="pre">_bar</span></code>属性，会发生什么？让我们来看看:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">foo</span>
 <span class="go">11</span>
@@ -187,7 +187,7 @@
 <span class="go">99</span>
 </pre></div>
 </div>
-<p>如果要让内部属性不被外部访问，可以把属性的名称前加上两个下划线<code class="docutils literal notranslate"><span class="pre">__</span></code>，在Python中，实例的变量名如果以<code class="docutils literal notranslate"><span class="pre">__</span></code>开头，就变成了一个私有变量<code class="docutils literal notranslate"><span class="pre">（private）</span></code>，只有内部可以访问，外部不能访问，所以，我们把Student类改一改：</p>
+<p>如果要让内部属性不被外部访问，可以把属性的名称前加上两个下划线<code class="docutils literal notranslate"><span class="pre">__</span></code>，在Python中，实例的变量名如果以<code class="docutils literal notranslate"><span class="pre">__</span></code>开头，就变成了一个私有变量<code class="docutils literal notranslate"><span class="pre">private</span></code>，<strong>只有内部可以访问，外部不能访问</strong>，所以，我们把Student类改一改：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
@@ -239,7 +239,7 @@
 </div>
 <p>需要注意的是，在Python中，变量名类似<code class="docutils literal notranslate"><span class="pre">__xxx__</span></code>的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用<code class="docutils literal notranslate"><span class="pre">__name__</span></code>、<code class="docutils literal notranslate"><span class="pre">__score__</span></code>这样的变量名。</p>
 <p>有些时候，你会看到以一个下划线开头的实例变量名，比如<code class="docutils literal notranslate"><span class="pre">_name</span></code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。</p>
-<p>双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问<code class="docutils literal notranslate"><span class="pre">__name</span></code>是因为Python解释器对外把<code class="docutils literal notranslate"><span class="pre">__name</span></code>变量改成了<code class="docutils literal notranslate"><span class="pre">_Student__name</span></code>，所以，仍然可以通过<code class="docutils literal notranslate"><span class="pre">_Student__name</span></code>来访问<code class="docutils literal notranslate"><span class="pre">__name</span></code>变量：</p>
+<p>双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问<code class="docutils literal notranslate"><span class="pre">__name</span></code>是因为<strong>Python解释器对外把<code class="docutils literal notranslate"><span class="pre">__name</span></code>变量改成了<code class="docutils literal notranslate"><span class="pre">_Student__name</span></code></strong>，所以，仍然可以通过<code class="docutils literal notranslate"><span class="pre">_Student__name</span></code>来访问<code class="docutils literal notranslate"><span class="pre">__name</span></code>变量：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bart</span><span class="o">.</span><span class="n">_Student__name</span>
 <span class="go">&#39;Bart Simpson&#39;</span>
 </pre></div>
@@ -281,7 +281,7 @@
 </div>
 <p>这会给我们一个带有对象属性的列表。让我们看看这个列表，并查找原始变量名<code class="docutils literal notranslate"><span class="pre">foo</span></code>、<code class="docutils literal notranslate"><span class="pre">_bar</span></code>和<code class="docutils literal notranslate"><span class="pre">__</span> <span class="pre">baz</span></code>—时保证会发现一些有趣的变化。</p>
 <p><code class="docutils literal notranslate"><span class="pre">self.foo</span></code>在属性列表中，<code class="docutils literal notranslate"><span class="pre">foo</span></code>变量显示为未修改的<code class="docutils literal notranslate"><span class="pre">foo</span></code>。</p>
-<p><code class="docutils literal notranslate"><span class="pre">self._bar</span></code>的行为方式是一样的——它在类中显示为<code class="docutils literal notranslate"><span class="pre">_bar</span></code>。就像我之前说的，前导下划线只是一种惯例。给程序员的提示。</p>
+<p><code class="docutils literal notranslate"><span class="pre">self._bar</span></code>的行为方式是一样的——它在类中显示为<code class="docutils literal notranslate"><span class="pre">_bar</span></code>。就像我之前说的，前导下划线只是一种惯例。给程序员的<strong>提示</strong>。</p>
 <p>然而<code class="docutils literal notranslate"><span class="pre">self.__baz</span></code>看起来有点不同。当在该列表中搜索<code class="docutils literal notranslate"><span class="pre">__baz</span></code>时，将看到没有具有该名称的变量。</p>
 <p>那么，到底发生了什么呢?</p>
 <p>如果仔细查看，就会看到这个对象上有一个名为<code class="docutils literal notranslate"><span class="pre">_Test__baz</span></code>的属性。这是Python解释器应用的命名混乱。这样做是为了保护变量不被子类覆盖。</p>
