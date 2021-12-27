@@ -14,22 +14,21 @@ debugger;
 
 借助构造器[Function](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function)构造 
 
-```
+```js
 Function("debugger;").call()
 Function("debugger;").apply()
 
 a = Function("debugger;").bind();
 a()
 
-Function().constrctor=Function()    // 因为这个
-Function().constructor("debugger;").call();  // 所以这个
-
-(Function().constructor("debugger")).call()
+Function().constrctor=Function()    =>	Function().constructor("debugger;").call();
+									=>	(Function().constructor("debugger")).call();
+									=>	(function(){}).constructor("debugger").call()
 ```
 
 一般都带点混淆
 
-```
+```js
 XXX.constructor("debugger").call("action")
 (function(){return !![];})["constructor"]("debugger")["call"]("action") 
 
@@ -52,18 +51,20 @@ Function("debugger").call()
 
 debugger与计时器搭配型，他的原理就是定时器设置一个很短的时间，频繁的去执行含有debugger的方法，以达到无限debugger的效果，这里我就写一个简单的demo来举例吧
 
-    function a(){
-        debugger;
-        b();
-    }
-    function b(){
-        console.log("hello world!")
-    }
-    setInterval(a,200); 	//每0.2秒触发一次
+```js
+function a(){
+    debugger;
+    b();
+}
+function b(){
+    console.log("hello world!")
+}
+setInterval(a,200); 	//每0.2秒触发一次
+```
 
 这时候就可以通过hook的方式去重写这个定时器方法：
 
-```
+```js
 setInterval_new=setInterval   	// 把setInterval赋给新的setInterval方法
 setInterval=function(a,b){		// 重写旧的setInterval方法
 if(a.indexOf("debugger")==-1){  // -1表示没有debugger
@@ -76,17 +77,17 @@ if(a.indexOf("debugger")==-1){  // -1表示没有debugger
 
 同上当出现"debugger"在constructor里面时，重写方法如下：
 
-```
+```js
 Function.prototype.constructor_bc=Function.prototype.constructor;
 Function.prototype.constructor=function(){
 	if(arguments==="debugger"){
-	"什么都不做"
+		"什么都不做"
 	}	//利用arguments关键字的属性获取当前方法里面的参数
     else{
-    return Function.prototype.constructor_bc.apply(this,arguments)  
+    	return Function.prototype.constructor_bc.apply(this,arguments)  
     	//跟上面处理debugger和定时器一起用的处理方法一样
     }
-    }	//注："Function"的含义并不是某度上面有些人说"js不区分大小"，不知道的小伙伴可以去看看比较正规一点的文档了解一下
+    }	//注："Function"的含义并不是某度上面有些人说"js不区分大小"，可以去看看比较正规一点的文档了解一下
 ```
 
 ----
@@ -94,7 +95,7 @@ Function.prototype.constructor=function(){
 ##### 3. 调试干扰-调试检测
 
 - 禁止F12右键的解决方案，浏览器的更多工具中的开发者工具
-- 呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以Autoresponse干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）
+- 呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以[AutoResponse](https://blog.csdn.net/yu1014745867/article/details/72843259)干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）
 
 ---
 

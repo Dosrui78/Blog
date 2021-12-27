@@ -109,24 +109,23 @@ debugger;
 </pre></div>
 </div>
 <p>借助构造器<a class="reference external" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a>构造</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
-<span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">).</span><span class="nx">call</span><span class="p">()</span>
+<span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">).</span><span class="nx">apply</span><span class="p">()</span>
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bind</span><span class="p">();</span>
-<span class="n">a</span><span class="p">()</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">).</span><span class="nx">bind</span><span class="p">();</span>
+<span class="nx">a</span><span class="p">()</span>
 
-<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constrctor</span><span class="o">=</span><span class="n">Function</span><span class="p">()</span>    <span class="o">//</span> <span class="n">因为这个</span>
-<span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">();</span>  <span class="o">//</span> <span class="n">所以这个</span>
-
-<span class="p">(</span><span class="n">Function</span><span class="p">()</span><span class="o">.</span><span class="n">constructor</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
+<span class="nb">Function</span><span class="p">().</span><span class="nx">constrctor</span><span class="o">=</span><span class="nb">Function</span><span class="p">()</span>    <span class="p">=&gt;</span>	<span class="nb">Function</span><span class="p">().</span><span class="kr">constructor</span><span class="p">(</span><span class="s2">&quot;debugger;&quot;</span><span class="p">).</span><span class="nx">call</span><span class="p">();</span>
+									<span class="p">=&gt;</span>	<span class="p">(</span><span class="nb">Function</span><span class="p">().</span><span class="kr">constructor</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">)).</span><span class="nx">call</span><span class="p">();</span>
+									<span class="p">=&gt;</span>	<span class="p">(</span><span class="kd">function</span><span class="p">(){}).</span><span class="kr">constructor</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">).</span><span class="nx">call</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>一般都带点混淆</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>XXX.constructor(&quot;debugger&quot;).call(&quot;action&quot;)
-(function(){return !![];})[&quot;constructor&quot;](&quot;debugger&quot;)[&quot;call&quot;](&quot;action&quot;) 
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">XXX</span><span class="p">.</span><span class="kr">constructor</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">).</span><span class="nx">call</span><span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="k">return</span> <span class="o">!!</span><span class="p">[];})[</span><span class="s2">&quot;constructor&quot;</span><span class="p">](</span><span class="s2">&quot;debugger&quot;</span><span class="p">)[</span><span class="s2">&quot;call&quot;</span><span class="p">](</span><span class="s2">&quot;action&quot;</span><span class="p">)</span> 
 
-Function(&quot;debugger&quot;).call() 	
-//这里根据后面带的参数个数、类型来定，如果参数为多个，或者类型为数组时，call需换成apply,或者bind
+<span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">).</span><span class="nx">call</span><span class="p">()</span> 	
+<span class="c1">//这里根据后面带的参数个数、类型来定，如果参数为多个，或者类型为数组时，call需换成apply,或者bind</span>
 </pre></div>
 </div>
 </section>
@@ -141,37 +140,37 @@ Function(&quot;debugger&quot;).call()
 <li><p>如果以上都失效，向上找堆栈，在进入无限debugger之前打上断点将触发无限debugger的函数置空（最麻烦，但是适用性最广）。</p></li>
 </ul>
 <p>debugger与计时器搭配型，他的原理就是定时器设置一个很短的时间，频繁的去执行含有debugger的方法，以达到无限debugger的效果，这里我就写一个简单的demo来举例吧</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">a</span><span class="p">(){</span>
-    <span class="n">debugger</span><span class="p">;</span>
-    <span class="n">b</span><span class="p">();</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">a</span><span class="p">(){</span>
+    <span class="k">debugger</span><span class="p">;</span>
+    <span class="nx">b</span><span class="p">();</span>
 <span class="p">}</span>
-<span class="n">function</span> <span class="n">b</span><span class="p">(){</span>
-    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;hello world!&quot;</span><span class="p">)</span>
+<span class="kd">function</span> <span class="nx">b</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hello world!&quot;</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="n">setInterval</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span> 	<span class="o">//</span><span class="n">每0</span><span class="mf">.2</span><span class="n">秒触发一次</span>
+<span class="nx">setInterval</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="mf">200</span><span class="p">);</span> 	<span class="c1">//每0.2秒触发一次</span>
 </pre></div>
 </div>
 <p>这时候就可以通过hook的方式去重写这个定时器方法：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>setInterval_new=setInterval   	// 把setInterval赋给新的setInterval方法
-setInterval=function(a,b){		// 重写旧的setInterval方法
-if(a.indexOf(&quot;debugger&quot;)==-1){  // -1表示没有debugger
-	return setInterval_new(a,b)
-	}
-}	// 如果这里的定时器只是单纯的用来频繁触发debugger的话，就直接将其干掉了
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">setInterval_new</span><span class="o">=</span><span class="nx">setInterval</span>   	<span class="c1">// 把setInterval赋给新的setInterval方法</span>
+<span class="nx">setInterval</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>		<span class="c1">// 重写旧的setInterval方法</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;debugger&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mf">1</span><span class="p">){</span>  <span class="c1">// -1表示没有debugger</span>
+	<span class="k">return</span> <span class="nx">setInterval_new</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>	<span class="c1">// 如果这里的定时器只是单纯的用来频繁触发debugger的话，就直接将其干掉了</span>
 </pre></div>
 </div>
 <p>上面所提的eval手段也是通过这样的手段将其重写。</p>
 <p>同上当出现”debugger”在constructor里面时，重写方法如下：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Function.prototype.constructor_bc=Function.prototype.constructor;
-Function.prototype.constructor=function(){
-	if(arguments===&quot;debugger&quot;){
-	&quot;什么都不做&quot;
-	}	//利用arguments关键字的属性获取当前方法里面的参数
-    else{
-    return Function.prototype.constructor_bc.apply(this,arguments)  
-    	//跟上面处理debugger和定时器一起用的处理方法一样
-    }
-    }	//注：&quot;Function&quot;的含义并不是某度上面有些人说&quot;js不区分大小&quot;，不知道的小伙伴可以去看看比较正规一点的文档了解一下
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor_bc</span><span class="o">=</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kr">constructor</span><span class="p">;</span>
+<span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kr">constructor</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">arguments</span><span class="o">===</span><span class="s2">&quot;debugger&quot;</span><span class="p">){</span>
+		<span class="s2">&quot;什么都不做&quot;</span>
+	<span class="p">}</span>	<span class="c1">//利用arguments关键字的属性获取当前方法里面的参数</span>
+    <span class="k">else</span><span class="p">{</span>
+    	<span class="k">return</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor_bc</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">)</span>  
+    	<span class="c1">//跟上面处理debugger和定时器一起用的处理方法一样</span>
+    <span class="p">}</span>
+    <span class="p">}</span>	<span class="c1">//注：&quot;Function&quot;的含义并不是某度上面有些人说&quot;js不区分大小&quot;，可以去看看比较正规一点的文档了解一下</span>
 </pre></div>
 </div>
 </section>
@@ -180,7 +179,7 @@ Function.prototype.constructor=function(){
 <h2>3. 调试干扰-调试检测<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>禁止F12右键的解决方案，浏览器的更多工具中的开发者工具</p></li>
-<li><p>呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以Autoresponse干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）</p></li>
+<li><p>呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以<a class="reference external" href="https://blog.csdn.net/yu1014745867/article/details/72843259">AutoResponse</a>干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）</p></li>
 </ul>
 </section>
 <hr class="docutils" />
