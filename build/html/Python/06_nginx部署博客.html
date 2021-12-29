@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.6 在Nginx上部署自己的Sphinx博客 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/Python/06_Nginx部署博客.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="第二章：数据分析" href="../Math/index.html" />
+    <link rel="prev" title="1.5 Python日志" href="05_Python%E6%97%A5%E5%BF%97.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">第一章：基础知识</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html">1.1 Python直接赋值、浅拷贝和深拷贝解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.3 我终于把Python中下划线的含义弄清楚了</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.5 Python日志</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.6 在Nginx上部署自己的Sphinx博客</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nginx">1. 安装、配置Nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2. 编辑配置文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#htmllinux">3. 将静态html上传至Linux服务器上</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">第四章：JS基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">第五章：JS逆向</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">第一章：基础知识</a> &raquo;</li>
+      <li>1.6 在Nginx上部署自己的Sphinx博客</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Python/06_Nginx部署博客.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nginxsphinx">
+<h1>1.6 在Nginx上部署自己的Sphinx博客<a class="headerlink" href="#nginxsphinx" title="Permalink to this headline">¶</a></h1>
+<section id="nginx">
+<h2>1. <a class="reference external" href="https://www.runoob.com/linux/nginx-install-setup.html">安装、配置Nginx</a><a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
+<p>几个要经常用到(copy)的命令:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">webserver</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx</span>  					   <span class="c1"># Nginx 启动命令</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">webserver</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reload</span>            <span class="c1"># 重新载入配置文件</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">webserver</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reopen</span>            <span class="c1"># 重启 Nginx</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">webserver</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">stop</span>              <span class="c1"># 停止 Nginx</span>
+<span class="n">vi</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">webserver</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">nginx</span><span class="o">.</span><span class="n">conf</span>              <span class="c1"># 编辑配置文件</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>2. 编辑配置文件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2021-12-29_02-07-53.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2021-12-29_02-07-53.png" /></p>
+<p>只用修改这部分就可以了。改完后再重新载入配置文件，启动Nginx发现出现如下情况时该怎么做</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-29_02-15-06.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-29_02-15-06.png" /></p>
+<p>经查询发现运行如下命令就能解决</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">pan</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">&quot;:80&quot;</span>
+</pre></div>
+</div>
+<p>原来是<code class="docutils literal notranslate"><span class="pre">80</span></code>端口被占用了啊</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-29_02-16-11.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-29_02-16-11.png" /></p>
+<p>然后执行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kill</span> <span class="mi">1188</span>  <span class="c1"># 杀掉1188进程</span>
+</pre></div>
+</div>
+<p>最后重新运行Nginx即可，刷新我们的服务器地(http://120.76.192.129/)即可。</p>
+</section>
+<hr class="docutils" />
+<section id="htmllinux">
+<h2>3. 将静态html上传至Linux服务器上<a class="headerlink" href="#htmllinux" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>这步是将build好的静态html传至服务器便于部署。</p>
+</div></blockquote>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-29_02-21-12.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-29_02-21-12.png" /></p>
+<ul>
+<li><p>scp命令Linux和Windows互传</p>
+<ul>
+<li><p>复制windows本地<code class="docutils literal notranslate"><span class="pre">D:\Linux\Blog\build\html</span></code>目录到远程服务器的<code class="docutils literal notranslate"><span class="pre">root</span></code>目录。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">rp</span> <span class="n">D</span><span class="p">:</span>\<span class="n">Linux</span>\<span class="n">Blog</span> <span class="n">root</span><span class="o">@</span><span class="mf">120.76.192.129</span><span class="p">:</span><span class="o">/</span><span class="n">root</span>
+</pre></div>
+</div>
+</li>
+<li><p>从linux服务器下载文件</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="n">root</span><span class="o">@</span><span class="mf">120.76.192.129</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">Blog</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">html</span> <span class="n">D</span><span class="p">:</span>\<span class="n">Linux</span>\<span class="n">Blog</span>\
+</pre></div>
+</div>
+<p>注：需要本地Windows有bash命令工具，关于windows下的bash命令行工具：
+安装git客户端就自带了mingw64，运行git-bash.exe就可以进入bash命令行</p>
+</li>
+</ul>
+</li>
+<li><p>免密操作</p>
+<ul>
+<li><p>客户端步骤
+1）在本地win10系统打开命令行工具
+2）执行命令：ssh-keygen -t rsa
+3）提示输入密码，因为不需要密码，所以不输入直接enter
+4）生成公钥和私钥文件默认放在C:\Users\Administrator.ssh 目录下，文件名分别为id_rsa.pub和id_rsa</p></li>
+<li><p>服务端步骤
+1）拷贝客户端上的公钥文件id_rsa.pub 到linux服务器的~/.ssh/ 目录下，注意.ssh目录可能是隐藏的
+2）把公钥文件id_rsa.pub的内容写入到authorized_keys文件，如果authorized_keys不存在，则创建。写入命令：cat id_rsa.pub&gt;&gt;authorized_keys
+注意：如果不是root用户登录，需要免签到对应用户目录下：cat /root/id_rsa.pub&gt;&gt;/home/用户名/.ssh/authorized_keys</p>
+<p>注意：/home/用户名 目录必须是用户的默认目录，否则免签无效</p>
+<p>如果新创建的用户没有.ssh目录和authorized_keys文件，需要手动创建，并设置权限</p>
+<p>chomd 700 /home/用户名/.ssh
+chomd 600 /home/用户名/.ssh/authorized_keys</p>
+<p>chown -R flow /mnt/flowsystem (把mnt目录下的flowsystem目录下的所有子文件的拥有者改为flow用户)</p>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="05_Python%E6%97%A5%E5%BF%97.html" class="btn btn-neutral float-left" title="1.5 Python日志" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Math/index.html" class="btn btn-neutral float-right" title="第二章：数据分析" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
