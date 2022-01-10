@@ -359,7 +359,7 @@ mysql -u root -p mydemo&gt;mydb_tt2.sql
 <p>只能得到一条记录</p>
 <p>小李　　老师</p>
 <p><strong>左连接：（左边的表不加限制）</strong></p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="k">name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">job</span> <span class="k">from</span> <span class="n">A</span> <span class="n">a</span>  <span class="k">left</span> <span class="k">join</span> <span class="n">B</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">A_id</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="k">name</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">job</span> <span class="k">from</span> <span class="n">A</span> <span class="n">a</span> <span class="k">left</span> <span class="k">join</span> <span class="n">B</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">A_id</span>
 </pre></div>
 </div>
 <p>三条记录</p>

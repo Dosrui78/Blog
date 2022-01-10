@@ -116,9 +116,9 @@ String.prototype.split = function(val){
 
 #### 3. Hook案例
 
-##### 猿人学联系平台第一题
+##### 猿人学练习平台第一题
 
-猿人学联系平台第一题可以用Hook setRequestHeader函数的办法找到函数入口
+猿人学练习平台第一题可以用Hook setRequestHeader函数的办法找到函数入口
 
 > 该[`XMLHttpRequest`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)方法 `setRequestHeader()`设置 HTTP 请求标头的值。使用`setRequestHeader()`时必须在调用之后调用 [`open()`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open)，调用之前调用 [`send()`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send)。如果使用相同的标头多次调用此方法，则这些值将合并为一个请求标头。
 >

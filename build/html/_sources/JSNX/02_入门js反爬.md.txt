@@ -117,7 +117,7 @@ cookie = execjs.compile(text).call('a')
 
 
 
-##### 4.24 简单js动态加密解析
+##### 4. 简单js动态加密解析
 
 打个scripct断点，然后一直f8前进到有js的界面
 

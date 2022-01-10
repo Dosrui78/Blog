@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.9 webpack打包解决方案 &mdash; Dosrui&#39;s Blog 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://magic.iswbm.com/JSNX/09_Webpack.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/readmore.js"></script>
+        <script src="../_static/js/baidutongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dosrui's Blog
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Python/index.html">第一章：基础知识</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Crawl/index.html">第三章：爬虫入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JS/index.html">第四章：JS基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">第五章：JS逆向</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第一章：开发工具</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dosrui's Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>5.9 webpack打包解决方案</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/JSNX/09_Webpack.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="webpack">
+<h1>5.9 webpack打包解决方案<a class="headerlink" href="#webpack" title="Permalink to this headline">¶</a></h1>
+<section id="id1">
+<h2>1. webpack简介<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><blockquote>
+<div><p>何谓webpack? <strong>webpack</strong> 是一个用于现代 JavaScript 应用程序的 <em>静态模块打包工具</em>。当 webpack 处理应用程序时，它会在内部从一个或多个入口点构建一个 <a class="reference external" href="https://webpack.docschina.org/concepts/dependency-graph/">依赖图(dependency graph)</a>，然后将你项目中所需的每一个模块组合成一个或多个 <em>bundles</em>，它们均为静态资源，用于展示你的内容。</p>
+</div></blockquote>
+</div></blockquote>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_00-32-12.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_00-32-12.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>2. webpack结构<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_01-18-18.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_01-18-18.png" /></p>
+<p>①展开这个e，它是一个大的对象，里边都是些分块的数字</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_01-00-01.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_01-00-01.png" /></p>
+<p>②这个<code class="docutils literal notranslate"><span class="pre">n(r)</span></code>是一个<strong>导库（包）函数</strong>，在webpack中叫做加载器，所有的webpack都有一个加载器。</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_01-10-31.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-07_01-10-31.png" /></p>
+<p>③紧接着是<strong>运行内容</strong>（一定是通过n这个函数走的），比如把<code class="docutils literal notranslate"><span class="pre">454</span></code>传到加载器中，通过判断上图中的<code class="docutils literal notranslate"><span class="pre">t[r]</span></code>是否存在，存在就返回它的函数<code class="docutils literal notranslate"><span class="pre">t[454].exports</span></code>，不存在则把<code class="docutils literal notranslate"><span class="pre">t[r]</span></code>即<code class="docutils literal notranslate"><span class="pre">t[454]</span></code>赋值给r并创立一个有导入属性<code class="docutils literal notranslate"><span class="pre">{exports:</span> <span class="pre">{}}</span></code>的对象，然后就会进入到<code class="docutils literal notranslate"><span class="pre">e[454]</span></code>中，并且执行(.call)这个e[454]</p>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>3. webpack调试技巧<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>寻找函数入口</p></li>
+<li><p>处理预设加载器（缺什么拿什么，删掉所有初始化方法，只保留加载器）</p></li>
+<li><p>暴露密文</p></li>
+<li><p>最后处理</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>4. 插桩法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>中间人攻击</p></li>
+<li><p>找桩点，右键打桩</p></li>
+<li><p>看日志，分析正常执行逻辑</p></li>
+<li><p>抠出核心逻辑</p></li>
+</ul>
+<p><strong>某些极端情况下，插桩法可以实现环境自吐，也就是环境自吐法</strong></p>
+<p><strong>实际上 某某宣传的环境自吐法，只是插桩的特殊情况罢了</strong></p>
+<p><strong>对于</strong> <strong>vmp</strong>来讲，插桩法是一种行之有效的处理方案**</p>
+<p><img alt="https://dosrui.oss-accelerate.aliyuncs.com/img/202201091426114.png" src="https://dosrui.oss-accelerate.aliyuncs.com/img/202201091426114.png" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Dosrui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

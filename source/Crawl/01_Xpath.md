@@ -1,8 +1,8 @@
-#### 3.1 Xpath积累
+#### 3.1 Xpath
 
 ##### 1. 定义包含一个或多个class属性的xpath路径
 
-![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.11.png)
+![](https://dosrui.oss-accelerate.aliyuncs.com/img/202201110026154.png)
 
 ```
 //div[@class="vsb-container"]    ×
@@ -18,7 +18,7 @@
 
 不包含文本"详情"：
 
-![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.12.png)
+![](https://dosrui.oss-accelerate.aliyuncs.com/img/202201110027296.png)
 
 ```
 //*[@id="content"]/div/div/div[2]/div[2]/ul/li/a[not(contains(text(),"详情"))]
@@ -28,7 +28,7 @@
 
 ##### 3. Xpath获取兄弟节点元素
 
-![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.13.png)
+![](https://dosrui.oss-accelerate.aliyuncs.com/img/202201110027412.png)
 
 preceding-sibling表示上面一个兄弟节点元素，反之，following-sibling则表示下面一个兄弟节点元素。
 
@@ -40,7 +40,7 @@ preceding-sibling表示上面一个兄弟节点元素，反之，following-sibli
 
 ##### 4. Xpath获取特定长度的文本
 
-![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.14.png)
+![](https://dosrui.oss-accelerate.aliyuncs.com/img/202201110027654.png)
 
 前两项数据不是我们想要的数据，可以用如下语句排除掉：
 
@@ -60,7 +60,7 @@ preceding-sibling表示上面一个兄弟节点元素，反之，following-sibli
 
 ##### 6. Xpath拼接符号 | 
 
-![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/2.16.png)![2.16.png](https://github.com/Dosrui78/Blog-Images/blob/master/2.16.png?raw=true)
+![](https://dosrui.oss-accelerate.aliyuncs.com/img/202201110028923.png)
 
 想获取全部文本内容可以用拼接符号|
 

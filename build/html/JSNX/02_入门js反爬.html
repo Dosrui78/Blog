@@ -55,7 +55,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id1">1. 加密参数直接出现</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cookie">2. 入门级cookie反爬</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">3. 简单请求头参数加密</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">4.24 简单js动态加密解析</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4. 简单js动态加密解析</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4"></a></li>
 </ul>
 </li>
@@ -190,7 +190,7 @@
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>4.24 简单js动态加密解析<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>4. 简单js动态加密解析<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>打个scripct断点，然后一直f8前进到有js的界面</p>
 <p><img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.24-1.png" /></p>
 <p>如果不是这个界面，删除Application里cookie的sign重头来一次直到进入到这个界面，因为和时间有关，多半是date，于是搜索date就可以找到加密参数的位置，然后全部打上断点。<img alt="img" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/4.24-2.png" /></p>

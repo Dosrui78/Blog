@@ -1,10 +1,12 @@
 #### 1.2 Python打开文件的路径
 
+##### 1. 绝对路径和相对路径
+
 > 绝对路径就是文件的真正存在的路径，是指从硬盘的根目录(盘符)开始，进行一级级目录指向文件。
 >
 > 相对路径就是以当前文件为基准进行一级级目录指向被引用的资源文件。
 
-##### 1. `__file__`详解
+##### 2. `__file__`详解
 
 `__file__`表示当前文件的绝对/相对路径
 
@@ -42,7 +44,7 @@ D:\Python\lib\string.py
 
 ---
 
-##### 2. os.path()模块
+##### 3. os.path()模块
 
 | 方法                                    | 说明                                                         |
 | :-------------------------------------- | :----------------------------------------------------------- |
@@ -100,16 +102,16 @@ root/test/runoob.txt
 
 ---------
 
-##### 3. ConfigParser模块
+##### 3. configparser模块
 
-`ConfigParser`简介：`ConfigParser `是用来读取配置文件的包。配置文件的格式如下：中括号`[ ]`内包含的为section。section 下面为类似于`key-value `的配置内容。
+`configparser`简介：`configparser `是用来读取配置文件的包。配置文件的格式如下：中括号`[ ]`内包含的为section。section 下面为类似于`key-value `的配置内容。
 
 ```
 [db]
 db_host = 127.0.0.1
 db_port = 69
 db_user = root
-db_pass = root
+db_pass = 123
 host_port = 69
 
 [concurrent]
@@ -119,7 +121,7 @@ processor = 20
 括号“[ ]”内包含的为section。紧接着section为类似于key-value的options的配置内容。
 ```
 
-`ConfigParser`初始化文件
+`configparser`初始化文件
 
 ```python
 import os

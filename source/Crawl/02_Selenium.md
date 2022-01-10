@@ -118,7 +118,7 @@ outerText:这是div中的文字这是span中的文字
 
 **结构图：**
 
-![img](https://img-blog.csdn.net/20140413221543250)
+![](https://dosrui.oss-accelerate.aliyuncs.com/img/202201110030088.jpg)
 
 可以得出结论：
  ① innerHTML 获取对象起始和结束标签内的 HTML，即这里的对象是div标签，亦即这个标签里面所有的内容包含span标签也获取出来，即 “这是div中的文字<span>这是span中的文字</span>”（注意HTML这个字的意思，也就是结构）
@@ -131,7 +131,7 @@ outerText:这是div中的文字这是span中的文字
 
 > ​        在做web自动化的过程中会遇到一些弹出的登录页面，定位后，执行程序发现还是出现报错，其实定位可能没有问题，而是表单再作怪，也就是iframe，iframe是HTML标签，作用是文档中的文档，或者浮动的框架(FRAME)。iframe元素会创建包含另外一个文档的内联框架，也就html中在嵌套一个网页，可以通过F12查看。
 
-![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-12-23_01-45-53.png)
+<img src="https://dosrui.oss-accelerate.aliyuncs.com/img/202201110030750.png" style="zoom: 150%;" />
 
 **如何定位iframe**
 

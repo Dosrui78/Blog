@@ -1,9 +1,11 @@
 DOSRUI's Blog
 =========================================
 
-Stay focus! Stay foolish!
+知识在于积累，聪明在于勤奋。
 
-Some experience of a small crawler.
+​																																																														——华罗庚
+
+​																																																																																							
 
 .. toctree::
    :maxdepth: 2
@@ -11,6 +13,7 @@ Some experience of a small crawler.
 
    Python/index   
    Math/index
-   Other/index
+   Crawl/index
    JS/index
    JSNX/index
+   Other/index

@@ -51,13 +51,13 @@
 <li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.3 我终于把Python中下划线的含义弄清楚了</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.5 Python日志</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_Nginx%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2.html">1.6 在Nginx上部署自己的Sphinx博客</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Crawl/index.html">第三章：爬虫入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JS/index.html">第四章：JS基础</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">第五章：JS逆向</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第六章：开发工具</a></li>
 </ul>
 
         </div>
@@ -86,7 +86,7 @@
              
   <section id="id1">
 <h1>第一章：基础知识<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p>本章主要介绍Python的基础知识或者其他一些有用的却不清楚难理解的Python语法知识。</p>
+<p>本章主要介绍Python的基础知识或者难理解的Python语法知识。</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -97,18 +97,19 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#file">1. <code class="docutils literal notranslate"><span class="pre">__file__</span></code>详解</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#os-path">2. os.path()模块</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#configparser">3. ConfigParser模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#id1">1. 绝对路径和相对路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#file">2. <code class="docutils literal notranslate"><span class="pre">__file__</span></code>详解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#os-path">3. os.path()模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html#configparser">3. configparser模块</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.3 我终于把Python中下划线的含义弄清楚了</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#var">1. 单引号下划线： <strong><code class="docutils literal notranslate"><span class="pre">_var</span></code></strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id1">2. 单尾划线： <strong><code class="docutils literal notranslate"><span class="pre">var_</span></code></strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id2">3. 双首下划线：<strong><code class="docutils literal notranslate"><span class="pre">__var</span></code></strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id4">4. 双重领先和落后强调： <strong><code class="docutils literal notranslate"><span class="pre">__var__</span></code></strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id5">5. 单下划线 _</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id6">5. 总结：Python下划线命名模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id3">4. 双重领先和落后强调： <strong><code class="docutils literal notranslate"><span class="pre">__var__</span></code></strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id4">5. 单下划线 _</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html#id5">5. 总结：Python下划线命名模式</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a><ul>
@@ -120,12 +121,6 @@
 <li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html#id1">1. 日志基础教程</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html#id2">2. 进阶日志教程</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html#loguru">3. loguru</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="06_Nginx%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2.html">1.6 在Nginx上部署自己的Sphinx博客</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="06_Nginx%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2.html#nginx">1. 安装、配置Nginx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_Nginx%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2.html#id1">2. 编辑配置文件</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_Nginx%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2.html#htmllinux">3. 将静态html上传至Linux服务器上</a></li>
 </ul>
 </li>
 </ul>

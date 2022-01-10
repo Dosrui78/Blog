@@ -280,7 +280,7 @@ select a.name,b.job from A a inner join B b on a.id=b.A_id
 **左连接：（左边的表不加限制）**
 
 ```mysql
-select a.name,b.job from A a  left join B b on a.id=b.A_id
+select a.name,b.job from A a left join B b on a.id=b.A_id
 ```
 
 三条记录

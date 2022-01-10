@@ -181,6 +181,29 @@ debugger;
 <li><p>禁止F12右键的解决方案，浏览器的更多工具中的开发者工具</p></li>
 <li><p>呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以<a class="reference external" href="https://blog.csdn.net/yu1014745867/article/details/72843259">AutoResponse</a>干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）</p></li>
 </ul>
+<p><strong>案例一：猿人学第16题</strong></p>
+<p>反调试类型：进入网页右键会自动重定向到主页。</p>
+<p>解决办法：先在主页打上<code class="docutils literal notranslate"><span class="pre">script断点</span></code>后进入16题页面，然后一直按F8执行到js所在界面。如下图：</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-23-36.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-23-36.png" /></p>
+<p>接着搜索open（别问我为啥知道，因为这种一般都是open相关的函数做了手脚）</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-27-16.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-27-16.png" /></p>
+<p>观察上图的逻辑可知这段是定义了一个<code class="docutils literal notranslate"><span class="pre">onOpen函数</span></code>，执行跳转红框中的网站的操作，打上断点如下：</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-30-32.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-30-32.png" /></p>
+<p>F8执行到如下界面：</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-14-17.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-14-17.png" /></p>
+<p>搜索onOpen，打上断点，跟进后再在控制台输入<code class="docutils literal notranslate"><span class="pre">e.onOpen</span></code></p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-18-03.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-18-03.png" /></p>
+<p>对<code class="docutils literal notranslate"><span class="pre">e.onOpen</span></code>置空，然后单步跟进，跳到下一断点</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-19-27.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-19-27.png" /></p>
+<p>断点停在了<code class="docutils literal notranslate"><span class="pre">ConsoleManager.onOpen=function(){...}</span></code>此时，在控制台输入<code class="docutils literal notranslate"><span class="pre">ConsoleManager.onOpen</span></code>会得到如下图所示函数，置空该函数</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-33-07.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-33-07.png" /></p>
+<p>这下我们置空了两个函数，这下反调试就被我们解决了，但是这个<code class="docutils literal notranslate"><span class="pre">Console</span> <span class="pre">was</span> <span class="pre">cleared</span></code>一直在闪烁</p>
+<p><img alt="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-47-49.png" src="https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-47-49.png" /></p>
+<p>在控制台执行下面语句即可</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">console</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">info</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){}</span>
+</pre></div>
+</div>
 </section>
 <hr class="docutils" />
 <section id="id3">

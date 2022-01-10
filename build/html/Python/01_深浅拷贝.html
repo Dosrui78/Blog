@@ -55,13 +55,14 @@
 <li class="toctree-l2"><a class="reference internal" href="02_%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.html">1.2 Python打开文件的路径</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_Python%E4%B8%8B%E5%88%92%E7%BA%BF.html">1.3 我终于把Python中下划线的含义弄清楚了</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6.html">1.4 海象运算符</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.6 Python日志</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Python%E6%97%A5%E5%BF%97.html">1.5 Python日志</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Math/index.html">第二章：数据分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第三章：爬虫入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Crawl/index.html">第三章：爬虫入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JS/index.html">第四章：JS基础</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JSNX/index.html">第五章：JS逆向</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Other/index.html">第六章：开发工具</a></li>
 </ul>
 
         </div>
@@ -99,7 +100,7 @@
 <hr class="docutils" />
 <section id="id1">
 <h2>1. 字典浅拷贝实例<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;a = {1: [1,2,3]}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;a = {1: [1,2,3]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span>
 <span class="go">({1: [1, 2, 3]}, {1: [1, 2, 3]})</span>
@@ -111,7 +112,7 @@
 </section>
 <section id="copy">
 <h2>2. 深度拷贝需要引入 copy 模块<a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;import copy</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;import copy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">c</span>
 <span class="go">({1: [1, 2, 3, 4]}, {1: [1, 2, 3, 4]})</span>
@@ -128,11 +129,10 @@
 <p>③<strong>b = copy.deepcopy(a):</strong> 深度拷贝, a 和 b 完全拷贝了父对象及其子对象，两者是完全独立的。</p>
 <p><img alt="img" src="https://www.runoob.com/wp-content/uploads/2017/03/1489720930-5882-BO4qO.png" /></p>
 </section>
-<hr class="docutils" />
 <section id="id2">
 <h2>3. 更多实例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>以下实例是使用 copy 模块的 copy.copy（ 浅拷贝 ）和（copy.deepcopy ）:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 <span class="c1"># -*-coding:utf-8 -*-</span>
  
 <span class="kn">import</span> <span class="nn">copy</span>
@@ -152,7 +152,7 @@
 </pre></div>
 </div>
 <p>以上实例执行输出结果为：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;a = &#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;a = &#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">])</span>
 <span class="p">(</span><span class="s1">&#39;b = &#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">])</span>
 <span class="p">(</span><span class="s1">&#39;c = &#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]])</span>
 <span class="p">(</span><span class="s1">&#39;d = &#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]])</span>

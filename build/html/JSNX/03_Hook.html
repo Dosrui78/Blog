@@ -59,7 +59,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">3. Hook案例</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">猿人学联系平台第一题</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">猿人学练习平台第一题</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">中国专利网（常用案例）</a></li>
 </ul>
 </li>
@@ -194,8 +194,8 @@
 <section id="id4">
 <h2>3. Hook案例<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <section id="id5">
-<h3>猿人学联系平台第一题<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>猿人学联系平台第一题可以用Hook setRequestHeader函数的办法找到函数入口</p>
+<h3>猿人学练习平台第一题<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>猿人学练习平台第一题可以用Hook setRequestHeader函数的办法找到函数入口</p>
 <blockquote>
 <div><p>该<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest"><code class="docutils literal notranslate"><span class="pre">XMLHttpRequest</span></code></a>方法 <code class="docutils literal notranslate"><span class="pre">setRequestHeader()</span></code>设置 HTTP 请求标头的值。使用<code class="docutils literal notranslate"><span class="pre">setRequestHeader()</span></code>时必须在调用之后调用 <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open"><code class="docutils literal notranslate"><span class="pre">open()</span></code></a>，调用之前调用 <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a>。如果使用相同的标头多次调用此方法，则这些值将合并为一个请求标头。</p>
 <p><code class="docutils literal notranslate"><span class="pre">setRequestHeader()</span></code>在第一次 调用之后，每次调用时，指定的文本都会附加到现有标题内容的末尾。</p>

@@ -97,6 +97,51 @@ Function.prototype.constructor=function(){
 - 禁止F12右键的解决方案，浏览器的更多工具中的开发者工具
 - 呼出控制台弹窗或者跳转：script断点，并且先尝试进行关键词搜索找线索。随机打上断点，不断缩小检测范围，直到找到。若是静态js/假动态直接可以[AutoResponse](https://blog.csdn.net/yu1014745867/article/details/72843259)干掉，若是真动态真在执行控制台该检测逻辑附近的时候重置这个函数（这个可以参考无限debugger处理方案，重写函数，hook关键位置等）
 
+**案例一：猿人学第16题**
+
+反调试类型：进入网页右键会自动重定向到主页。
+
+解决办法：先在主页打上`script断点`后进入16题页面，然后一直按F8执行到js所在界面。如下图：
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-23-36.png)
+
+接着搜索open（别问我为啥知道，因为这种一般都是open相关的函数做了手脚）
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-27-16.png)
+
+观察上图的逻辑可知这段是定义了一个`onOpen函数`，执行跳转红框中的网站的操作，打上断点如下：
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-30-32.png)
+
+F8执行到如下界面：
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-14-17.png)
+
+搜索onOpen，打上断点，跟进后再在控制台输入`e.onOpen`
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-18-03.png)
+
+对`e.onOpen`置空，然后单步跟进，跳到下一断点
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-19-27.png)
+
+断点停在了`ConsoleManager.onOpen=function(){...}`此时，在控制台输入`ConsoleManager.onOpen`会得到如下图所示函数，置空该函数
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_22-33-07.png)
+
+这下我们置空了两个函数，这下反调试就被我们解决了，但是这个`Console was cleared`一直在闪烁
+
+![](https://dosrui.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2022-01-05_23-47-49.png)
+
+在控制台执行下面语句即可
+
+```js
+console.clear = function(){}
+console.info = function(){}
+```
+
+
+
 ---
 
 
